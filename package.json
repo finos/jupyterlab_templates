@@ -1,0 +1,36 @@
+{
+  "name": "jupyterlab_templates",
+  "version": "0.0.1",
+  "description": "A JupyterLab extension.",
+  "author": "Tim Paine",
+  "main": "lib/index.js",
+  "keywords": [
+    "jupyter",
+    "jupyterlab"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
+    "style/**/*.css"
+  ],
+  "jupyterlab": {
+    "extension": true
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^0.15.0",
+    "@jupyterlab/apputils": "^0.15.0",
+    "@jupyterlab/docmanager": "^0.15.0",
+    "@jupyterlab/launcher": "^0.15.0",
+    "@jupyterlab/mainmenu": "^0.4.0",
+    "@jupyterlab/notebook": "^0.15.7",
+    "@phosphor/disposable": "^1.1.2"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~2.6.2"
+  }
+}

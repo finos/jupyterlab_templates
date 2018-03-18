@@ -31,7 +31,9 @@ def load_jupyter_server_extension(nb_server_app):
         abspath = os.path.abspath(os.path.realpath(path))
         files = [f for f in os.listdir(abspath) if os.path.isfile(os.path.join(abspath, f)) and f.endswith('.ipynb')]
         for f in files:
-            templates.append((f, abspath))
+            with open(os.path.join(abspath, f), 'r') as fp:
+                content = fp.read()
+            templates.append((f, abspath, content))
 
     print('Available templates: %s' % ','.join(t[0] for t in templates))
-    web_app.add_handlers(host_pattern, [('/templates', TemplatesHandler, {'templates': templates})])
+    web_app.add_handlers(host_pattern, [('/templates/get', TemplatesHandler, {'templates': templates})])
