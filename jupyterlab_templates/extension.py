@@ -20,7 +20,7 @@ def load_jupyter_server_extension(nb_server_app):
         nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
     """
     web_app = nb_server_app.web_app
-    template_dirs = nb_server_app.config.get('JupyterLabTemplate', {}).get('template_dirs', [])
+    template_dirs = nb_server_app.config.get('JupyterLabTemplates', {}).get('template_dirs', [])
     template_dirs.append(os.path.join(os.path.dirname(__file__), 'templates'))
 
     host_pattern = '.*$'
