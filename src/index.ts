@@ -11,6 +11,9 @@ import {
 } from '@jupyterlab/docmanager';
 
 import {
+  IFileBrowserFactory
+} from '@jupyterlab/filebrowser';
+import {
   ILauncher
 } from '@jupyterlab/launcher';
 
@@ -31,7 +34,7 @@ import '../style/index.css';
 const extension: JupyterLabPlugin<void> = {
   id: 'jupyterlab_templates',
   autoStart: true,
-  requires: [IDocumentManager, ICommandPalette, ILayoutRestorer, IMainMenu],
+  requires: [IDocumentManager, ICommandPalette, ILayoutRestorer, IMainMenu, IFileBrowserFactory],
   optional: [ILauncher],
   activate: activate
 };
@@ -82,11 +85,12 @@ function activate(app: JupyterLab,
                   palette: ICommandPalette,
                   restorer: ILayoutRestorer,
                   menu: IMainMenu,
+                  browser: IFileBrowserFactory,
                   launcher: ILauncher | null) {
 
   // grab templates from serverextension
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/templates", true);
+  xhr.open("GET", "/templates/get", true);
   xhr.onload = function (e:any) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
@@ -115,13 +119,13 @@ function activate(app: JupyterLab,
           focusNodeSelector: 'input',
           buttons: [Dialog.cancelButton(), Dialog.okButton({ label: 'GO' })]
         }).then(result => {
-          let path = '/'; //TODO
+          let path = browser.defaultBrowser.model.path;
           return app.commands.execute(
             'docmanager:new-untitled', {path: path, type: 'notebook' }
-          ).then((model: NotebookModel) => {
-            let path = '/Untitled.ipynb'; //TODO
+          ).then((model) => {
+            console.log(model);
             app.commands.execute('docmanager:open', {
-              path: path, factory: 'Notebook'
+              path: model.path, factory: 'Notebook'
             }).then(widget=> {
               console.log(widget);
               console.log(widget.model);
