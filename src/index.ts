@@ -22,10 +22,6 @@ import {
 } from '@jupyterlab/mainmenu';
 
 import {
-    NotebookModel
-} from '@jupyterlab/notebook';
-
-import {
   Widget
 } from '@phosphor/widgets';
 
