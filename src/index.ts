@@ -71,21 +71,24 @@ class OpenTemplateWidget extends Widget {
   }
 }
 
-function newFromTemplate(app: JupyterLab, browser: IFileBrowserFactory): any {
-  showDialog({
-      title: 'From Template',
-      body: new OpenTemplateWidget(),
-      focusNodeSelector: 'input',
-      buttons: [Dialog.cancelButton(), Dialog.okButton({ label: 'GO' })]
-    }).then(result => {
-      let path = browser.defaultBrowser.model.path;
-      return app.commands.execute(
-        'docmanager:new-untitled', {path: path, type: 'notebook' }
-      ).then((model) => {
-        app.commands.execute('docmanager:open', {
-          path: model.path, factory: 'Notebook'
-        }).then(widget=> {
-          widget.model.fromString(result.value);
+function newFromTemplate(app: JupyterLab, browser: IFileBrowserFactory): Promise<Widget> {
+  return new Promise(function(resolve){
+    showDialog({
+        title: 'From Template',
+        body: new OpenTemplateWidget(),
+        focusNodeSelector: 'input',
+        buttons: [Dialog.cancelButton(), Dialog.okButton({ label: 'GO' })]
+      }).then(result => {
+        let path = browser.defaultBrowser.model.path;
+        app.commands.execute(
+          'docmanager:new-untitled', {path: path, type: 'notebook' }
+        ).then((model) => {
+          app.commands.execute('docmanager:open', {
+            path: model.path, factory: 'Notebook'
+          }).then(widget=> {
+            widget.model.fromString(result.value);
+            resolve(widget);
+          });
         });
       });
     });
