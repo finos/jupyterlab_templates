@@ -134,6 +134,9 @@ function activate(app: JupyterLab,
           focusNodeSelector: 'input',
           buttons: [Dialog.cancelButton(), Dialog.okButton({ label: 'GO' })]
         }).then(result => {
+          if (result.button.label !== 'GO') {
+            return;
+          }
           let path = browser.defaultBrowser.model.path;
           return app.commands.execute(
             'docmanager:new-untitled', {path: path, type: 'notebook' }
