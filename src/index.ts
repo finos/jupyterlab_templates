@@ -134,7 +134,7 @@ function activate(app: JupyterLab,
           focusNodeSelector: 'input',
           buttons: [Dialog.cancelButton(), Dialog.okButton({ label: 'GO' })]
         }).then(result => {
-          if (result.button.label !== 'GO') {
+          if (result.label !== 'GO') {
             return;
           }
           let path = browser.defaultBrowser.model.path;
