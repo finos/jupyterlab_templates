@@ -79,6 +79,9 @@ function newFromTemplate(app: JupyterLab, browser: IFileBrowserFactory): Promise
         focusNodeSelector: 'input',
         buttons: [Dialog.cancelButton(), Dialog.okButton({ label: 'GO' })]
       }).then(result => {
+        if (result.button.label === 'CANCEL') {
+          return;
+        }
         let path = browser.defaultBrowser.model.path;
         app.commands.execute(
           'docmanager:new-untitled', {path: path, type: 'notebook' }
@@ -134,7 +137,7 @@ function activate(app: JupyterLab,
           focusNodeSelector: 'input',
           buttons: [Dialog.cancelButton(), Dialog.okButton({ label: 'GO' })]
         }).then(result => {
-          if (result.label !== 'GO') {
+          if (result.button.label === 'CANCEL') {
             return;
           }
           let path = browser.defaultBrowser.model.path;
