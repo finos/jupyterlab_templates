@@ -13,6 +13,7 @@ import {
 import {
   IFileBrowserFactory
 } from '@jupyterlab/filebrowser';
+
 import {
   ILauncher
 } from '@jupyterlab/launcher';
