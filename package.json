@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab_templates",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A JupyterLab extension.",
   "author": "Tim Paine",
   "main": "lib/index.js",
