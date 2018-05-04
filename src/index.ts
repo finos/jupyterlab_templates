@@ -90,8 +90,10 @@ function newFromTemplate(app: JupyterLab, browser: IFileBrowserFactory): Promise
           app.commands.execute('docmanager:open', {
             path: model.path, factory: 'Notebook'
           }).then(widget=> {
-            widget.model.fromString(result.value);
-            resolve(widget);
+              widget.context.ready.then(() =>{
+                widget.model.fromString(result.value);
+                resolve(widget);
+              });
           });
         });
       });
@@ -141,16 +143,23 @@ function activate(app: JupyterLab,
           if (result.button.label === 'CANCEL') {
             return;
           }
+
           let path = browser.defaultBrowser.model.path;
-          return app.commands.execute(
+          
+          return new Promise(function(resolve) {
+            app.commands.execute(
             'docmanager:new-untitled', {path: path, type: 'notebook' }
           ).then((model) => {
             app.commands.execute('docmanager:open', {
               path: model.path, factory: 'Notebook'
             }).then(widget=> {
-              widget.model.fromString(result.value);
+              widget.context.ready.then(() =>{
+                widget.model.fromString(result.value);
+                resolve(widget);
+              });
             });
           });
+        });
         });
       }
     });
