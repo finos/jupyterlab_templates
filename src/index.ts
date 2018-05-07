@@ -51,6 +51,7 @@ class OpenTemplateWidget extends Widget {
     for(let t of templates){
       let val = document.createElement('option');
       val.label = t[0];
+      val.text  = t[0];
       val.value = t[2];
       input.appendChild(val);
     }
