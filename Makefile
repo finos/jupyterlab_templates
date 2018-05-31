@@ -20,6 +20,9 @@ serverextension: install ## enable serverextension
 labextension: install ## enable labextension
 	jupyter labextension install .
 
+dist:  ## dist to pypi
+	python3 setup.py sdist upload -r pypi
+
 # docs:  ## make documentation
 # 	make -C ./docs html
 
@@ -31,4 +34,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: clean install serverextension labextension test tests help docs
+.PHONY: clean install serverextension labextension test tests help docs dist
