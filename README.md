@@ -1,6 +1,7 @@
 # jupyterlab_templates
 Support for jupyter notebook templates in jupyterlab
 
+[![Build Status](https://travis-ci.org/timkpaine/jupyterlab_templates.svg?branch=master)](https://travis-ci.org/timkpaine/jupyterlab_templates)
 [![PyPI](https://img.shields.io/pypi/l/jupyterlab_iframe.svg)](https://pypi.python.org/pypi/jupyterlab_templates)
 [![PyPI](https://img.shields.io/pypi/v/jupyterlab_iframe.svg)](https://pypi.python.org/pypi/jupyterlab_templates)
 [![npm](https://img.shields.io/npm/v/jupyterlab_templates.svg)](https://www.npmjs.com/package/jupyterlab_templates)
