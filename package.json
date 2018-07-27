@@ -22,13 +22,13 @@
     "extension": true
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.16.0",
-    "@jupyterlab/apputils": "^0.16.0",
-    "@jupyterlab/coreutils": "^1.0.2",
-    "@jupyterlab/docmanager": "^0.16.0",
-    "@jupyterlab/filebrowser": "^0.16.0",
-    "@jupyterlab/launcher": "^0.16.0",
-    "@jupyterlab/mainmenu": "^0.5.0",
+    "@jupyterlab/application": "^0.17.0",
+    "@jupyterlab/apputils": "^0.17.0",
+    "@jupyterlab/coreutils": "^2.0.0",
+    "@jupyterlab/docmanager": "^0.17.0",
+    "@jupyterlab/filebrowser": "^0.17.0",
+    "@jupyterlab/launcher": "^0.17.0",
+    "@jupyterlab/mainmenu": "^0.6.0",
     "@phosphor/disposable": "^1.1.2"
   },
   "devDependencies": {
