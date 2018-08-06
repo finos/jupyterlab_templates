@@ -106,8 +106,8 @@ function activate(app: JupyterLab,
   const open_command = 'template:open';
 
   app.commands.addCommand(open_command, {
-    label: args => 'From Template',
-    iconClass: args => 'jp-TemplateIcon',
+    label: 'From Template',
+    iconClass: 'jp-TemplateIcon',
     caption: 'Initialize a notebook from a template notebook',
     isEnabled: () => true,
     execute: args => {
