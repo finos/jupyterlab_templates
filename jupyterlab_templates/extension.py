@@ -1,6 +1,6 @@
 import os
 import os.path
-import ujson
+import json
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
@@ -10,7 +10,7 @@ class TemplatesHandler(IPythonHandler):
         self.templates = templates
 
     def get(self, template=None):
-        self.finish(ujson.dumps(self.templates))
+        self.finish(json.dumps(self.templates))
 
 
 def load_jupyter_server_extension(nb_server_app):
