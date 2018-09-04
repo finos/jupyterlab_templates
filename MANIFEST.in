@@ -1,3 +1,2 @@
 recursive-include jupyterlab_templates/templates/ *
-include README.md
-include LICENSE
+include requirements.txt
