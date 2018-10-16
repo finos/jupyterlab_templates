@@ -60,7 +60,7 @@ class OpenTemplateWidget extends Widget {
       input.appendChild(val);
     }
 
-    input.placeholder = 'select';
+    // input.placeholder = 'select';
 
     body.appendChild(label);
     body.appendChild(input);
