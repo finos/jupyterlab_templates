@@ -44,7 +44,7 @@ const extension: JupyterLabPlugin<void> = {
 var templates: Array<String>;
 
 
-
+export
 class OpenTemplateWidget extends Widget {
   constructor() {
     let body = document.createElement('div');
@@ -163,3 +163,4 @@ function activate(app: JupyterLab,
 
 
 export default extension;
+export {activate as _activate};
