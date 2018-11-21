@@ -1,5 +1,7 @@
 language: python
-cache: pip
+cache: 
+  - pip
+  - npm
 
 python:
   - "3.6"

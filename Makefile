@@ -1,9 +1,13 @@
-tests: ## Clean and Make unit tests
+testjs: ## Clean and Make js tests
+	npm run test
+
+testpy: ## Clean and Make unit tests
 	python3 -m nose -v tests --with-coverage --cover-erase --cover-package=`find jupyterlab_templates -name "*.py" | sed "s=\./==g" | sed "s=/=.=g" | sed "s/\.py//g" | tr '\n' ',' | rev | cut -c2- | rev`
 	
 test: ## run the tests for travis CI
 	@ python3 -m nose -v tests --with-coverage --cover-erase --cover-package=`find jupyterlab_templates -name "*.py" | sed "s=\./==g" | sed "s=/=.=g" | sed "s/\.py//g" | tr '\n' ',' | rev | cut -c2- | rev`
- 
+	npm install && npm run test
+
 clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf 
 	find . -name "*.pyc" | xargs rm -rf 
