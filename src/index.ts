@@ -30,6 +30,10 @@ import {
   Widget
 } from '@phosphor/widgets';
 
+import {
+  request, RequestResult
+} from './request';
+
 import '../style/index.css';
 
 const extension: JupyterLabPlugin<void> = {
@@ -85,22 +89,12 @@ function activate(app: JupyterLab,
                   launcher: ILauncher | null) {
 
   // grab templates from serverextension
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", PageConfig.getBaseUrl() + "templates/get", true);
-  xhr.onload = function (e:any) {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        let sites = JSON.parse(xhr.responseText);
-        templates = sites;
-      } else {
-        console.error(xhr.statusText);
-      }
+  request('get', PageConfig.getBaseUrl() + "templates/get").then((res: RequestResult) => {
+    if(res.ok){
+        let sites = res.json() as [string];
+        templates = sites || [];
     }
-  }.bind(this);
-  xhr.onerror = function (e) {
-    console.error(xhr.statusText);
-  };
-  xhr.send(null);
+  });
 
   // Add an application command
   const open_command = 'template:open';

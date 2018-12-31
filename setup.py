@@ -20,7 +20,6 @@ setup(
     author='Tim Paine',
     author_email='t.paine154@gmail.com',
     license='Apache 2.0',
-    install_requires=requires,
 
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -37,12 +36,7 @@ setup(
     packages=find_packages(exclude=['tests', ]),
     package_data={'jupyterlab_templates': ['jupyterlab_templates/templates/*']},
     include_package_data=True,
-    data_files=[('', ["LICENSE", "README.md"])],
     zip_safe=False,
-
-    # entry_points={
-    #     'console_scripts': [
-    #         'sample=sample:main',
-    #     ],
-    # },
+    install_requires=requires,
+    extras_require={'dev': requires + ['nose2', 'pylint', 'flake8']}
 )
