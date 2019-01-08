@@ -53,7 +53,7 @@ class OpenTemplateWidget extends Widget {
   constructor() {
     let body = document.createElement('div');
     let label = document.createElement('label');
-    label.textContent = 'From Template:';
+    label.textContent = 'Template:';
 
     let input = document.createElement('select');
     for(let t of templates){
@@ -100,13 +100,13 @@ function activate(app: JupyterLab,
   const open_command = 'template:open';
 
   app.commands.addCommand(open_command, {
-    label: 'From Template',
+    label: 'Template',
     iconClass: 'jp-TemplateIcon',
     caption: 'Initialize a notebook from a template notebook',
     isEnabled: () => true,
     execute: args => {
       showDialog({
-          title: 'From Template',
+          title: 'Template',
           body: new OpenTemplateWidget(),
           focusNodeSelector: 'input',
           buttons: [Dialog.cancelButton(), Dialog.okButton({ label: 'GO' })]
