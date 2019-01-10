@@ -91,8 +91,8 @@ function activate(app: JupyterLab,
   // grab templates from serverextension
   request('get', PageConfig.getBaseUrl() + "templates/get").then((res: RequestResult) => {
     if(res.ok){
-        let sites = res.json() as [string];
-        templates = sites || [];
+        let sites = res.json() as {[key: string]: [string]};
+        templates = sites['templates'] || [];
     }
   });
 

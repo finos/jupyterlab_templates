@@ -10,7 +10,7 @@ class TemplatesHandler(IPythonHandler):
         self.templates = templates
 
     def get(self, template=None):
-        self.finish(json.dumps(self.templates))
+        self.finish(json.dumps({'templates': self.templates}))
 
 
 def load_jupyter_server_extension(nb_server_app):
