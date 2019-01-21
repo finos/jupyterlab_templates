@@ -25,3 +25,7 @@ install the server extension, and add the following to `jupyter_notebook_config.
 c.JupyterLabTemplates.template_dirs = ['list', 'of', 'template', 'directories']
 c.JupyterLabTemplates.include_default = True
 ```
+
+### Flags
+- `template_dirs`: a list of directories. all `.ipynb` files in these directories will be listed as templates
+- `include_default`: include the default Sample template
