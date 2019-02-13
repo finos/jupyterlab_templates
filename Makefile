@@ -2,10 +2,10 @@ testjs: ## Clean and Make js tests
 	npm run test
 
 testpy: ## Clean and Make unit tests
-	python3 -m nose -v tests --with-coverage --cover-erase --cover-package=`find jupyterlab_templates -name "*.py" | sed "s=\./==g" | sed "s=/=.=g" | sed "s/\.py//g" | tr '\n' ',' | rev | cut -c2- | rev`
+	python3 -m pytest tests --cov=jupyterlab_templates
 	
 test: lint ## run the tests for travis CI
-	@ python3 -m nose -v tests --with-coverage --cover-erase --cover-package=`find jupyterlab_templates -name "*.py" | sed "s=\./==g" | sed "s=/=.=g" | sed "s/\.py//g" | tr '\n' ',' | rev | cut -c2- | rev`
+	@ python3 -m pytest tests --cov=jupyterlab_templates
 	npm install && npm run test
 
 lint: ## run linter
