@@ -29,7 +29,7 @@ def load_jupyter_server_extension(nb_server_app):
     base_url = web_app.settings['base_url']
 
     host_pattern = '.*$'
-    print('Installing jupyterlab_templates handler on path %s' % url_path_join(base_url, 'templates/get'))
+    print('Installing jupyterlab_templates handler on path %s' % url_path_join(base_url, 'templates'))
 
     template_dirs = nb_server_app.config.get('JupyterLabTemplates', {}).get('template_dirs', [])
 
