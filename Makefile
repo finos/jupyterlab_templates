@@ -2,10 +2,10 @@ testjs: ## Clean and Make js tests
 	npm run test
 
 testpy: ## Clean and Make unit tests
-	python3 -m pytest tests --cov=jupyterlab_templates
+	python3 -m pytest -v tests --cov=jupyterlab_templates
 	
 test: lint ## run the tests for travis CI
-	@ python3 -m pytest tests --cov=jupyterlab_templates
+	@ python3 -m pytest -v tests --cov=jupyterlab_templates
 	npm install && npm run test
 
 lint: ## run linter
