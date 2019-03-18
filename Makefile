@@ -9,8 +9,8 @@ test: lint ## run the tests for travis CI
 	npm install && npm run test
 
 lint: ## run linter
-	pylint jupyterlab_templates || echo
 	flake8 jupyterlab_templates 
+	yarn lint
 
 annotate: ## MyPy type annotation check
 	mypy -s jupyterlab_templates
