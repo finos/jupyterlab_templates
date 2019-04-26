@@ -9,6 +9,7 @@ python:
 install:
     - pip install -r requirements.txt
     - pip install -U pytest pytest-cov flake8 pylint codecov
+    - yarn
 
 script:
   - make lint
