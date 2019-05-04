@@ -1,6 +1,7 @@
 import os
 import os.path
 import json
+from io import open
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
@@ -38,7 +39,7 @@ def load_jupyter_server_extension(nb_server_app):
         abspath = os.path.abspath(os.path.realpath(path))
         files = [f for f in os.listdir(abspath) if os.path.isfile(os.path.join(abspath, f)) and f.endswith('.ipynb')]
         for f in files:
-            with open(os.path.join(abspath, f), 'r') as fp:
+            with open(os.path.join(abspath, f), 'r', encoding='utf8') as fp:
                 content = fp.read()
             templates.append((f, abspath, content))
 
