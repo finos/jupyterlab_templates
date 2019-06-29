@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab_templates",
-  "version": "0.1.15",
+  "version": "0.2.0",
   "description": "A JupyterLab extension.",
   "author": "Tim Paine",
   "main": "lib/index.js",
@@ -24,13 +24,13 @@
     "extension": true
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.19.0",
-    "@jupyterlab/apputils": "^0.19.0",
-    "@jupyterlab/coreutils": "^2.2.0",
-    "@jupyterlab/docmanager": "^0.19.0",
-    "@jupyterlab/filebrowser": "^0.19.0",
-    "@jupyterlab/launcher": "^0.19.0",
-    "@jupyterlab/mainmenu": "^0.8.0",
+    "@jupyterlab/application": "^1.0.0",
+    "@jupyterlab/apputils": "^1.0.0",
+    "@jupyterlab/coreutils": "^3.0.0",
+    "@jupyterlab/docmanager": "^1.0.0",
+    "@jupyterlab/filebrowser": "^1.0.0",
+    "@jupyterlab/launcher": "^1.0.0",
+    "@jupyterlab/mainmenu": "^1.0.0",
     "@phosphor/disposable": "^1.1.2"
   },
   "devDependencies": {

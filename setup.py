@@ -12,11 +12,10 @@ with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
 
 setup(
     name='jupyterlab_templates',
-    version='0.0.8',
+    version='0.2.0',
     description='Templates for notebooks in JupyterLab',
     long_description=long_description,
     url='https://github.com/timkpaine/jupyterlab_templates',
-    download_url='https://github.com/timkpaine/jupyterlab_templates/archive/v0.0.8.tar.gz',
     author='Tim Paine',
     author_email='t.paine154@gmail.com',
     license='Apache 2.0',

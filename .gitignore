@@ -163,3 +163,5 @@ ENV/
 .mypy_cache/
 
 .DS_Store
+
+.autoversion
