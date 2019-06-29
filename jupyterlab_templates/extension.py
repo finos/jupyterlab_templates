@@ -24,7 +24,7 @@ class TemplateNamesHandler(IPythonHandler):
         self.templates = templates
 
     def get(self, template=None):
-        self.finish(json.dumps([d for d in self.templates]))
+        self.finish(json.dumps(sorted(self.templates.keys())))
 
 
 def load_jupyter_server_extension(nb_server_app):

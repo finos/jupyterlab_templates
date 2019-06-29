@@ -97,8 +97,6 @@ function activate(app: JupyterFrontEnd,
         // Add an application command
         const open_command = "template:open";
         
-        console.log(templates)
-
         app.commands.addCommand(open_command, {
           caption: "Initialize a notebook from a template notebook",
           execute: (args) => {
@@ -111,29 +109,30 @@ function activate(app: JupyterFrontEnd,
                 if (result.button.label === "CANCEL") {
                   return;
                 }
+                if (result.value){
+                  request("get",
+                          PageConfig.getBaseUrl() + "templates/get",
+                          {"template": result.value}
+                          ).then((res2: IRequestResult) => {
+                          const data = res2.json() as {[key: string]: [string]};
+                          const path = browser.defaultBrowser.model.path;
 
-                request("get",
-                        PageConfig.getBaseUrl() + "templates/get",
-                        {"template": result.value}
-                        ).then((res2: IRequestResult) => {
-                        const data = res2.json() as {[key: string]: [string]};
-                        const path = browser.defaultBrowser.model.path;
-
-                        return new Promise((resolve) => {
-                          app.commands.execute(
-                          "docmanager:new-untitled", {path, type: "notebook" },
-                        ).then((model) => {
-                          app.commands.execute("docmanager:open", {
-                            factory: "Notebook", path: model.path,
-                          }).then((widget) => {
-                            widget.context.ready.then(() => {
-                              widget.model.fromString(data.content);
-                              resolve(widget);
+                          return new Promise((resolve) => {
+                            app.commands.execute(
+                            "docmanager:new-untitled", {path, type: "notebook" },
+                          ).then((model) => {
+                            app.commands.execute("docmanager:open", {
+                              factory: "Notebook", path: model.path,
+                            }).then((widget) => {
+                              widget.context.ready.then(() => {
+                                widget.model.fromString(data.content);
+                                resolve(widget);
+                              });
                             });
                           });
+                          });
                         });
-                        });
-                      });
+                }
               });
             },
           iconClass: "jp-TemplateIcon",
