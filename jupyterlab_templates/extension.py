@@ -2,6 +2,7 @@ import os
 import os.path
 import fnmatch
 import json
+from io import open
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
@@ -59,7 +60,7 @@ def load_jupyter_server_extension(nb_server_app):
 
         # pull contents and push into templates list
         for f, dirname, filename in files:
-            with open(os.path.join(abspath, f), 'r') as fp:
+            with open(os.path.join(abspath, f), 'r', encoding='utf8') as fp:
                 content = fp.read()
             templates[os.path.join(dirname, filename)] = {'path': f, 'dirname': dirname, 'filename': filename, 'content': content}
 
