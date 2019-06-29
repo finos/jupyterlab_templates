@@ -34,7 +34,6 @@ def load_jupyter_server_extension(nb_server_app):
     Args:
         nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
     """
-    import ipdb; ipdb.set_trace()
     web_app = nb_server_app.web_app
     template_dirs = nb_server_app.config.get('JupyterLabTemplates', {}).get('template_dirs', [])
 
