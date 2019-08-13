@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab_templates",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A JupyterLab extension.",
   "author": "Tim Paine",
   "main": "lib/index.js",
@@ -11,9 +11,11 @@
   ],
   "scripts": {
     "build": "tsc",
+    "build:lab": "rimraf lab-dist && mkdirp lab-dist && cd lab-dist && npm pack ..",
+    "build:all": "npm run build && npm run build:lab",
     "clean": "rimraf lib",
-    "lint": "./node_modules/.bin/tslint 'src/*.ts'",
-    "prepublish": "npm run build",
+    "lint": "./node_modules/.bin/tslint './src/*.ts'",
+    "prepublishOnly": "npm run build",
     "test": "jest --coverage --collectCoverageFrom=src/*.{ts}"
   },
   "files": [
@@ -21,7 +23,17 @@
     "style/**/*.css"
   ],
   "jupyterlab": {
-    "extension": true
+    "extension": true,
+    "discovery": {
+      "server": {
+        "base": {
+          "name": "jupyterlab_templates"
+        },
+        "managers": [
+          "pip"
+        ]
+      }
+    }
   },
   "dependencies": {
     "@jupyterlab/application": "^1.0.0",
@@ -31,13 +43,17 @@
     "@jupyterlab/filebrowser": "^1.0.0",
     "@jupyterlab/launcher": "^1.0.0",
     "@jupyterlab/mainmenu": "^1.0.0",
+    "@jupyterlab/notebook": "^1.0.0",
     "@phosphor/disposable": "^1.1.2"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.9",
+    "@babel/preset-env": "^7.5.5",
+    "@types/jest": "^24.0.4",
+    "babel-jest": "^24.8.0",
     "isomorphic-fetch": "^2.2.1",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "jest-transform-css": "^2.0.0",
+    "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
     "ts-jest": "^23.10.4",
     "tslint": "^5.14.0",

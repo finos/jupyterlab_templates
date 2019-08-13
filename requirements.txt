@@ -1,1 +1,1 @@
-jupyterlab>=0.35.4
+jupyterlab>=1.0.0
