@@ -4,11 +4,12 @@
     "noImplicitAny": true,
     "noEmitOnError": true,
     "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "target": "ES5",
+    "target": "ES6",
     "outDir": "./lib",
-    "lib": ["es5", "es2015.promise", "dom", "es2015.collection"],
+    "lib": ["es5", "es2015.promise", "dom", "es2015.collection", "es2015.iterable"],
     "types": ["jest"]
   },
   "include": ["src/*"]
