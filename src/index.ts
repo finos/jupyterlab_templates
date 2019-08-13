@@ -93,10 +93,10 @@ function activate(app: JupyterFrontEnd,
     if (res.ok) {
       templates = res.json() as string[];
 
-      if(templates.length > 0) {
+      if (templates.length > 0) {
         // Add an application command
         const open_command = "template:open";
-        
+
         app.commands.addCommand(open_command, {
           caption: "Initialize a notebook from a template notebook",
           execute: (args) => {
@@ -109,10 +109,10 @@ function activate(app: JupyterFrontEnd,
                 if (result.button.label === "CANCEL") {
                   return;
                 }
-                if (result.value){
+                if (result.value) {
                   request("get",
                           PageConfig.getBaseUrl() + "templates/get",
-                          {"template": result.value}
+                          {template: result.value},
                           ).then((res2: IRequestResult) => {
                           const data = res2.json() as {[key: string]: [string]};
                           const path = browser.defaultBrowser.model.path;
