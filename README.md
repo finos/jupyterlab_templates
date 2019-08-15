@@ -1,5 +1,4 @@
 # jupyterlab_templates
-<hr>
 <img width="50" src="icon.png"> 
 Support for jupyter notebook templates in jupyterlab
 
