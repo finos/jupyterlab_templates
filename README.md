@@ -1,5 +1,4 @@
 # jupyterlab_templates
-<img width="50" src="icon.png"> 
 Support for jupyter notebook templates in jupyterlab
 
 [![Build Status](https://travis-ci.org/timkpaine/jupyterlab_templates.svg?branch=master)](https://travis-ci.org/timkpaine/jupyterlab_templates)
