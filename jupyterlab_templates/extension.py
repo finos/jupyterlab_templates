@@ -55,6 +55,9 @@ def load_jupyter_server_extension(nb_server_app):
         files = []
         # get all files in subdirectories
         for dirname, dirnames, filenames in os.walk(path):
+            if dirname == path:
+                # Skip top level
+                continue
             for filename in fnmatch.filter(filenames, '*.ipynb'):
                 files.append((os.path.join(dirname, filename), dirname.replace(path, ''), filename))
 
