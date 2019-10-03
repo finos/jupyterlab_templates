@@ -59,7 +59,8 @@ def load_jupyter_server_extension(nb_server_app):
                 # Skip top level
                 continue
             for filename in fnmatch.filter(filenames, '*.ipynb'):
-                files.append((os.path.join(dirname, filename), dirname.replace(path, ''), filename))
+                if '.ipynb_checkpoints' not in dirname:
+                    files.append((os.path.join(dirname, filename), dirname.replace(path, ''), filename))
 
         # pull contents and push into templates list
         for f, dirname, filename in files:
