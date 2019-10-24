@@ -106,7 +106,7 @@ function activate(app: JupyterFrontEnd,
                 focusNodeSelector: "input",
                 title: "Template",
               }).then((result) => {
-                if (result.button.label === "CANCEL") {
+                if (result.button.label === "Cancel") {
                   return;
                 }
                 if (result.value) {
