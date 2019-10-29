@@ -1,31 +1,62 @@
-import os
-import os.path
 import fnmatch
 import json
-import jupyter_core.paths
+import os
+import os.path
 from io import open
+
+import jupyter_core.paths
+
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
 
+class TemplatesLoader():
+    def __init__(self, template_dirs):
+        self.template_dirs = template_dirs
+
+    def get_templates(self):
+        templates = {}
+
+        for path in self.template_dirs:
+            abspath = os.path.abspath(os.path.realpath(path))
+            files = []
+            # get all files in subdirectories
+            for dirname, dirnames, filenames in os.walk(path):
+                if dirname == path:
+                    # Skip top level
+                    continue
+                for filename in fnmatch.filter(filenames, '*.ipynb'):
+                    if '.ipynb_checkpoints' not in dirname:
+                        files.append((os.path.join(dirname, filename), dirname.replace(path, ''), filename))
+
+            # pull contents and push into templates list
+            for f, dirname, filename in files:
+                with open(os.path.join(abspath, f), 'r', encoding='utf8') as fp:
+                    content = fp.read()
+                templates[os.path.join(dirname, filename)] = {'path': f, 'dirname': dirname, 'filename': filename, 'content': content}
+
+        return templates
+
+
 class TemplatesHandler(IPythonHandler):
-    def initialize(self, templates=None):
-        self.templates = templates
+    def initialize(self, loader):
+        self.loader = loader
 
     def get(self):
         temp = self.get_argument('template', '')
         if temp:
-            self.finish(self.templates[temp])
+            self.finish(self.loader.get_templates()[temp])
         else:
             self.set_status(404)
 
 
 class TemplateNamesHandler(IPythonHandler):
-    def initialize(self, templates=None):
-        self.templates = templates
+    def initialize(self, loader):
+        self.loader = loader
 
-    def get(self, template=None):
-        self.finish(json.dumps(sorted(self.templates.keys())))
+    def get(self):
+        template_names = self.loader.get_templates().keys()
+        self.finish(json.dumps(sorted(template_names)))
 
 
 def load_jupyter_server_extension(nb_server_app):
@@ -49,25 +80,8 @@ def load_jupyter_server_extension(nb_server_app):
     template_dirs.extend([os.path.join(x, 'notebook_templates') for x in jupyter_core.paths.jupyter_path()])
     print('Search paths:\n\t%s' % '\n\t'.join(template_dirs))
 
-    templates = {}
-    for path in template_dirs:
-        abspath = os.path.abspath(os.path.realpath(path))
-        files = []
-        # get all files in subdirectories
-        for dirname, dirnames, filenames in os.walk(path):
-            if dirname == path:
-                # Skip top level
-                continue
-            for filename in fnmatch.filter(filenames, '*.ipynb'):
-                if '.ipynb_checkpoints' not in dirname:
-                    files.append((os.path.join(dirname, filename), dirname.replace(path, ''), filename))
+    loader = TemplatesLoader(template_dirs)
+    print('Available templates:\n\t%s' % '\n\t'.join(t for t in loader.get_templates()))
 
-        # pull contents and push into templates list
-        for f, dirname, filename in files:
-            with open(os.path.join(abspath, f), 'r', encoding='utf8') as fp:
-                content = fp.read()
-            templates[os.path.join(dirname, filename)] = {'path': f, 'dirname': dirname, 'filename': filename, 'content': content}
-
-    print('Available templates:\n\t%s' % '\n\t'.join(t for t in templates))
-    web_app.add_handlers(host_pattern, [(url_path_join(base_url, 'templates/names'), TemplateNamesHandler, {'templates': templates})])
-    web_app.add_handlers(host_pattern, [(url_path_join(base_url, 'templates/get'), TemplatesHandler, {'templates': templates})])
+    web_app.add_handlers(host_pattern, [(url_path_join(base_url, 'templates/names'), TemplateNamesHandler, {'loader': loader})])
+    web_app.add_handlers(host_pattern, [(url_path_join(base_url, 'templates/get'), TemplatesHandler, {'loader': loader})])
