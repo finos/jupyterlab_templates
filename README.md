@@ -29,6 +29,8 @@ c.JupyterLabTemplates.include_default = True
 ## Templates for libraries
 If you have tutorials or guides you'd like to install for users, simply copy them into your jupyter data folder inside the `notebook_templates` directory, e.g. `/usr/local/share/jupyter/notebook_templates/bqplot` for `bqplot`.
 
+Templates will be looked for in a subdirectory of one of the `template_dirs` specified above.
+
 ### Flags
 - `template_dirs`: a list of directories. all `.ipynb` files in these directories will be listed as templates
 - `include_default`: include the default Sample template
