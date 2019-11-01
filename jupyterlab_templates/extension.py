@@ -18,7 +18,8 @@ class TemplatesLoader():
         templates = {}
 
         for path in self.template_dirs:
-            abspath = os.path.abspath(os.path.realpath(path))
+            # in order to produce correct filenames, abspath should point to the parent directory of path
+            abspath = os.path.abspath(os.path.join(os.path.realpath(path), os.pardir))
             files = []
             # get all files in subdirectories
             for dirname, dirnames, filenames in os.walk(path):
@@ -28,7 +29,6 @@ class TemplatesLoader():
                 for filename in fnmatch.filter(filenames, '*.ipynb'):
                     if '.ipynb_checkpoints' not in dirname:
                         files.append((os.path.join(dirname, filename), dirname.replace(path, ''), filename))
-
             # pull contents and push into templates list
             for f, dirname, filename in files:
                 with open(os.path.join(abspath, f), 'r', encoding='utf8') as fp:
