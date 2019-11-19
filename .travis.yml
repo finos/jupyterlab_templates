@@ -1,15 +1,29 @@
+dist: xenial
 language: python
 cache: 
   - pip
   - npm
 
-python:
-  - "3.6"
+matrix:
+  fast_finish: true
+  include:
+    - python: "3.7"
+      language: python
+      cache: pip
+
+    - cache: pip
+      os: osx
+      osx_image: xcode11.2
+
+addons:
+  homebrew:
+    update: true
+    packages:
+      - python
 
 install:
     - pip install -e .[dev]
     - pip install -r requirements.txt
-      - python2
     - yarn
 
 script:
