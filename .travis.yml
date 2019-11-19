@@ -24,8 +24,8 @@ addons:
       - python
 
 install:
-    - pip install -e .[dev]
-    - pip install -r requirements.txt
+    - python3 -m pip install -e .[dev]
+    - python3 -m pip install -r requirements.txt
     - yarn
 
 script:
