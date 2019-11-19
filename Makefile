@@ -1,11 +1,13 @@
+PYTHON=python3
+
 testjs: ## Clean and Make js tests
 	yarn test
 
 testpy: ## Clean and Make unit tests
-	python3 -m pytest -v tests --cov=jupyterlab_templates
+	${PYTHON} -m pytest -v tests --cov=jupyterlab_templates
 
 test: lint ## run the tests for travis CI
-	@ python3 -m pytest -v tests --cov=jupyterlab_templates
+	@ ${PYTHON} -m pytest -v tests --cov=jupyterlab_templates
 	yarn test
 
 lint: ## run linter
@@ -25,10 +27,14 @@ clean: ## clean the repository
 	rm -rf .coverage cover htmlcov logs build dist *.egg-info lib node_modules
 
 install:  ## install to site-packages
-	pip3 install .
+	${PYTHON} -m pip install .
 
 serverextension: install ## enable serverextension
 	jupyter serverextension enable --py jupyterlab_templates
+
+fix:  ## run autopep8/tslint fix
+	autopep8 --in-place -r -a -a crowdsource/
+	./node_modules/.bin/tslint --fix src/ts/**/*.ts
 
 js:  ## build javascript
 	yarn
@@ -39,8 +45,8 @@ labextension: js ## enable labextension
 
 dist:  js  ## dist to pypi
 	rm -rf dist build
-	python3 setup.py sdist
-	python3 setup.py bdist_wheel
+	${PYTHON} setup.py sdist
+	${PYTHON} setup.py bdist_wheel
 	twine check dist/* && twine upload dist/*
 
 # Thanks to Francoise at marmelab.com for this
