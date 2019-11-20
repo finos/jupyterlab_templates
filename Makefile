@@ -33,7 +33,7 @@ serverextension: install ## enable serverextension
 	jupyter serverextension enable --py jupyterlab_templates
 
 fix:  ## run autopep8/tslint fix
-	autopep8 --in-place -r -a -a crowdsource/
+	autopep8 --in-place -r -a -a jupyterlab_templates/
 	./node_modules/.bin/tslint --fix src/ts/**/*.ts
 
 js:  ## build javascript
