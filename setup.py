@@ -47,7 +47,7 @@ cmdclass['js'] = combine_commands(
 setup(
     name=name,
     version=version,
-    description='Automatically version notebooks from JupyterLab',
+    description='Notebook templates',
     long_description=long_description,
     url='https://github.com/timkpaine/jupyterlab_templates',
     author='Tim Paine',
