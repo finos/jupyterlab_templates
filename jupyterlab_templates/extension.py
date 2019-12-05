@@ -77,7 +77,8 @@ def load_jupyter_server_extension(nb_server_app):
     host_pattern = '.*$'
     print('Installing jupyterlab_templates handler on path %s' % url_path_join(base_url, 'templates'))
 
-    template_dirs.extend([os.path.join(x, 'notebook_templates') for x in jupyter_core.paths.jupyter_path()])
+    if nb_server_app.config.get('JupyterLabTemplates', {}).get('include_core_paths', True):
+        template_dirs.extend([os.path.join(x, 'notebook_templates') for x in jupyter_core.paths.jupyter_path()])
     print('Search paths:\n\t%s' % '\n\t'.join(template_dirs))
 
     loader = TemplatesLoader(template_dirs)

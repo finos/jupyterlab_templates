@@ -33,4 +33,5 @@ Templates will be looked for in a subdirectory of one of the `template_dirs` spe
 
 ### Flags
 - `template_dirs`: a list of directories. all `.ipynb` files in these directories will be listed as templates
-- `include_default`: include the default Sample template
+- `include_default`: include the default Sample template (default True)
+- `include_core_paths`: include jupyter core paths (see: jupyter --paths) (default True)
