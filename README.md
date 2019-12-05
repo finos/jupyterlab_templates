@@ -24,6 +24,7 @@ install the server extension, and add the following to `jupyter_notebook_config.
 ```python3
 c.JupyterLabTemplates.template_dirs = ['list', 'of', 'template', 'directories']
 c.JupyterLabTemplates.include_default = True
+c.JupyterLabTemplates.include_core_paths = True
 ```
 
 ## Templates for libraries
