@@ -4,6 +4,11 @@
   "description": "A JupyterLab extension.",
   "author": "Tim Paine",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timkpaine/jupyterlab_templates.git"
+  },
+  "license": "Apache-2.0",
   "keywords": [
     "jupyter",
     "jupyterlab",
