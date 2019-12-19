@@ -28,11 +28,12 @@ c.JupyterLabTemplates.include_core_paths = True
 ```
 
 ## Templates for libraries
-If you have tutorials or guides you'd like to install for users, simply copy them into your jupyter data folder inside the `notebook_templates` directory, e.g. `/usr/local/share/jupyter/notebook_templates/bqplot` for `bqplot`.
+The extension will search *subdirectories* of each parent directory specified in `template_dirs` for templates.
 
-Templates will be looked for in a subdirectory of one of the `template_dirs` specified above.
+The `notebook_templates` directory under the jupyter data folder is one of the default parent directory. Thus, if you have tutorials or guides you'd like to install for users, simply copy them into your jupyter data folder inside the `notebook_templates` directory, e.g. `/usr/local/share/jupyter/notebook_templates/bqplot` for `bqplot`.
+
 
 ### Flags
-- `template_dirs`: a list of directories. all `.ipynb` files in these directories will be listed as templates
+- `template_dirs`: a list of absolute directory paths. All `.ipynb` files in any *subdirectories* of these paths will be listed as templates
 - `include_default`: include the default Sample template (default True)
 - `include_core_paths`: include jupyter core paths (see: jupyter --paths) (default True)
