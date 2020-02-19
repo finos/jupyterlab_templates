@@ -1,4 +1,4 @@
-PYTHON=python3
+PYTHON=python3.7
 
 testjs: ## Clean and Make js tests
 	yarn test
@@ -6,8 +6,8 @@ testjs: ## Clean and Make js tests
 testpy: ## Clean and Make unit tests
 	${PYTHON} -m pytest -v tests --cov=jupyterlab_templates
 
-test: lint ## run the tests for travis CI
-	@ ${PYTHON} -m pytest -v tests --cov=jupyterlab_templates
+tests: lint ## run the tests
+	${PYTHON} -m pytest -v tests --cov=jupyterlab_templates --junitxml=python_junit.xml --cov-report=xml --cov-branch
 	yarn test
 
 lint: ## run linter
@@ -48,6 +48,7 @@ dist:  js  ## dist to pypi
 	${PYTHON} setup.py sdist
 	${PYTHON} setup.py bdist_wheel
 	twine check dist/* && twine upload dist/*
+	npm publish
 
 # Thanks to Francoise at marmelab.com for this
 .DEFAULT_GOAL := help
