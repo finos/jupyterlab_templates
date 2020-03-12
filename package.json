@@ -41,16 +41,16 @@
     }
   },
   "dependencies": {
-    "@jupyterlab/application": "^1.0.0",
-    "@jupyterlab/apputils": "^1.0.0",
-    "@jupyterlab/coreutils": "^3.0.0",
-    "@jupyterlab/docmanager": "^1.0.0",
-    "@jupyterlab/filebrowser": "^1.0.0",
-    "@jupyterlab/launcher": "^1.0.0",
-    "@jupyterlab/mainmenu": "^1.0.0",
-    "@jupyterlab/notebook": "^1.0.0",
-    "@phosphor/disposable": "^1.1.2",
-    "requests-helper": "^0.1.1"
+    "@jupyterlab/application": "^2.0.0",
+    "@jupyterlab/apputils": "^2.0.0",
+    "@jupyterlab/coreutils": "^4.0.0",
+    "@jupyterlab/docmanager": "^2.0.0",
+    "@jupyterlab/filebrowser": "^2.0.0",
+    "@jupyterlab/launcher": "^2.0.0",
+    "@jupyterlab/mainmenu": "^2.0.0",
+    "@jupyterlab/notebook": "^2.0.0",
+    "@lumino/disposable": "^1.1.2",
+    "requests-helper": "^0.1.5"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.5.5",

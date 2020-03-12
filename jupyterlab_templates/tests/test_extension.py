@@ -1,5 +1,5 @@
 # for Coverage
-from mock import patch, MagicMock
+from mock import MagicMock
 from jupyterlab_templates.extension import load_jupyter_server_extension
 
 
