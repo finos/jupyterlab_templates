@@ -13,7 +13,7 @@ lint: ## run linter
 	yarn lint
 
 fix:  ## run autopep8/tslint fix
-	autopep8 --in-place -r -a -a jupyterlab_templates/
+	autopep8 --in-place -r -a -a jupyterlab_templates/ jupyterlab_templates/*/*
 	./node_modules/.bin/tslint --fix src/*
 
 annotate: ## MyPy type annotation check
@@ -26,7 +26,7 @@ clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf
 	find . -name "*.pyc" | xargs rm -rf
 	find . -name ".ipynb_checkpoints" | xargs  rm -rf
-	rm -rf .coverage coverage cover htmlcov logs build dist *.egg-info lib node_modules
+	rm -rf .coverage coverage cover htmlcov logs build dist *.egg-info lib node_modules .autoversion .pytest_cache lab-dist
 	# make -C ./docs clean
 
 docs:  ## make documentation
