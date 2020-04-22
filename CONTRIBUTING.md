@@ -1,6 +1,11 @@
 # Contributing
 
-If you want to contribute to this repository here are some helpful guidelines.
+Thank you for your interest in contributing to jupyterlab_templates!
+
+We invite you to contribute enhancements. Upon review you will be required to complete the [Contributor License Agreement (CLA)](https://github.com/jpmorganchase/cla) before we are able to merge.
+
+If you have any questions about the contribution process, please feel free to send an email to [open_source@jpmorgan.com](mailto:open_source@jpmorgan.com).
+
 
 ## Reporting bugs, feature requests, etc.
 
