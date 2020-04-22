@@ -37,3 +37,14 @@ The `notebook_templates` directory under the jupyter data folder is one of the d
 - `template_dirs`: a list of absolute directory paths. All `.ipynb` files in any *subdirectories* of these paths will be listed as templates
 - `include_default`: include the default Sample template (default True)
 - `include_core_paths`: include jupyter core paths (see: jupyter --paths) (default True)
+
+
+## Development
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+
+## License
+
+This software is licensed under the Apache 2.0 license. See the
+[LICENSE](LICENSE) and [AUTHORS](AUTHORS) files for details.
