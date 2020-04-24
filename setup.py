@@ -60,8 +60,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/timkpaine/jupyterlab_templates',
-    author='Tim Paine',
-    author_email='t.paine154@gmail.com',
+    author='the jupyterlab_templates authors',
     license='Apache 2.0',
 
     classifiers=[
