@@ -54,7 +54,7 @@ const extension: JupyterFrontEndPlugin<void> = {
   requires: [IDocumentManager, ICommandPalette, ILayoutRestorer, IMainMenu, IFileBrowserFactory],
 };
 
-let templates: string[];
+let templates: {[key: string]: Array<{[key: string]: string}>};
 
 export
 class OpenTemplateWidget extends Widget {
@@ -63,19 +63,41 @@ class OpenTemplateWidget extends Widget {
     const label = document.createElement("label");
     label.textContent = "Template:";
 
-    const input = document.createElement("select");
-    for (const t of templates) {
-      const val = document.createElement("option");
-      val.label = t;
-      val.text  = t;
-      val.value = t;
-      input.appendChild(val);
+    const package_input = document.createElement("select");
+    const notebook_input = document.createElement("select");
+
+    for (const package_name of Object.keys(templates)) {
+      const package_option = document.createElement("option");
+      package_option.label = package_name;
+      package_option.text  = package_name;
+      package_option.value = package_name;
+      package_input.appendChild(package_option);
     }
 
-    // input.placeholder = 'select';
+    const fill = (package_name: string) => {
+      while (notebook_input.lastChild) { notebook_input.removeChild(notebook_input.lastChild); }
+
+      for (const notebook of templates[package_name]) {
+        const notebook_option = document.createElement("option");
+        notebook_option.label = notebook.name;
+        notebook_option.text  = notebook.name;
+        notebook_option.value = notebook.name;
+        notebook_input.appendChild(notebook_option);
+      }
+    };
+
+    package_input.addEventListener("change", (event) => {
+      const package_name = (event.target as HTMLSelectElement).value;
+      fill(package_name);
+    });
+
+    if (Object.keys(templates).length > 0) {
+      fill(Object.keys(templates)[0]);
+    }
 
     body.appendChild(label);
-    body.appendChild(input);
+    body.appendChild(package_input);
+    body.appendChild(notebook_input);
     super({ node: body });
   }
 
@@ -84,7 +106,7 @@ class OpenTemplateWidget extends Widget {
   }
 
   get inputNode(): HTMLSelectElement {
-    return this.node.getElementsByTagName("select")[0] as HTMLSelectElement;
+    return this.node.getElementsByTagName("select")[1] as HTMLSelectElement;
   }
 }
 
@@ -99,9 +121,9 @@ function activate(app: JupyterFrontEnd,
   // grab templates from serverextension
   request("get", PageConfig.getBaseUrl() + "templates/names").then((res: IRequestResult) => {
     if (res.ok) {
-      templates = res.json() as string[];
+      templates = res.json() as {[key: string]: Array<{[key: string]: string}>};
 
-      if (templates.length > 0) {
+      if (Object.keys(templates).length > 0) {
         // Add an application command
         const open_command = "template:open";
 
