@@ -23,6 +23,7 @@ class TemplatesLoader():
 
     def get_templates(self):
         templates = {}
+        template_by_path = {}
 
         for path in self.template_dirs:
             # in order to produce correct filenames, abspath should point to the parent directory of path
@@ -33,6 +34,7 @@ class TemplatesLoader():
                 if dirname == path:
                     # Skip top level
                     continue
+
                 for filename in fnmatch.filter(filenames, '*.ipynb'):
                     if '.ipynb_checkpoints' not in dirname:
                         files.append((os.path.join(dirname, filename), dirname.replace(path, ''), filename))
@@ -40,9 +42,24 @@ class TemplatesLoader():
             for f, dirname, filename in files:
                 with open(os.path.join(abspath, f), 'r', encoding='utf8') as fp:
                     content = fp.read()
-                templates[os.path.join(dirname, filename)] = {'path': f, 'dirname': dirname, 'filename': filename, 'content': content}
 
-        return templates
+                data = {'path': f,
+                        'name': os.path.join(dirname, filename),
+                        'dirname': dirname,
+                        'filename': filename,
+                        'content': content}
+
+                # remove leading slash for select
+                if dirname.strip(os.path.sep) not in templates:
+                    templates[dirname.strip(os.path.sep)] = []
+
+                # don't include content unless necessary
+                templates[dirname.strip(os.path.sep)].append({'name': data['name']})
+
+                # full data
+                template_by_path[data['name']] = data
+
+        return templates, template_by_path
 
 
 class TemplatesHandler(IPythonHandler):
@@ -52,7 +69,7 @@ class TemplatesHandler(IPythonHandler):
     def get(self):
         temp = self.get_argument('template', '')
         if temp:
-            self.finish(self.loader.get_templates()[temp])
+            self.finish(self.loader.get_templates()[1][temp])
         else:
             self.set_status(404)
 
@@ -62,8 +79,7 @@ class TemplateNamesHandler(IPythonHandler):
         self.loader = loader
 
     def get(self):
-        template_names = self.loader.get_templates().keys()
-        self.finish(json.dumps(sorted(template_names)))
+        self.finish(json.dumps(self.loader.get_templates()[0]))
 
 
 def load_jupyter_server_extension(nb_server_app):
@@ -77,7 +93,7 @@ def load_jupyter_server_extension(nb_server_app):
     template_dirs = nb_server_app.config.get('JupyterLabTemplates', {}).get('template_dirs', [])
 
     if nb_server_app.config.get('JupyterLabTemplates', {}).get('include_default', True):
-        template_dirs.append(os.path.join(os.path.dirname(__file__), 'templates'))
+        template_dirs.insert(0, os.path.join(os.path.dirname(__file__), 'templates'))
 
     base_url = web_app.settings['base_url']
 
@@ -89,7 +105,7 @@ def load_jupyter_server_extension(nb_server_app):
     print('Search paths:\n\t%s' % '\n\t'.join(template_dirs))
 
     loader = TemplatesLoader(template_dirs)
-    print('Available templates:\n\t%s' % '\n\t'.join(t for t in loader.get_templates()))
+    print('Available templates:\n\t%s' % '\n\t'.join(t for t in loader.get_templates()[1].keys()))
 
     web_app.add_handlers(host_pattern, [(url_path_join(base_url, 'templates/names'), TemplateNamesHandler, {'loader': loader})])
     web_app.add_handlers(host_pattern, [(url_path_join(base_url, 'templates/get'), TemplatesHandler, {'loader': loader})])
