@@ -1,7 +1,7 @@
 {
   "name": "jupyterlab_templates",
   "version": "0.2.3",
-  "description": "A JupyterLab extension.",
+  "description": "Notebook templates",
   "author": "the jupyterlab_templates authors",
   "main": "lib/index.js",
   "repository": {
