@@ -23,6 +23,7 @@ module.exports = {
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "project": "tsconfig.json",
+        "createDefaultProgram": true,
         "sourceType": "module"
     },
     "plugins": [
@@ -211,7 +212,7 @@ module.exports = {
             }
         ],
         "spaced-comment": [
-            "error",
+            "off",
             "always",
             {
                 "markers": [
