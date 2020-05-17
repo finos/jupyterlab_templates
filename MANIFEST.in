@@ -11,21 +11,12 @@ include Makefile
 
 graft jupyterlab_templates/tests
 
-# Documentation
-graft docs
-exclude docs/\#*
-
-# docs subdirs we want to skip
-prune docs/build
-prune docs/gh-pages
-prune docs/dist
+prune docs
 
 # Webapp files
-include package.json
-include tsconfig.json
-include tslint.json
-graft src
-graft style
+graft js
+prune js/node_modules
+prune js/lib
 
 # Patterns to exclude from any directory
 global-exclude *~

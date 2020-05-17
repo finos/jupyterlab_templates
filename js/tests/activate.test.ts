@@ -8,10 +8,10 @@
  */
 import "isomorphic-fetch";
 
-import * as extension from '../../../src/index';
+import {_activate} from '../src/index';
 
-describe('Checks exports', () => {
-  test("Check extension", () => {
-     expect(extension);
+describe('Checks activate', () => {
+  test("Check activate", () => {
+     expect(_activate);
   });
 });

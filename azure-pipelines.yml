@@ -24,7 +24,7 @@ jobs:
     - bash: npm install -g yarn
       displayName: "Install Yarn"
 
-    - bash: yarn
+    - bash: cd js; yarn
       displayName: "Install Deps"
 
     - script: |
@@ -73,7 +73,7 @@ jobs:
     - bash: npm install -g yarn
       displayName: "Install Yarn"
 
-    - bash: yarn
+    - bash: cd js; yarn
       displayName: "Install Deps"
 
     - script: |
@@ -122,7 +122,7 @@ jobs:
     - bash: npm install -g yarn
       displayName: "Install Yarn"
 
-    - bash: yarn
+    - bash: cd js; yarn
       displayName: "Install Deps"
 
     - script: |
