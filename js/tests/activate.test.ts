@@ -6,10 +6,12 @@
  * the Apache License 2.0.  The full license can be found in the LICENSE file.
  *
  */
-const path = require('path');
+import "isomorphic-fetch";
 
-module.exports = {
-  process(src, filename, config, options) {
-    return 'module.exports = ' + JSON.stringify(path.basename(filename)) + ';';
-  },
-};Tra
+import {_activate} from "../src/index";
+
+describe("Checks activate", () => {
+    test("Check activate", () => {
+        expect(_activate);
+    });
+});

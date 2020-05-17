@@ -19,7 +19,8 @@
     "build:lab": "rimraf lab-dist && mkdirp lab-dist && cd lab-dist && npm pack ..",
     "build:all": "npm run build && npm run build:lab",
     "clean": "rimraf lib",
-    "lint": "./node_modules/.bin/tslint './src/*.ts'",
+    "fix": "eslint -c .eslintrc.js --ext .ts --fix src/ tests/",
+    "lint": "eslint -c .eslintrc.js --ext .ts src/ tests/",
     "prepublishOnly": "npm run build",
     "test": "jest --coverage --collectCoverageFrom=src/*.{ts}"
   },
@@ -53,16 +54,21 @@
     "requests-helper": "^0.1.5"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-env": "^7.9.5",
     "@types/jest": "^24.0.4",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "babel-jest": "^24.8.0",
+    "eslint": "^7.0.0",
+    "eslint-plugin-import": "^2.20.2",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^24.1.0",
     "jest-transform-css": "^2.0.0",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
     "ts-jest": "^23.10.4",
-    "tslint": "^5.14.0",
+    "tslint": "^5.20.1",
     "typescript": "^3.1.6"
   }
 }

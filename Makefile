@@ -6,15 +6,18 @@ testpy: ## Clean and Make unit tests
 
 tests: lint ## run the tests
 	python3.7 -m pytest -v jupyterlab_templates/tests --cov=jupyterlab_templates --junitxml=python_junit.xml --cov-report=xml --cov-branch
-	yarn test
+	cd js; yarn test
+
+build: ## build python and js
+	python3 setup.py build
 
 lint: ## run linter
 	flake8 jupyterlab_templates setup.py
-	yarn lint
+	cd js; yarn lint
 
 fix:  ## run autopep8/tslint fix
 	autopep8 --in-place -r -a -a jupyterlab_templates/ jupyterlab_templates/*/*
-	./node_modules/.bin/tslint --fix src/*
+	cd js; yarn fix
 
 annotate: ## MyPy type annotation check
 	mypy -s jupyterlab_templates
@@ -40,11 +43,11 @@ serverextension: install ## enable serverextension
 	jupyter serverextension enable --py jupyterlab_templates
 
 js:  ## build javascript
-	yarn
-	yarn build
+	cd js; yarn
+	cd js; yarn build
 
 labextension: js ## enable labextension
-	jupyter labextension install .
+	cd js; jupyter labextension install .
 
 dist: js  ## create dists
 	rm -rf dist build
@@ -52,7 +55,7 @@ dist: js  ## create dists
 
 publish: dist  ## dist to pypi and npm
 	twine check dist/* && twine upload dist/*
-	npm publish
+	cd js; npm publish
 
 # Thanks to Francoise at marmelab.com for this
 .DEFAULT_GOAL := help
@@ -62,4 +65,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: clean install serverextension labextension test tests help docs dist
+.PHONY: clean install serverextension labextension test tests help docs dist build lint test tests testjs testpy js
