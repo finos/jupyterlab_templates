@@ -1,53 +1,54 @@
+/* eslint-disable @typescript-eslint/indent */
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true
+    env: {
+        browser: true,
+        es6: true,
     },
-    "extends": [
+    extends: [
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "project": "tsconfig.json",
-        "createDefaultProgram": true,
-        "sourceType": "module"
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+        project: "tsconfig.json",
+        createDefaultProgram: true,
+        sourceType: "module",
     },
-    "plugins": [
+    plugins: [
         "@typescript-eslint",
-        "@typescript-eslint/tslint"
+        "@typescript-eslint/tslint",
     ],
-    "rules": {
+    rules: {
         "@typescript-eslint/array-type": [
             "error",
             {
-                "default": "array-simple"
-            }
+                default: "array-simple",
+            },
         ],
         "@typescript-eslint/ban-types": [
             "error",
             {
-                "types": {
-                    "Object": {
-                        "message": "Avoid using the `Object` type. Did you mean `object`?"
+                types: {
+                    Object: {
+                        message: "Avoid using the `Object` type. Did you mean `object`?",
                     },
-                    "Function": {
-                        "message": "Avoid using the `Function` type. Prefer a specific function type, like `() => void`."
+                    Function: {
+                        message: "Avoid using the `Function` type. Prefer a specific function type, like `() => void`.",
                     },
-                    "Boolean": {
-                        "message": "Avoid using the `Boolean` type. Did you mean `boolean`?"
+                    Boolean: {
+                        message: "Avoid using the `Boolean` type. Did you mean `boolean`?",
                     },
-                    "Number": {
-                        "message": "Avoid using the `Number` type. Did you mean `number`?"
+                    Number: {
+                        message: "Avoid using the `Number` type. Did you mean `number`?",
                     },
-                    "String": {
-                        "message": "Avoid using the `String` type. Did you mean `string`?"
+                    String: {
+                        message: "Avoid using the `String` type. Did you mean `string`?",
                     },
-                    "Symbol": {
-                        "message": "Avoid using the `Symbol` type. Did you mean `symbol`?"
-                    }
-                }
-            }
+                    Symbol: {
+                        message: "Avoid using the `Symbol` type. Did you mean `symbol`?",
+                    },
+                },
+            },
         ],
         "@typescript-eslint/camelcase": "off",
         "@typescript-eslint/consistent-type-definitions": "error",
@@ -55,33 +56,33 @@ module.exports = {
         "@typescript-eslint/explicit-member-accessibility": [
             "error",
             {
-                "accessibility": "explicit"
-            }
+                accessibility: "explicit",
+            },
         ],
         "@typescript-eslint/indent": [
             "error",
-            4,
+            2,
             {
-                "FunctionDeclaration": {
-                    "parameters": "first"
+                FunctionDeclaration: {
+                    parameters: "first",
                 },
-                "FunctionExpression": {
-                    "parameters": "first"
-                }
-            }
+                FunctionExpression: {
+                    parameters: "first",
+                },
+            },
         ],
         "@typescript-eslint/member-delimiter-style": [
             "error",
             {
-                "multiline": {
-                    "delimiter": "semi",
-                    "requireLast": true
+                multiline: {
+                    delimiter: "semi",
+                    requireLast: true,
                 },
-                "singleline": {
-                    "delimiter": "semi",
-                    "requireLast": false
-                }
-            }
+                singleline: {
+                    delimiter: "semi",
+                    requireLast: false,
+                },
+            },
         ],
         "@typescript-eslint/member-ordering": "error",
         "@typescript-eslint/no-explicit-any": "off",
@@ -94,35 +95,35 @@ module.exports = {
             "error",
             "double",
             {
-                "avoidEscape": true
-            }
+                avoidEscape: true,
+            },
         ],
         "@typescript-eslint/semi": [
             "error",
-            "always"
+            "always",
         ],
         "@typescript-eslint/triple-slash-reference": [
             "error",
             {
-                "path": "always",
-                "types": "prefer-import",
-                "lib": "always"
-            }
+                path: "always",
+                types: "prefer-import",
+                lib: "always",
+            },
         ],
         "@typescript-eslint/unified-signatures": "error",
         "arrow-body-style": "error",
         "arrow-parens": [
             "error",
-            "always"
+            "always",
         ],
         "brace-style": [
             "error",
-            "1tbs"
+            "1tbs",
         ],
         "camelcase": "off",
         "comma-dangle": [
             "error",
-            "always-multiline"
+            "always-multiline",
         ],
         "complexity": "off",
         "constructor-super": "error",
@@ -130,7 +131,7 @@ module.exports = {
         "eol-last": "error",
         "eqeqeq": [
             "error",
-            "smart"
+            "smart",
         ],
         "guard-for-in": "error",
         "id-blacklist": [
@@ -143,18 +144,18 @@ module.exports = {
             "Boolean",
             "boolean",
             "Undefined",
-            "undefined"
+            "undefined",
         ],
         "id-match": "error",
         "max-classes-per-file": [
             "error",
-            1
+            1,
         ],
         "max-len": [
             "error",
             {
-                "code": 200
-            }
+                code: 200,
+            },
         ],
         "new-parens": "error",
         "no-bitwise": "error",
@@ -171,8 +172,8 @@ module.exports = {
         "no-shadow": [
             "error",
             {
-                "hoist": "all"
-            }
+                hoist: "all",
+            },
         ],
         "no-throw-literal": "error",
         "no-trailing-spaces": "error",
@@ -183,37 +184,37 @@ module.exports = {
         "object-shorthand": "error",
         "one-var": [
             "error",
-            "never"
+            "never",
         ],
         "prefer-arrow-callback": "error",
         "quote-props": [
             "error",
-            "consistent-as-needed"
+            "consistent-as-needed",
         ],
         "radix": "error",
         "space-before-function-paren": [
             "error",
             {
-                "anonymous": "never",
-                "asyncArrow": "always",
-                "named": "never"
-            }
+                anonymous: "never",
+                asyncArrow: "always",
+                named: "never",
+            },
         ],
         "spaced-comment": [
             "off",
             "always",
             {
-                "markers": [
-                    "/"
-                ]
-            }
+                markers: [
+                    "/",
+                ],
+            },
         ],
         "use-isnan": "error",
         "valid-typeof": "off",
         "@typescript-eslint/tslint/config": [
             "error",
             {
-                "rules": {
+                rules: {
                     "import-spacing": true,
                     "object-literal-sort-keys": true,
                     "whitespace": [
@@ -223,10 +224,10 @@ module.exports = {
                         "check-operator",
                         "check-separator",
                         "check-type",
-                        "check-typecast"
-                    ]
-                }
-            }
-        ]
-    }
+                        "check-typecast",
+                    ],
+                },
+            },
+        ],
+    },
 };
