@@ -30,7 +30,7 @@ class TemplatesLoader():
             abspath = os.path.abspath(os.path.join(os.path.realpath(path), os.pardir))
             files = []
             # get all files in subdirectories
-            for dirname, dirnames, filenames in os.walk(path):
+            for dirname, dirnames, filenames in os.walk(path, followlinks=True):
                 if dirname == path:
                     # Skip top level
                     continue
