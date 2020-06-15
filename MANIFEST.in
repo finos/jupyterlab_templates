@@ -7,6 +7,7 @@ include setup.cfg
 include pyproject.toml
 include .bumpversion.cfg
 include Makefile
+graft jupyterlab_templates/templates
 
 # Webapp files
 graft js
