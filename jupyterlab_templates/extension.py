@@ -9,6 +9,7 @@ import fnmatch
 import json
 import os
 import os.path
+import tornado.web
 from io import open
 
 import jupyter_core.paths
@@ -66,6 +67,7 @@ class TemplatesHandler(IPythonHandler):
     def initialize(self, loader):
         self.loader = loader
 
+    @tornado.web.authenticated
     def get(self):
         temp = self.get_argument('template', '')
         if temp:
@@ -78,6 +80,7 @@ class TemplateNamesHandler(IPythonHandler):
     def initialize(self, loader):
         self.loader = loader
 
+    @tornado.web.authenticated
     def get(self):
         self.finish(json.dumps(self.loader.get_templates()[0]))
 
