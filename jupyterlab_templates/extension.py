@@ -8,6 +8,7 @@
 import fnmatch
 import json
 import os
+import os.path
 import jupyter_core.paths
 import tornado.web
 
