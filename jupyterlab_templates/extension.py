@@ -9,11 +9,10 @@ import fnmatch
 import json
 import os
 import os.path
-import tornado.web
-from io import open
-
 import jupyter_core.paths
+import tornado.web
 
+from io import open
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
