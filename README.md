@@ -1,4 +1,5 @@
-# jupyterlab_templates
+<img src="docs/logo.png" width=400></img>
+
 Support for jupyter notebook templates in jupyterlab
 
 [![Build Status](https://dev.azure.com/tpaine154/jupyter/_apis/build/status/jpmorganchase.jupyterlab_templates?branchName=master)](https://dev.azure.com/tpaine154/jupyter/_build/latest?definitionId=26&branchName=master)
