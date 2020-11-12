@@ -12,7 +12,7 @@ build: ## build python and js
 	python3 setup.py build
 
 lint: ## run linter
-	pytho3 -m flake8 jupyterlab_templates setup.py
+	python3 -m flake8 jupyterlab_templates setup.py
 	cd js; yarn lint
 
 fix:  ## run autopep8/tslint fix
