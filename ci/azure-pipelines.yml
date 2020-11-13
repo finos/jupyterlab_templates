@@ -135,8 +135,10 @@ jobs:
         which python > python.txt
         set /p PYTHON=<python.txt
         ln -s %PYTHON% %PYTHON%$(python.version)
+        ln -s %PYTHON% %PYTHON%3
         python --version
         which python$(python.version)
+        which python3
       displayName: "Which python"
 
     - script: |
