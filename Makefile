@@ -2,21 +2,21 @@ testjs: ## Clean and Make js tests
 	yarn test
 
 testpy: ## Clean and Make unit tests
-	python3.7 -m pytest -v jupyterlab_templates/tests --cov=jupyterlab_templates
+	python3 -m pytest -v jupyterlab_templates/tests --cov=jupyterlab_templates
 
 tests: lint ## run the tests
-	python3.7 -m pytest -v jupyterlab_templates/tests --cov=jupyterlab_templates --junitxml=python_junit.xml --cov-report=xml --cov-branch
+	python3 -m pytest -v jupyterlab_templates/tests --cov=jupyterlab_templates --junitxml=python_junit.xml --cov-report=xml --cov-branch
 	cd js; yarn test
 
 build: ## build python and js
 	python3 setup.py build
 
 lint: ## run linter
-	flake8 jupyterlab_templates setup.py
+	python3 -m flake8 jupyterlab_templates setup.py
 	cd js; yarn lint
 
 fix:  ## run autopep8/tslint fix
-	autopep8 --in-place -r -a -a jupyterlab_templates/ jupyterlab_templates/*/*
+	python3 -m autopep8 --in-place -r -a -a jupyterlab_templates/ jupyterlab_templates/*/*
 	cd js; yarn fix
 
 annotate: ## MyPy type annotation check
@@ -37,10 +37,10 @@ docs:  ## make documentation
 	open ./docs/_build/html/index.html
 
 install:  ## install to site-packages
-	pip3 install .
+	python3 -m pip install .
 
 serverextension: install ## enable serverextension
-	jupyter serverextension enable --py jupyterlab_templates
+	python3 -m jupyter serverextension enable --py jupyterlab_templates
 
 js:  ## build javascript
 	cd js; yarn
@@ -51,10 +51,10 @@ labextension: js ## enable labextension
 
 dist: js  ## create dists
 	rm -rf dist build
-	python3.7 setup.py sdist bdist_wheel
+	python3 setup.py sdist bdist_wheel
 
 publish: dist  ## dist to pypi and npm
-	twine check dist/* && twine upload dist/*
+	python3 -m twine check dist/* && twine upload dist/*
 	cd js; npm publish
 
 # Thanks to Francoise at marmelab.com for this

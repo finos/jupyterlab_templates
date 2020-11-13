@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=jupyterlab_commands
+set SPHINXPROJ=jupyterlab_templates
 
 if "%1" == "" goto help
 
