@@ -30,8 +30,9 @@ c.JupyterLabTemplates.include_core_paths = True
 
 ## Templates for libraries
 The extension will search *subdirectories* of each parent directory specified in `template_dirs` for templates.
+**Note!** Templates in the parent directories will be ignored. You must put the templates in *subdirectories*, in order to keep everything organized.  
 
-The `notebook_templates` directory under the jupyter data folder is one of the default parent directory. Thus, if you have tutorials or guides you'd like to install for users, simply copy them into your jupyter data folder inside the `notebook_templates` directory, e.g. `/usr/local/share/jupyter/notebook_templates/bqplot` for `bqplot`.
+If `include_default = True` the `notebook_templates` directory under the [jupyter data folder](https://jupyter.readthedocs.io/en/latest/use/jupyter-directories.html) is one of the default parent directories. Thus, if you have tutorials or guides you'd like to install for users, simply copy them into your jupyter data folder inside the `notebook_templates` directory, e.g. `/usr/local/share/jupyter/notebook_templates/bqplot` for `bqplot`.
 
 
 ### Flags
