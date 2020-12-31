@@ -7,20 +7,16 @@
  *
  */
 import {
-  ILayoutRestorer, JupyterFrontEnd, JupyterFrontEndPlugin,
+  JupyterFrontEnd, JupyterFrontEndPlugin,
 } from "@jupyterlab/application";
 
 import {
-  Dialog, ICommandPalette, showDialog,
+  Dialog, showDialog,
 } from "@jupyterlab/apputils";
 
 import {
   PageConfig,
 } from "@jupyterlab/coreutils";
-
-import {
-  IDocumentManager,
-} from "@jupyterlab/docmanager";
 
 import {
   IFileBrowserFactory,
@@ -51,7 +47,7 @@ const extension: JupyterFrontEndPlugin<void> = {
   autoStart: true,
   id: "jupyterlab_templates",
   optional: [ILauncher],
-  requires: [IDocumentManager, ICommandPalette, ILayoutRestorer, IMainMenu, IFileBrowserFactory],
+  requires: [IMainMenu, IFileBrowserFactory],
 };
 
 let templates: {[key: string]: Array<{[key: string]: string}>};
@@ -113,9 +109,6 @@ class OpenTemplateWidget extends Widget {
 }
 
 function activate(app: JupyterFrontEnd,
-                  docManager: IDocumentManager,
-                  palette: ICommandPalette,
-                  restorer: ILayoutRestorer,
                   menu: IMainMenu,
                   browser: IFileBrowserFactory,
                   launcher: ILauncher | null) {

@@ -1,15 +1,14 @@
-from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-from jupyter_packaging import (
-    create_cmdclass, install_npm, ensure_targets,
-    combine_commands, ensure_python, get_version
-)
+from jupyter_packaging import (combine_commands, create_cmdclass,
+                               ensure_python, ensure_targets, get_version,
+                               install_npm)
+from setuptools import find_packages, setup
 
 pjoin = path.join
 
-ensure_python(('2.7', '>=3.3'))
+ensure_python(('2.7', '>=3.6'))
 
 name = 'jupyterlab_templates'
 here = path.abspath(path.dirname(__file__))
@@ -20,16 +19,19 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 requires = [
-    'jupyterlab>=1.0.0'
+    'jupyterlab>=3.0.0'
 ]
 
 dev_requires = requires + [
-    'autopep8',
+    'black>=20.',
+    'bump2version>=1.0.0',
+    'flake8>=3.7.8',
+    'flake8-black>=0.2.1',
+    'mock',
     'pytest',
     'pytest-cov>=2.6.1',
-    'flake8',
-    'bump2version',
-    'mock'
+    'Sphinx>=1.8.4',
+    'sphinx-markdown-builder>=0.5.2',
 ]
 
 data_spec = [
@@ -72,6 +74,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Framework :: Jupyter',
     ],
 

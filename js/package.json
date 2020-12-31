@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/timkpaine/jupyterlab_templates.git"
+    "url": "https://github.com/jpmorganchase/jupyterlab_templates.git"
   },
   "license": "Apache-2.0",
   "keywords": [
@@ -42,14 +42,13 @@
     }
   },
   "dependencies": {
-    "@jupyterlab/application": "^2.0.0",
-    "@jupyterlab/apputils": "^2.0.0",
-    "@jupyterlab/coreutils": "^4.0.0",
-    "@jupyterlab/docmanager": "^2.0.0",
-    "@jupyterlab/filebrowser": "^2.0.0",
-    "@jupyterlab/launcher": "^2.0.0",
-    "@jupyterlab/mainmenu": "^2.0.0",
-    "@jupyterlab/notebook": "^2.0.0",
+    "@jupyterlab/application": "^3.0.0",
+    "@jupyterlab/apputils": "^3.0.0",
+    "@jupyterlab/coreutils": "^5.0.0",
+    "@jupyterlab/filebrowser": "^3.0.0",
+    "@jupyterlab/launcher": "^3.0.0",
+    "@jupyterlab/mainmenu": "^3.0.0",
+    "@jupyterlab/notebook": "^3.0.0",
     "@lumino/disposable": "^1.1.2",
     "requests-helper": "^0.1.5"
   },
