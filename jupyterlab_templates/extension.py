@@ -17,7 +17,7 @@ from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
 
-class TemplatesLoader():
+class TemplatesLoader:
     def __init__(self, template_dirs):
         self.template_dirs = template_dirs
 
@@ -35,29 +35,37 @@ class TemplatesLoader():
                     # Skip top level
                     continue
 
-                for filename in fnmatch.filter(filenames, '*.ipynb'):
-                    if '.ipynb_checkpoints' not in dirname:
-                        files.append((os.path.join(dirname, filename), dirname.replace(path, ''), filename))
+                for filename in fnmatch.filter(filenames, "*.ipynb"):
+                    if ".ipynb_checkpoints" not in dirname:
+                        files.append(
+                            (
+                                os.path.join(dirname, filename),
+                                dirname.replace(path, ""),
+                                filename,
+                            )
+                        )
             # pull contents and push into templates list
             for f, dirname, filename in files:
-                with open(os.path.join(abspath, f), 'r', encoding='utf8') as fp:
+                with open(os.path.join(abspath, f), "r", encoding="utf8") as fp:
                     content = fp.read()
 
-                data = {'path': f,
-                        'name': os.path.join(dirname, filename),
-                        'dirname': dirname,
-                        'filename': filename,
-                        'content': content}
+                data = {
+                    "path": f,
+                    "name": os.path.join(dirname, filename),
+                    "dirname": dirname,
+                    "filename": filename,
+                    "content": content,
+                }
 
                 # remove leading slash for select
                 if dirname.strip(os.path.sep) not in templates:
                     templates[dirname.strip(os.path.sep)] = []
 
                 # don't include content unless necessary
-                templates[dirname.strip(os.path.sep)].append({'name': data['name']})
+                templates[dirname.strip(os.path.sep)].append({"name": data["name"]})
 
                 # full data
-                template_by_path[data['name']] = data
+                template_by_path[data["name"]] = data
 
         return templates, template_by_path
 
@@ -68,7 +76,7 @@ class TemplatesHandler(IPythonHandler):
 
     @tornado.web.authenticated
     def get(self):
-        temp = self.get_argument('template', '')
+        temp = self.get_argument("template", "")
         if temp:
             self.finish(self.loader.get_templates()[1][temp])
         else:
@@ -92,22 +100,55 @@ def load_jupyter_server_extension(nb_server_app):
         nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
     """
     web_app = nb_server_app.web_app
-    template_dirs = nb_server_app.config.get('JupyterLabTemplates', {}).get('template_dirs', [])
+    template_dirs = nb_server_app.config.get("JupyterLabTemplates", {}).get(
+        "template_dirs", []
+    )
 
-    if nb_server_app.config.get('JupyterLabTemplates', {}).get('include_default', True):
-        template_dirs.insert(0, os.path.join(os.path.dirname(__file__), 'templates'))
+    if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_default", True):
+        template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
 
-    base_url = web_app.settings['base_url']
+    base_url = web_app.settings["base_url"]
 
-    host_pattern = '.*$'
-    print('Installing jupyterlab_templates handler on path %s' % url_path_join(base_url, 'templates'))
+    host_pattern = ".*$"
+    print(
+        "Installing jupyterlab_templates handler on path %s"
+        % url_path_join(base_url, "templates")
+    )
 
-    if nb_server_app.config.get('JupyterLabTemplates', {}).get('include_core_paths', True):
-        template_dirs.extend([os.path.join(x, 'notebook_templates') for x in jupyter_core.paths.jupyter_path()])
-    print('Search paths:\n\t%s' % '\n\t'.join(template_dirs))
+    if nb_server_app.config.get("JupyterLabTemplates", {}).get(
+        "include_core_paths", True
+    ):
+        template_dirs.extend(
+            [
+                os.path.join(x, "notebook_templates")
+                for x in jupyter_core.paths.jupyter_path()
+            ]
+        )
+    print("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
     loader = TemplatesLoader(template_dirs)
-    print('Available templates:\n\t%s' % '\n\t'.join(t for t in loader.get_templates()[1].keys()))
+    print(
+        "Available templates:\n\t%s"
+        % "\n\t".join(t for t in loader.get_templates()[1].keys())
+    )
 
-    web_app.add_handlers(host_pattern, [(url_path_join(base_url, 'templates/names'), TemplateNamesHandler, {'loader': loader})])
-    web_app.add_handlers(host_pattern, [(url_path_join(base_url, 'templates/get'), TemplatesHandler, {'loader': loader})])
+    web_app.add_handlers(
+        host_pattern,
+        [
+            (
+                url_path_join(base_url, "templates/names"),
+                TemplateNamesHandler,
+                {"loader": loader},
+            )
+        ],
+    )
+    web_app.add_handlers(
+        host_pattern,
+        [
+            (
+                url_path_join(base_url, "templates/get"),
+                TemplatesHandler,
+                {"loader": loader},
+            )
+        ],
+    )

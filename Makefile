@@ -16,7 +16,7 @@ lint: ## run linter
 	cd js; yarn lint
 
 fix:  ## run black/tslint fix
-	python -m black jupyterlab_templates
+	python -m black jupyterlab_templates setup.py
 	cd js; yarn fix
 
 annotate: ## MyPy type annotation check
