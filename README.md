@@ -2,14 +2,14 @@
 
 Support for jupyter notebook templates in jupyterlab
 
-[![Build Status](https://dev.azure.com/tpaine154/jupyter/_apis/build/status/jpmorganchase.jupyterlab_templates?branchName=master)](https://dev.azure.com/tpaine154/jupyter/_build/latest?definitionId=26&branchName=master)
+[![Build Status](https://dev.azure.com/tpaine154/jupyter/_apis/build/status/jpmorganchase.jupyterlab_templates?branchName=main)](https://dev.azure.com/tpaine154/jupyter/_build/latest?definitionId=26&branchName=main)
 [![GitHub issues](https://img.shields.io/github/issues/jpmorganchase/jupyterlab_templates.svg)]()
-[![Coverage](https://img.shields.io/azure-devops/coverage/tpaine154/jupyter/26/master)](https://dev.azure.com/tpaine154/jupyter/_build?definitionId=26&_a=summary)
+[![Coverage](https://img.shields.io/azure-devops/coverage/tpaine154/jupyter/26/main)](https://dev.azure.com/tpaine154/jupyter/_build?definitionId=26&_a=summary)
 [![PyPI](https://img.shields.io/pypi/l/jupyterlab_templates.svg)](https://pypi.python.org/pypi/jupyterlab_templates)
 [![PyPI](https://img.shields.io/pypi/v/jupyterlab_templates.svg)](https://pypi.python.org/pypi/jupyterlab_templates)
 [![npm](https://img.shields.io/npm/v/jupyterlab_templates.svg)](https://www.npmjs.com/package/jupyterlab_templates)
 
-![](https://raw.githubusercontent.com/timkpaine/jupyterlab_templates/master/docs/example1.gif)
+![](https://raw.githubusercontent.com/timkpaine/jupyterlab_templates/main/docs/example1.gif)
 
 
 ## Install
