@@ -29,7 +29,7 @@ clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf
 	find . -name "*.pyc" | xargs rm -rf
 	find . -name ".ipynb_checkpoints" | xargs  rm -rf
-	rm -rf .coverage coverage cover htmlcov logs build dist *.egg-info lib node_modules .autoversion .pytest_cache lab-dist
+	rm -rf .coverage coverage cover htmlcov logs build dist *.egg-info lib node_modules .autoversion .pytest_cache lab-dist coverage.xml python_junit.xml
 	# make -C ./docs clean
 
 docs:  ## make documentation
@@ -51,11 +51,12 @@ labextension: js ## enable labextension
 
 dist: js  ## create dists
 	rm -rf dist build
-	python -m python setup.py sdist bdist_wheel
+	python setup.py sdist bdist_wheel
+	python -m twine check dist/*
 
 publish: dist  ## dist to pypi and npm
-	python -m twine check dist/* && twine upload dist/*
-	cd js; npm publish
+	python -m twine upload dist/* --skip-existing
+	cd js; npm publish || echo "can't publish - might already exist"
 
 # Thanks to Francoise at marmelab.com for this
 .DEFAULT_GOAL := help
