@@ -165,7 +165,6 @@ ENV/
 .DS_Store
 
 .autoversion
-yarn.lock
 docs/index.md
 docs/api
 python_junit.xml
