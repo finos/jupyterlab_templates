@@ -13,7 +13,7 @@ from setuptools import find_packages, setup
 
 pjoin = path.join
 
-ensure_python(("2.7", ">=3.6"))
+ensure_python(("2.7", ">=3.7"))
 
 name = "jupyterlab_templates"
 here = path.abspath(path.dirname(__file__))
@@ -68,7 +68,6 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
