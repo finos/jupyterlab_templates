@@ -41,7 +41,7 @@ data_spec = [
     # Lab extension installed by default:
     ("share/jupyter/lab/extensions", "lab-dist", "jupyterlab_templates-*.tgz"),
     # Config to enable server extension by default:
-    ("etc/jupyter", "jupyter-config", "**/*.json"),
+    ("etc/jupyter/jupyter_server_config.d", "jupyter-config", "*.json"),
 ]
 
 
