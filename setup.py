@@ -60,7 +60,7 @@ setup(
     description="Notebook templates",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/timkpaine/jupyterlab_templates",
+    url="https://github.com/jpmorganchase/jupyterlab_templates",
     author="the jupyterlab_templates authors",
     license="Apache 2.0",
     classifiers=[
