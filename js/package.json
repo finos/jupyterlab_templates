@@ -71,6 +71,7 @@
     "typescript": "^3.1.6"
   },
   "resolutions": {
+    "marked": "^2.0.0",
     "node-notifier": "^8.0.1"
   }
 }
