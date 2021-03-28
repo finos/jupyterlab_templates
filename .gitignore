@@ -168,3 +168,5 @@ ENV/
 docs/index.md
 docs/api
 python_junit.xml
+jupyterlab_templates/labextension
+Untitled.ipynb
