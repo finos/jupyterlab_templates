@@ -20,7 +20,7 @@
     "build:all": "npm run build && npm run build:lab",
     "clean": "rimraf lib",
     "fix": "yarn lint --fix",
-    "lint": "eslint -c .eslintrc.js --ext .ts,.js ./src ./tests",
+    "lint": "eslint -c .eslintrc.js --ext .ts,.js src/ tests/",
     "prepublishOnly": "npm run build",
     "test": "jest --coverage --collectCoverageFrom=src/*.{ts}"
   },
