@@ -6,6 +6,7 @@ module.exports = {
   extends: [
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -13,10 +14,7 @@ module.exports = {
     createDefaultProgram: true,
     sourceType: "module",
   },
-  plugins: [
-    "@typescript-eslint",
-    "@typescript-eslint/tslint",
-  ],
+  plugins: ["@typescript-eslint", "@typescript-eslint/tslint", "prettier"],
   rules: {
     "@typescript-eslint/array-type": [
       "error",
@@ -32,7 +30,8 @@ module.exports = {
             message: "Avoid using the `Object` type. Did you mean `object`?",
           },
           Function: {
-            message: "Avoid using the `Function` type. Prefer a specific function type, like `() => void`.",
+            message:
+              "Avoid using the `Function` type. Prefer a specific function type, like `() => void`.",
           },
           Boolean: {
             message: "Avoid using the `Boolean` type. Did you mean `boolean`?",
@@ -97,10 +96,7 @@ module.exports = {
         avoidEscape: true,
       },
     ],
-    "@typescript-eslint/semi": [
-      "error",
-      "always",
-    ],
+    "@typescript-eslint/semi": ["error", "always"],
     "@typescript-eslint/triple-slash-reference": [
       "error",
       {
@@ -111,27 +107,15 @@ module.exports = {
     ],
     "@typescript-eslint/unified-signatures": "error",
     "arrow-body-style": "error",
-    "arrow-parens": [
-      "error",
-      "always",
-    ],
-    "brace-style": [
-      "error",
-      "1tbs",
-    ],
-    "camelcase": "off",
-    "comma-dangle": [
-      "error",
-      "always-multiline",
-    ],
-    "complexity": "off",
+    "arrow-parens": ["error", "always"],
+    "brace-style": ["error", "1tbs"],
+    camelcase: "off",
+    "comma-dangle": ["error", "always-multiline"],
+    complexity: "off",
     "constructor-super": "error",
-    "curly": "error",
+    curly: "error",
     "eol-last": "error",
-    "eqeqeq": [
-      "error",
-      "smart",
-    ],
+    eqeqeq: ["error", "smart"],
     "guard-for-in": "error",
     "id-blacklist": [
       "error",
@@ -146,10 +130,7 @@ module.exports = {
       "undefined",
     ],
     "id-match": "error",
-    "max-classes-per-file": [
-      "error",
-      1,
-    ],
+    "max-classes-per-file": ["error", 1],
     "max-len": [
       "error",
       {
@@ -181,16 +162,9 @@ module.exports = {
     "no-unsafe-finally": "error",
     "no-unused-labels": "error",
     "object-shorthand": "error",
-    "one-var": [
-      "error",
-      "never",
-    ],
+    "one-var": ["error", "never"],
     "prefer-arrow-callback": "error",
-    "quote-props": [
-      "error",
-      "consistent-as-needed",
-    ],
-    "radix": "error",
+    radix: "error",
     "space-before-function-paren": [
       "error",
       {
@@ -203,9 +177,7 @@ module.exports = {
       "off",
       "always",
       {
-        markers: [
-          "/",
-        ],
+        markers: ["/"],
       },
     ],
     "use-isnan": "error",
@@ -216,7 +188,7 @@ module.exports = {
         rules: {
           "import-spacing": true,
           "object-literal-sort-keys": true,
-          "whitespace": [
+          whitespace: [
             true,
             "check-branch",
             "check-decl",
@@ -226,6 +198,16 @@ module.exports = {
             "check-typecast",
           ],
         },
+      },
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        semi: true,
+        singleQuote: false,
+        tabWidth: 2,
+        useTabs: false,
+        trailingComma: "all",
       },
     ],
   },
