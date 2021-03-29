@@ -8,7 +8,7 @@
  */
 import "isomorphic-fetch";
 
-import {_activate} from "../src/index";
+import { _activate } from "../src/index";
 
 describe("Checks activate", () => {
   test("Check activate", () => {
