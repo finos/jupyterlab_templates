@@ -106,6 +106,24 @@ module.exports = {
       },
     ],
     "@typescript-eslint/unified-signatures": "error",
+    "@typescript-eslint/tslint/config": [
+      "error",
+      {
+        rules: {
+          "import-spacing": true,
+          "object-literal-sort-keys": true,
+          whitespace: [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-separator",
+            "check-type",
+            "check-typecast",
+          ],
+        },
+      },
+    ],
     "arrow-body-style": "error",
     "arrow-parens": ["error", "always"],
     "brace-style": ["error", "1tbs"],
@@ -182,24 +200,6 @@ module.exports = {
     ],
     "use-isnan": "error",
     "valid-typeof": "off",
-    "@typescript-eslint/tslint/config": [
-      "error",
-      {
-        rules: {
-          "import-spacing": true,
-          "object-literal-sort-keys": true,
-          whitespace: [
-            true,
-            "check-branch",
-            "check-decl",
-            "check-operator",
-            "check-separator",
-            "check-type",
-            "check-typecast",
-          ],
-        },
-      },
-    ],
     "prettier/prettier": [
       "error",
       {
@@ -208,6 +208,7 @@ module.exports = {
         tabWidth: 2,
         useTabs: false,
         trailingComma: "all",
+        endOfLine: "auto",
       },
     ],
   },
