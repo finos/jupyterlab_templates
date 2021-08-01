@@ -9,7 +9,7 @@
 
  module.exports = {
   parser: "babel-eslint",
-  extends: ["airbnb", "prettier", "plugin:json/recommended"],
+  extends: ["airbnb-base", "prettier", "plugin:json/recommended"],
   plugins: ["prettier", "jest"],
   env: {
     browser: true,
