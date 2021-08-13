@@ -15,15 +15,9 @@ lint: ## run linter
 	python -m flake8 jupyterlab_templates setup.py
 	cd js; yarn lint
 
-fix:  ## run black/tslint fix
+fix:  ## run black/eslint fix
 	python -m black jupyterlab_templates setup.py
 	cd js; yarn fix
-
-annotate: ## MyPy type annotation check
-	python -m mypy -s jupyterlab_templates
-
-annotate_l: ## MyPy type annotation check - count only
-	python -m mypy -s jupyterlab_templates | wc -l
 
 clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf
