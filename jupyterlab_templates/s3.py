@@ -1,6 +1,5 @@
 import os
 from collections import defaultdict
-import boto3
 
 class S3TemplateLoader:
     def __init__(self, bucket, aws_access_key, aws_secret_key, prefix="", **kwargs):

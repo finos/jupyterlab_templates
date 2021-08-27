@@ -128,6 +128,7 @@ def load_jupyter_server_extension(nb_server_app):
     loader_kwargs = extension_config.get("loader_kwargs", {})
     loader = get_loader(loader_name, template_dirs=template_dirs, **loader_kwargs)
     template_dirs.extend([d for d in loader.get_paths() if d not in template_dirs])
+    print("I am here",template_dirs)
 
     if extension_config.get("include_default", True):
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
