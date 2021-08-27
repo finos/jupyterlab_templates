@@ -119,6 +119,8 @@ def load_jupyter_server_extension(nb_server_app):
         "template_dirs", []
     )
 
+    print("Keep it",template_dirs)
+
     # template_dirs = nb_server_app.config.get("JupyterLabTemplates", {}).get(
     #     "template_dirs", []
     # )
