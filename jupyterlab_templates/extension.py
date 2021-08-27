@@ -112,16 +112,12 @@ def load_jupyter_server_extension(nb_server_app):
     Args:
         nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
     """
-    print("jjjj")
     extension_config = nb_server_app.config.get("JupyterLabTemplates", {})
-    print("ccccc",extension_config)
     web_app = nb_server_app.web_app
 
     template_dirs = extension_config.get(
         "template_dirs", []
     )
-
-    print("Keep it",template_dirs)
 
     # template_dirs = nb_server_app.config.get("JupyterLabTemplates", {}).get(
     #     "template_dirs", []
@@ -132,7 +128,6 @@ def load_jupyter_server_extension(nb_server_app):
     loader_kwargs = extension_config.get("loader_kwargs", {})
     loader = get_loader(loader_name, template_dirs=template_dirs, **loader_kwargs)
     template_dirs.extend([d for d in loader.get_paths() if d not in template_dirs])
-    print("I am here",template_dirs)
 
     if extension_config.get("include_default", True):
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
