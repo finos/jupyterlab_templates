@@ -16,7 +16,7 @@ class S3TemplateLoader:
             # So we can test by redirecting to docker
             # endpoint_url = os.getenv("AWS_ENDPOINT_URL")
             # self._client = boto3.client("s3", endpoint_url=endpoint_url)
-            self._client = boto3.client("s3", aws_access_key_id=self.aws_access_key, aws_secret_access_key=self.aws_secret_access_key)
+            self._client = boto3.client("s3", aws_access_key_id=self.aws_access_key, aws_secret_access_key=self.aws_secret_key)
         return self._client
 
     def get_paths(self):
