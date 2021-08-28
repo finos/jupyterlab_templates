@@ -56,7 +56,7 @@ export class OpenTemplateWidget extends Widget {
     };
 
     package_input.addEventListener("change", (event) => {
-      const package_name = event.target.value;
+      const package_name = (event.target).value;
       fill(package_name);
     });
 
@@ -70,7 +70,10 @@ export class OpenTemplateWidget extends Widget {
     super({node: body});
   }
 
-  getValue = () => this.node.getElementsByTagName("select")[1];
+  getValue = () => this.node.getElementsByTagName("select")[1].value;
+
+//  getValue = () => this.inputNode.value;
+//  inputNode = ()HTMLSelectElement => this.node.getElementsByTagName("select")[1];
 }
 
 function activate(app, menu, browser, launcher) {
@@ -100,7 +103,7 @@ function activate(app, menu, browser, launcher) {
                   template: result.value,
                 }).then((res2) => {
                   const data = res2.json();
-                  const {path} = browser.defaultBrowser.model;
+                  const {path} = browser.defaultBrowser.model.path;
 
                   return new Promise((resolve) => {
                     app.commands

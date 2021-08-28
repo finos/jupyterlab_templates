@@ -108,7 +108,6 @@ class TemplateNamesHandler(IPythonHandler):
 def load_jupyter_server_extension(nb_server_app):
     """
     Called when the extension is loaded.
-
     Args:
         nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
     """
@@ -118,10 +117,6 @@ def load_jupyter_server_extension(nb_server_app):
     template_dirs = extension_config.get(
         "template_dirs", []
     )
-
-    # template_dirs = nb_server_app.config.get("JupyterLabTemplates", {}).get(
-    #     "template_dirs", []
-    # )
 
     # if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_default", True):
     loader_name = extension_config.get("loader", "default")
@@ -143,7 +138,7 @@ def load_jupyter_server_extension(nb_server_app):
 
     # if nb_server_app.config.get("JupyterLabTemplates", {}).get(
     if extension_config.get(
-        "include_core_paths", True
+            "include_core_paths", True
     ):
         template_dirs.extend(
             [

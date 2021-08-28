@@ -2,21 +2,17 @@ import os
 from collections import defaultdict
 
 class S3TemplateLoader:
-    def __init__(self, bucket, aws_access_key, aws_secret_key, prefix="", **kwargs):
+    def __init__(self, bucket, endpoint_url, prefix="", **kwargs):
         self.bucket = bucket
         self.prefix = prefix
-        self.aws_access_key = aws_access_key
-        self.aws_secret_key = aws_secret_key
+        self.endpoint_url = endpoint_url
         self._client = None
 
     @property
     def client(self):
         if not self._client:
             import boto3
-            # So we can test by redirecting to docker
-            # endpoint_url = os.getenv("AWS_ENDPOINT_URL")
-            # self._client = boto3.client("s3", endpoint_url=endpoint_url)
-            self._client = boto3.client("s3", aws_access_key_id=self.aws_access_key, aws_secret_access_key=self.aws_secret_key, region_name="ap-south-1")
+            self._client = boto3.client("s3", endpoint_url = self.endpoint_url)
         return self._client
 
     def get_paths(self):
