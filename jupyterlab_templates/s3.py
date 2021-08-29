@@ -35,7 +35,7 @@ class S3TemplateLoader:
             dirname = os.path.dirname(path)
 
             try:
-                dirname = dirname.split("/")[-2]
+                dirname = dirname.split("/")[-1]
             except:
                 dirname = dirname
 
