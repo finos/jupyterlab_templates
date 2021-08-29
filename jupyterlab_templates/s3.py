@@ -34,6 +34,11 @@ class S3TemplateLoader:
             filename = os.path.basename(path)
             dirname = os.path.dirname(path)
 
+            try:
+                dirname = dirname.split("/")[-2]
+            except:
+                dirname = dirname
+
             data = {
                 "name": "{}/{}".format(dirname, filename),
                 "path": path,
