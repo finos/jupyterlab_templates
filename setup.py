@@ -4,7 +4,6 @@ from os import path
 from jupyter_packaging import (
     combine_commands,
     create_cmdclass,
-    ensure_python,
     ensure_targets,
     get_version,
     install_npm,
@@ -12,8 +11,6 @@ from jupyter_packaging import (
 from setuptools import find_packages, setup
 
 pjoin = path.join
-
-ensure_python(("2.7", ">=3.7"))
 
 name = "jupyterlab_templates"
 here = path.abspath(path.dirname(__file__))
@@ -73,12 +70,11 @@ setup(
     license="Apache 2.0",
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Framework :: Jupyter",
     ],
     cmdclass=cmdclass,
@@ -92,4 +88,5 @@ setup(
     extras_require={"dev": dev_requires},
     include_package_data=True,
     zip_safe=False,
+    python_requires=">=3.7",
 )
