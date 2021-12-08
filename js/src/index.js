@@ -85,7 +85,7 @@ function activate(app, menu, browser, launcher) {
 
         app.commands.addCommand(open_command, {
           caption: "Initialize a notebook from a template notebook",
-          execute: (args) => {
+          execute: () => {
             showDialog({
               body: new OpenTemplateWidget(),
               buttons: [Dialog.cancelButton(), Dialog.okButton({label: "GO"})],
