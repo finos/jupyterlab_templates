@@ -2,17 +2,22 @@ import os
 from collections import defaultdict
 
 class S3TemplateLoader:
-    def __init__(self, bucket, endpoint_url, prefix="", **kwargs):
+    def __init__(self, bucket, endpoint_url, prefix="",access_key="",secret_key="", **kwargs):
         self.bucket = bucket
         self.prefix = prefix
         self.endpoint_url = endpoint_url
+        self.access_key = access_key
+        self.secret_key = secret_key
         self._client = None
 
     @property
     def client(self):
         if not self._client:
             import boto3
-            self._client = boto3.client("s3", endpoint_url = self.endpoint_url)
+            if self.access_key=="":
+                self._client = boto3.client("s3", endpoint_url = self.endpoint_url)
+            else:
+                self._client = boto3.client("s3", endpoint_url = self.endpoint_url,aws_access_key_id=self.access_key,aws_secret_access_key=self.secret_key)
         return self._client
 
     def get_paths(self):
