@@ -97,7 +97,7 @@ function activate(app, menu, browser, launcher) {
               }
               if (result.value) {
                 request("get", `${PageConfig.getBaseUrl()}templates/get`, {
-                  template: result.value,
+                  template: result.value.value,
                 }).then((res2) => {
                   const data = res2.json();
                   const {path} = browser.defaultBrowser.model;
