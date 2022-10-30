@@ -30,7 +30,7 @@ class TemplatesLoader:
             abspath = os.path.abspath(os.path.join(os.path.realpath(path), os.pardir))
             files = []
             # get all files in subdirectories
-            for dirname, dirnames, filenames in os.walk(path, followlinks=True):
+            for dirname, _, filenames in os.walk(path, followlinks=True):
                 if dirname == path:
                     # Skip top level
                     continue
@@ -46,8 +46,13 @@ class TemplatesLoader:
                         )
             # pull contents and push into templates list
             for f, dirname, filename in files:
-                with open(os.path.join(abspath, f), "r", encoding="utf8") as fp:
-                    content = fp.read()
+                # skips over faild attempts to read content
+                try:
+                    with open(os.path.join(abspath, f), "r", encoding="utf8") as fp:
+                        content = fp.read()
+                except (FileNotFoundError, PermissionError) as content_exception:
+                    print(type(content_exception).__name__, content_exception)
+                    continue
 
                 data = {
                     "path": f,
