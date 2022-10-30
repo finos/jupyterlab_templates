@@ -16,6 +16,7 @@ from io import open
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
+TEMPLATES_IGNORE_FILE = ".jupyterlab_templates_ignore"
 
 class TemplatesLoader:
     def __init__(self, template_dirs):
@@ -33,6 +34,10 @@ class TemplatesLoader:
             for dirname, dirnames, filenames in os.walk(path, followlinks=True):
                 if dirname == path:
                     # Skip top level
+                    continue
+                
+                if TEMPLATES_IGNORE_FILE in filenames:
+                    # skip this very directory (subdirectories will still be considered)
                     continue
 
                 for filename in fnmatch.filter(filenames, "*.ipynb"):

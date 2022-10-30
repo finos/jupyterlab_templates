@@ -33,6 +33,8 @@ The extension will search *subdirectories* of each parent directory specified in
 
 If `include_default = True` the `notebook_templates` directory under the [jupyter data folder](https://jupyter.readthedocs.io/en/latest/use/jupyter-directories.html) is one of the default parent directories. Thus, if you have tutorials or guides you'd like to install for users, simply copy them into your jupyter data folder inside the `notebook_templates` directory, e.g. `/usr/local/share/jupyter/notebook_templates/bqplot` for `bqplot`.
 
+If you want to exclude templates from a specific directory, please add a file `.jupyterlab_templates_ignore` to to this location.
+All notebooks in this directory will be ignored (but has no effect on subdirectories).
 
 ### Flags
 - `template_dirs`: a list of absolute directory paths. All `.ipynb` files in any *subdirectories* of these paths will be listed as templates
