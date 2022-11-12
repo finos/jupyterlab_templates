@@ -51,7 +51,7 @@ class TemplatesLoader:
                     with open(os.path.join(abspath, f), "r", encoding="utf8") as fp:
                         content = fp.read()
                 except (FileNotFoundError, PermissionError) as content_exception:
-                    print(type(content_exception).__name__, content_exception)
+                    # Can't read file, skip
                     continue
 
                 data = {
