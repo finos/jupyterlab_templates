@@ -70,7 +70,7 @@ export class OpenTemplateWidget extends Widget {
     super({node: body});
   }
 
-  getValue = () => this.node.getElementsByTagName("select")[1];
+  getValue = () => this.node.getElementsByTagName("select")[1].value;
 }
 
 function activate(app, menu, browser, launcher) {
