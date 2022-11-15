@@ -114,7 +114,8 @@ function activate(app, menu, browser, launcher) {
                             factory: "Notebook",
                             path: model.path,
                           })
-                          .then((widget) => {
+                          .then((widget) =>
+                            // eslint-disable-next-line no-param-reassign
                             widget.isUntitled = true;
                             widget.context.ready.then(() => {
                               widget.model.fromString(data.content);
