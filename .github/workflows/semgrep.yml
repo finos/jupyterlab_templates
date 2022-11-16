@@ -1,0 +1,15 @@
+name: Static code analysis
+
+on: [push, pull_request]
+
+jobs:
+  semgrep:
+    name: run-semgrep
+    runs-on: ubuntu-20.04
+    container:
+      image: returntocorp/semgrep
+    steps:
+    - uses: actions/checkout@v3
+    - run: semgrep scan --error --config auto
+      env:
+        SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
