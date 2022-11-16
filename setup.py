@@ -60,7 +60,7 @@ cmdclass["js"] = combine_commands(
 
 setup(
     name=name,
-    version="0.3.2",
+    version="0.3.3",
     description="Notebook templates",
     long_description=long_description,
     long_description_content_type="text/markdown",
