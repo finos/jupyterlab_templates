@@ -19,6 +19,9 @@ fix:  ## run black/eslint fix
 	python -m black jupyterlab_templates setup.py
 	cd js; yarn fix
 
+checks: ## run checks
+	python -m check_manifest
+
 clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf
 	find . -name "*.pyc" | xargs rm -rf
@@ -60,4 +63,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: clean install serverextension labextension test tests help docs dist build lint test tests testjs testpy js
+.PHONY: clean install serverextension labextension test tests help docs dist build lint test tests testjs testpy js fix checks
