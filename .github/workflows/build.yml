@@ -50,6 +50,10 @@ jobs:
       run: |
         make lint
 
+    - name: Checks
+      run: |
+        make checks
+
     - name: Test
       run: |
         make tests

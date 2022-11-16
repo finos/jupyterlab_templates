@@ -5,7 +5,6 @@ from jupyter_packaging import (
     combine_commands,
     create_cmdclass,
     ensure_targets,
-    get_version,
     install_npm,
 )
 from setuptools import find_packages, setup
@@ -15,7 +14,6 @@ pjoin = path.join
 name = "jupyterlab_templates"
 here = path.abspath(path.dirname(__file__))
 jshere = path.abspath(path.join(path.dirname(__file__), "js"))
-version = get_version(pjoin(here, name, "_version.py"))
 
 with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read().replace("\r\n", "\n")
@@ -25,6 +23,7 @@ requires = ["jupyterlab>=3.0.0"]
 dev_requires = requires + [
     "black>=20.0*",
     "bump2version>=1.0.0",
+    "check-manifest",
     "flake8>=3.7.8",
     "flake8-black>=0.2.1",
     "mock",
@@ -61,7 +60,7 @@ cmdclass["js"] = combine_commands(
 
 setup(
     name=name,
-    version=version,
+    version="0.3.2",
     description="Notebook templates",
     long_description=long_description,
     long_description_content_type="text/markdown",
