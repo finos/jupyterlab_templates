@@ -12,6 +12,8 @@ graft jupyter-config
 
 prune docs 
 prune .github
+prune js/node_modules
+prune js/lib
 
 global-exclude *~
 global-exclude *.pyc
