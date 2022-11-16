@@ -1,0 +1,8 @@
+# security:
+#     ignore-cvss-severity-below: 6
+#     ignore-cvss-unknown-severity: False
+#     ignore-vulnerabilities:
+#         25853: # Example vulnerability ID
+#             reason: Testing CVE suppression
+#             expires: '2023-12-31'
+#     continue-on-vulnerability-error: False
