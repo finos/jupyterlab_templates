@@ -1,0 +1,27 @@
+name: License Scanning for Node.js
+
+on:
+  push:
+    paths:
+      - 'js/package.json'
+      - 'js/yarn.lock'
+      - '.github/workflows/license-scanning-node.yml'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install --production
+        working-directory: js
+      - run: npm install -g node-license-validator
+        working-directory: js
+      - run: node-license-validator . --allow-licenses Apache-2.0 MIT BSD-2-Clause BSD BSD-3-Clause Unlicense
+        working-directory: js

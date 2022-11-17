@@ -62,6 +62,7 @@ _version_py = os.path.join('..', 'jupyterlab_templates', '_version.py')
 version_ns = {}
 
 with open(_version_py, mode='r') as version_file:
+    # nosemgrep
     exec(version_file.read(), version_ns)
 
 # The short X.Y version.

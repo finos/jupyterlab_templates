@@ -1,0 +1,26 @@
+name: License Scanning for Python
+
+on:
+  push:
+    paths:
+      - 'requirements.txt'
+      - 'pyproject.toml'
+      - '.github/workflows/license-scanning-python.yml'
+
+env:
+  ALLOW_LICENSES: "MIT License;Apache Software License;BSD License"
+  # IGNORE_PACKAGES: ""
+
+jobs:
+  scan:
+    name: Scan for licenses
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install pip-licenses
+        run: pip3 install pip-licenses
+      - name: Scan for licenses
+        run: pip-licenses --allow-only="${{ env.ALLOW_LICENSES }}" # --ignore-packages="${{ env.IGNORE_PACKAGES }}"
