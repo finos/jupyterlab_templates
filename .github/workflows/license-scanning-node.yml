@@ -3,6 +3,7 @@ name: License Scanning for Node.js
 on:
   push:
     paths:
+      - 'js/package.json'
       - 'js/yarn.lock'
       - '.github/workflows/license-scanning-node.yml'
 
