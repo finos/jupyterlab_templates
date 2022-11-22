@@ -1,26 +1,58 @@
-testjs: ## Clean and Make js tests
-	yarn test
-
-testpy: ## Clean and Make unit tests
-	python -m pytest -v jupyterlab_templates/tests --cov=jupyterlab_templates
-
-tests: lint ## run the tests
-	python -m pytest -v jupyterlab_templates/tests --cov=jupyterlab_templates --junitxml=python_junit.xml --cov-report=xml --cov-branch
+test-js:  ## run js tests
 	cd js; yarn test
 
-build: ## build python and js
+test-py:  ## run python tests
+	python -m pytest -v jupyterlab_templates/tests --junitxml=python_junit.xml --cov=jupyterlab_templates --cov-report=xml:.coverage.xml --cov-report=html:.coverage.html --cov-branch --cov-fail-under=60 --cov-report term-missing
+
+tests: test-py test-js ## run the tests
+
+build-js:  ## build js assets
+	cd js; yarn
+	cd js; yarn build
+
+build:  ## build python and js
 	python setup.py build
 
-lint: ## run linter
+lint-py:  ## run python linter
 	python -m flake8 jupyterlab_templates setup.py
+	python -m black --check jupyterlab_templates setup.py
+
+lint-js:  ## run js linter
 	cd js; yarn lint
 
-fix:  ## run black/eslint fix
+lint: lint-py lint-js ## run linters
+
+fix-py:  ## run python autofixes
 	python -m black jupyterlab_templates setup.py
+
+fix-js:  ## run js autofixes
 	cd js; yarn fix
 
-checks: ## run checks
+fix: fix-py fix-js  ## run autofixers
+
+check-manifest:  ## check python sdist is complete
 	python -m check_manifest
+
+check-security-py:  ## check for security vulnerabilities in python
+	python -m safety check --full-report -r jupyterlab_templates.egg-info/requires.txt
+
+check-licenses-py:  ## check for licenses in python
+	python -m piplicenses --order=license --format=markdown --allow-only "Python Software Foundation License;ISC License (ISCL);MIT;MIT License;BSD License;BSD-3-Clause;BSD 3-Clause;BSD;Apache Software License;Apache 2.0;Mozilla Public License 2.0 (MPL 2.0);GNU General Public License (GPL);"
+
+checks-py: check-manifest check-security-py check-licenses-py  ## run python checks
+
+check-security-js:  ## check for security vulnerabilities in python
+	cd js; yarn check-security
+
+check-licenses-js:  ## check for licenses in python
+	cd js; yarn check-licenses
+
+checks-js: check-security-js  ## run js checks
+
+checks: checks-py checks-js ## run checks
+
+# Alias
+check: checks
 
 clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf
@@ -39,15 +71,11 @@ install:  ## install to site-packages
 serverextension: install ## enable serverextension
 	python -m jupyter serverextension enable --py jupyterlab_templates
 
-js:  ## build javascript
-	cd js; yarn
-	cd js; yarn build
-
-labextension: js ## enable labextension
+labextension: build-js ## enable labextension
 	cd js; python -m jupyter labextension install .
 
-dist: js  ## create dists
-	rm -rf dist build
+dist: build-js  ## create dists
+	rm -rf dist build js/node_modules
 	python setup.py sdist bdist_wheel
 	python -m twine check dist/*
 
@@ -63,4 +91,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: clean install serverextension labextension test tests help docs dist build lint test tests testjs testpy js fix checks
+.PHONY: test-js test-py tests build-js build lint-py lint-js lint fix-py fix-js fix check-manifest check-security-py check-licenses-py checks-py check-security-js check-licenses-js checks-js checks check clean docs install serverextension labextension dist publish help

@@ -12,8 +12,23 @@ Support for jupyter notebook templates in jupyterlab
 
 
 ## Install
+
+### PyPI
+`jupyterlab_templates` is available on [PyPI](https://pypi.org/project/jupyterlab-templates/):
+
 ```bash
 pip install jupyterlab_templates
+```
+
+### Conda
+`jupyterlab_templates` is also available on [conda-forge](https://github.com/conda-forge/jupyterlab_templates-feedstock):
+
+```bash
+conda install -c conda-forge jupyterlab_templates
+```
+
+### Jupyter Server/JupyterLab Extension
+```
 jupyter labextension install jupyterlab_templates
 jupyter serverextension enable --py jupyterlab_templates
 ```

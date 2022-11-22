@@ -8,6 +8,7 @@ on:
   schedule:
     # run on sunday nights
     - cron:  '0 0 * * 0'
+  workflow_dispatch:
 
 concurrency:
    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
