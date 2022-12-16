@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jpmorganchase/jupyterlab_templates.git"
+    "url": "https://github.com/finos/jupyterlab_templates.git"
   },
   "license": "Apache-2.0",
   "keywords": [
