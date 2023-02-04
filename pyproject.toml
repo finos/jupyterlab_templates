@@ -1,2 +1,2 @@
 [build-system]
-requires = ["setuptools", "wheel", "jupyter-packaging", "jupyterlab>=3"]
+requires = ["setuptools<66", "wheel", "jupyter-packaging", "jupyterlab>=3"]
