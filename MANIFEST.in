@@ -2,23 +2,19 @@ include LICENSE
 include README.md
 include CONTRIBUTING.md
 
-include requirements.txt
 include setup.cfg
 include pyproject.toml
-include .bumpversion.cfg
 include Makefile
-graft jupyterlab_templates/templates
 
-# Webapp files
+graft jupyterlab_templates
 graft js
-prune js/dist
-prune js/build
-prune js/lib
-prune js/node_modules
-prune js/yarn.lock
-prune docs/
+graft jupyter-config
 
-# Patterns to exclude from any directory
+prune docs 
+prune .github
+prune js/node_modules
+prune js/lib
+
 global-exclude *~
 global-exclude *.pyc
 global-exclude *.pyo
