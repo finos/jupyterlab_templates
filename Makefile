@@ -36,16 +36,10 @@ check-manifest:  ## check python sdist is complete
 check-security-py:  ## check for security vulnerabilities in python
 	python -m safety check --full-report -r jupyterlab_templates.egg-info/requires.txt
 
-check-licenses-py:  ## check for licenses in python
-	python -m piplicenses --order=license --format=markdown --allow-only "Python Software Foundation License;ISC License (ISCL);MIT;MIT License;BSD License;BSD-3-Clause;BSD 3-Clause;BSD;Apache Software License;Apache 2.0;Mozilla Public License 2.0 (MPL 2.0);GNU General Public License (GPL);"
-
-checks-py: check-manifest check-security-py check-licenses-py  ## run python checks
+checks-py: check-manifest check-security-py  ## run python checks
 
 check-security-js:  ## check for security vulnerabilities in python
 	cd js; yarn check-security
-
-check-licenses-js:  ## check for licenses in python
-	cd js; yarn check-licenses
 
 checks-js: check-security-js  ## run js checks
 

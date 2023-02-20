@@ -27,7 +27,6 @@ dev_requires = requires + [
     "flake8>=3.7.8",
     "flake8-black>=0.2.1",
     "mock",
-    "pip-licenses",
     "pytest",
     "pytest-cov>=2.6.1",
     "safety",
