@@ -18,7 +18,7 @@ jshere = path.abspath(path.join(path.dirname(__file__), "js"))
 with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read().replace("\r\n", "\n")
 
-requires = ["jupyterlab>=3.0.0"]
+requires = ["jupyterlab>=3.5.0"]
 
 dev_requires = requires + [
     "black>=23.1",
@@ -26,7 +26,6 @@ dev_requires = requires + [
     "check-manifest",
     "flake8>=3.7.8",
     "flake8-black>=0.2.1",
-    "mock",
     "pytest",
     "pytest-cov>=2.6.1",
     "safety",
