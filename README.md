@@ -31,7 +31,7 @@ conda install -c conda-forge jupyterlab_templates
 ### Jupyter Server/JupyterLab Extension
 ```
 jupyter labextension install jupyterlab_templates
-jupyter serverextension enable --py jupyterlab_templates
+jupyter server extension enable --py jupyterlab_templates
 ```
 
 ## Adding templates
