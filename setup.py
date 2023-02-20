@@ -85,7 +85,7 @@ setup(
         ]
     ),
     install_requires=requires,
-    extras_require={"dev": dev_requires},
+    extras_require={"dev": dev_requires, "develop": dev_requires},
     include_package_data=True,
     zip_safe=False,
     python_requires=">=3.7",

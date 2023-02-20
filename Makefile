@@ -1,3 +1,8 @@
+develop:  ## install package in develop mode
+	python -m pip install --upgrade pip setuptools wheel twine jupyter_packaging
+	cd js; yarn
+	python -m pip install -e .[dev]
+
 test-js:  ## run js tests
 	cd js; yarn test
 
@@ -29,6 +34,9 @@ fix-js:  ## run js autofixes
 	cd js; yarn fix
 
 fix: fix-py fix-js  ## run autofixers
+
+# Alias
+format: fix
 
 check-manifest:  ## check python sdist is complete
 	python -m check_manifest
@@ -85,4 +93,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: test-js test-py tests build-js build lint-py lint-js lint fix-py fix-js fix check-manifest check-security-py check-licenses-py checks-py check-security-js check-licenses-js checks-js checks check clean docs install serverextension labextension dist publish help
+.PHONY: develop test-js test-py tests build-js build lint-py lint-js lint fix-py fix-js fix format check-manifest check-security-py check-licenses-py checks-py check-security-js check-licenses-js checks-js checks check clean docs install serverextension labextension dist publish help
