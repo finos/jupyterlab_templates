@@ -6,7 +6,7 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 # for Coverage
-from mock import MagicMock
+from unittest.mock import MagicMock
 from jupyterlab_templates.extension import load_jupyter_server_extension
 
 

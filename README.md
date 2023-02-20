@@ -7,13 +7,29 @@ Support for jupyter notebook templates in jupyterlab
 [![PyPI](https://img.shields.io/pypi/l/jupyterlab_templates.svg)](https://pypi.python.org/pypi/jupyterlab_templates)
 [![PyPI](https://img.shields.io/pypi/v/jupyterlab_templates.svg)](https://pypi.python.org/pypi/jupyterlab_templates)
 [![npm](https://img.shields.io/npm/v/jupyterlab_templates.svg)](https://www.npmjs.com/package/jupyterlab_templates)
+[![FINOS Active](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-active.svg)](https://community.finos.org/docs/governance/software-projects/stages/active/)
 
 ![](https://raw.githubusercontent.com/finos/jupyterlab_templates/main/docs/example1.gif)
 
 
 ## Install
+
+### PyPI
+`jupyterlab_templates` is available on [PyPI](https://pypi.org/project/jupyterlab-templates/):
+
 ```bash
 pip install jupyterlab_templates
+```
+
+### Conda
+`jupyterlab_templates` is also available on [conda-forge](https://github.com/conda-forge/jupyterlab_templates-feedstock):
+
+```bash
+conda install -c conda-forge jupyterlab_templates
+```
+
+### Jupyter Server/JupyterLab Extension
+```
 jupyter labextension install jupyterlab_templates
 jupyter serverextension enable --py jupyterlab_templates
 ```
