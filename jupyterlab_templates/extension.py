@@ -115,7 +115,7 @@ def load_jupyter_server_extension(nb_server_app):
     base_url = web_app.settings["base_url"]
 
     host_pattern = ".*$"
-    print(
+    nb_server_app.log.info(
         "Installing jupyterlab_templates handler on path %s"
         % url_path_join(base_url, "templates")
     )
@@ -129,10 +129,10 @@ def load_jupyter_server_extension(nb_server_app):
                 for x in jupyter_core.paths.jupyter_path()
             ]
         )
-    print("Search paths:\n\t%s" % "\n\t".join(template_dirs))
+    nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
     loader = TemplatesLoader(template_dirs)
-    print(
+    nb_server_app.log.info(
         "Available templates:\n\t%s"
         % "\n\t".join(t for t in loader.get_templates()[1].keys())
     )
