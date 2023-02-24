@@ -8,6 +8,7 @@ Support for jupyter notebook templates in jupyterlab
 [![PyPI](https://img.shields.io/pypi/v/jupyterlab_templates.svg)](https://pypi.python.org/pypi/jupyterlab_templates)
 [![npm](https://img.shields.io/npm/v/jupyterlab_templates.svg)](https://www.npmjs.com/package/jupyterlab_templates)
 [![FINOS Active](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-active.svg)](https://community.finos.org/docs/governance/software-projects/stages/active/)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/finos/jupyterlab_templates/main?urlpath=lab)
 
 ![](https://raw.githubusercontent.com/finos/jupyterlab_templates/main/docs/example1.gif)
 
