@@ -14,13 +14,13 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions:
-  checks: write
-  pull-requests: write
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
+
+permissions:
+  checks: write
+  pull-requests: write
 
 jobs:
   build:
@@ -75,17 +75,25 @@ jobs:
         make tests
       if: ${{ github.event_name == matrix.event-name || matrix.os == 'ubuntu-latest' }}
 
-    - name: Upload test results
+    - name: Upload test results (Python)
       uses: actions/upload-artifact@v3
       with:
         name: pytest-results-${{ matrix.os }}-${{ matrix.python-version }}
-        path: python_junit.xml
+        path: junit.xml
+      if: ${{ always() }}
+
+    - name: Upload test results (JS)
+      uses: actions/upload-artifact@v3
+      with:
+        name: pytest-results-${{ matrix.os }}-${{ matrix.python-version }}
+        path: js/junit.xml
       if: ${{ always() }}
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       with:
-        files: python_junit.xml
+        files: |
+            **/junit.xml
       if: ${{ matrix.os == 'ubuntu-latest' }}
 
     - name: Upload coverage
