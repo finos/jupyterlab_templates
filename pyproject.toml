@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 [project]
 name = "jupyterlab_templates"
 description = "notebook templates for jupyterlab"
-version = "0.3.2"
+version = "0.4.0"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.7"
@@ -68,7 +68,7 @@ artifacts = [
 [tool.hatch.build.targets.wheel.shared-data]
 "jupyterlab_templates/labextension" = "share/jupyter/labextensions/jupyterlab_templates"
 "jupyterlab_templates/extension/install.json" = "share/jupyter/labextensions/jupyterlab_templates/install.json"
-"jupyterlab_templates/extension/jupyterlab_templates.json" = "etc/jupyter/nbconfig/notebook.d/jupyterlab_templates.json"
+"jupyterlab_templates/extension/jupyterlab_templates.json" = "etc/jupyter/jupyter_server_config.d/jupyterlab_templates.json"
 "jupyterlab_templates/extension/notebook_templates" = "share/jupyter/notebook"
 
 [tool.hatch.build.targets.sdist]
