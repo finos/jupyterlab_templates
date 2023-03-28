@@ -16,7 +16,7 @@ install:  ## install to site-packages
 # Testing #
 ###########
 testpy: ## Clean and Make unit tests
-	python -m pytest -v jupyterlab_templates/tests --junitxml=python_junit.xml --cov=jupyterlab_templates --cov-report=xml:.coverage.xml --cov-branch --cov-fail-under=20 --cov-report term-missing
+	python -m pytest -v jupyterlab_templates/tests --junitxml=junit.xml --cov=jupyterlab_templates --cov-report=xml:.coverage.xml --cov-branch --cov-fail-under=20 --cov-report term-missing
 
 testjs: ## Clean and Make js tests
 	cd js; yarn test
