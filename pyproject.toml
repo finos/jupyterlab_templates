@@ -51,8 +51,8 @@ test = [
 ]
 
 [project.urls]
-repository = "{{cookiecutter.url}}"
-homepage = "https://github.com/finos/jupyterlab_templates"
+Repository = "https://github.com/finos/jupyterlab_templates"
+Homepage = "https://github.com/finos/jupyterlab_templates"
 
 [tool.check-manifest]
 ignore = [
