@@ -9,10 +9,14 @@ import fnmatch
 import json
 import os
 import os.path
+from collections import defaultdict
+
 import jupyter_core.paths
 import tornado.web
 
 from io import open
+
+from hdfscm import HDFSContentsManager, NoOpCheckpoints
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
@@ -75,6 +79,29 @@ class TemplatesLoader:
         return templates, template_by_path
 
 
+class TemplatesLoaderHDFS(TemplatesLoader):
+    def get_templates(self):
+        templates = defaultdict(list)
+        template_by_path = {}
+
+        contents_manager = HDFSContentsManager(root_dir=self.template_dirs[0], checkpoints_class=NoOpCheckpoints)
+        for path in self.template_dirs:
+            content_list = contents_manager.get(path, type='directory')['content']
+            notebooks_model = [model for model in content_list if model['type'] == 'notebook']
+
+            # pull contents and push into templates list
+            for model in notebooks_model:
+                content = contents_manager.get(model['path'], type='notebook')['content']
+
+                # don't include content unless necessary
+                templates[path].append({"name": content["path"]})
+
+                # full data
+                template_by_path[content["name"]] = content
+
+        return templates, template_by_path
+
+
 class TemplatesHandler(IPythonHandler):
     def initialize(self, loader):
         self.loader = loader
@@ -131,7 +158,13 @@ def load_jupyter_server_extension(nb_server_app):
         )
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
-    loader = TemplatesLoader(template_dirs)
+    file_system = nb_server_app.config.get("JupyterLabTemplates", {}).get("file_system", "local")
+    if file_system == "local":
+        loader = TemplatesLoader(template_dirs)
+    elif file_system == 'hdfs':
+        loader = TemplatesLoaderHDFS(template_dirs)
+    else:
+        raise ValueError("file_system must be either 'local' or 'hdfs'")
     nb_server_app.log.info(
         "Available templates:\n\t%s"
         % "\n\t".join(t for t in loader.get_templates()[1].keys())
