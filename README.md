@@ -55,6 +55,7 @@ If `include_default = True` the `notebook_templates` directory under the [jupyte
 - `template_dirs`: a list of absolute directory paths. All `.ipynb` files in any *subdirectories* of these paths will be listed as templates
 - `include_default`: include the default Sample template (default True)
 - `include_core_paths`: include jupyter core paths (see: jupyter --paths) (default True)
+- `file_system`: use the file system for storing templates `local` or `hdfs` (default `local`)
 
 
 ## Development

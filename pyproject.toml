@@ -35,7 +35,7 @@ classifiers = [
 ]
 dependencies = [
     "jupyterlab>=3.5",
-    "jupyter-hdfscm@git+https://github.com/Automattic/hdfscm#egg=add/shared-dir"
+    "jupyter-hdfscm @ git+https://github.com/Automattic/hdfscm#egg=add/shared-dir"
 ]
 
 [project.optional-dependencies]
