@@ -132,13 +132,14 @@ def load_jupyter_server_extension(nb_server_app):
         nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
     """
     web_app = nb_server_app.web_app
-    template_dirs = nb_server_app.config.get("JupyterLabTemplates", {}).get(
-        "template_dirs", []
-    )
+    jupyterlab_templates_config = nb_server_app.config.get("JupyterLabTemplates", {})
+    nb_server_app.log.info("jupyterlab_templates config: %s" % jupyterlab_templates_config)
+
+    template_dirs = jupyterlab_templates_config.get("template_dirs", [])
     if isinstance(template_dirs, str):
         template_dirs = template_dirs.split(",")
 
-    include_default = nb_server_app.config.get("JupyterLabTemplates", {}).get("include_default", True)
+    include_default = jupyterlab_templates_config.get("include_default", True)
     include_default = include_default.lower() == 'true' if isinstance(include_default, str) else include_default
     if include_default:
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
@@ -151,7 +152,7 @@ def load_jupyter_server_extension(nb_server_app):
         % url_path_join(base_url, "templates")
     )
 
-    include_core_paths = nb_server_app.config.get("JupyterLabTemplates", {}).get("include_core_paths", True)
+    include_core_paths = jupyterlab_templates_config.get("include_core_paths", True)
     include_core_paths = include_default.lower() == 'true' if isinstance(include_core_paths, str) else include_core_paths
     if include_core_paths:
         template_dirs.extend(
@@ -162,7 +163,7 @@ def load_jupyter_server_extension(nb_server_app):
         )
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
-    file_system = nb_server_app.config.get("JupyterLabTemplates", {}).get("file_system", "local")
+    file_system = jupyterlab_templates_config.get("file_system", "local")
     nb_server_app.log.info("File system: %s" % file_system)
     if file_system == "local":
         loader = TemplatesLoader(template_dirs)
