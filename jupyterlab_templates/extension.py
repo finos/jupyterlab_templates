@@ -138,7 +138,9 @@ def load_jupyter_server_extension(nb_server_app):
     if isinstance(template_dirs, str):
         template_dirs = template_dirs.split(",")
 
-    if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_default", True):
+    include_default = nb_server_app.config.get("JupyterLabTemplates", {}).get("include_default", True)
+    include_default = include_default.lower() == 'true' if isinstance(include_default, str) else include_default
+    if include_default:
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
 
     base_url = web_app.settings["base_url"]
@@ -149,7 +151,9 @@ def load_jupyter_server_extension(nb_server_app):
         % url_path_join(base_url, "templates")
     )
 
-    if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_core_paths", True):
+    include_core_paths = nb_server_app.config.get("JupyterLabTemplates", {}).get("include_core_paths", True)
+    include_core_paths = include_default.lower() == 'true' if isinstance(include_core_paths, str) else include_core_paths
+    if include_core_paths:
         template_dirs.extend(
             [
                 os.path.join(x, "notebook_templates")
