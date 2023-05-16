@@ -153,7 +153,7 @@ def load_jupyter_server_extension(nb_server_app):
     )
 
     include_core_paths = jupyterlab_templates_config.get("include_core_paths", True)
-    include_core_paths = include_default.lower() == 'true' if isinstance(include_core_paths, str) else include_core_paths
+    include_core_paths = include_core_paths.lower() == 'true' if isinstance(include_core_paths, str) else include_core_paths
     if include_core_paths:
         template_dirs.extend(
             [
