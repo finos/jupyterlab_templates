@@ -135,6 +135,8 @@ def load_jupyter_server_extension(nb_server_app):
     template_dirs = nb_server_app.config.get("JupyterLabTemplates", {}).get(
         "template_dirs", []
     )
+    if isinstance(template_dirs, str):
+        template_dirs = template_dirs.split(",")
 
     if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_default", True):
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
@@ -147,9 +149,7 @@ def load_jupyter_server_extension(nb_server_app):
         % url_path_join(base_url, "templates")
     )
 
-    if nb_server_app.config.get("JupyterLabTemplates", {}).get(
-        "include_core_paths", True
-    ):
+    if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_core_paths", True):
         template_dirs.extend(
             [
                 os.path.join(x, "notebook_templates")
@@ -159,6 +159,7 @@ def load_jupyter_server_extension(nb_server_app):
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
     file_system = nb_server_app.config.get("JupyterLabTemplates", {}).get("file_system", "local")
+    nb_server_app.log.info("File system: %s" % file_system)
     if file_system == "local":
         loader = TemplatesLoader(template_dirs)
     elif file_system == 'hdfs':
