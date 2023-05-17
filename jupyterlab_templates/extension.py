@@ -102,7 +102,7 @@ class TemplatesLoaderHDFS(TemplatesLoader):
                 data = {
                     "path": notebook_model["path"],
                     "name": notebook_model["name"],
-                    "dirname": notebook_model["path"].split(os.path.sep)[:-1],
+                    "dirname": os.path.sep.join(notebook_model["path"].split(os.path.sep)[:-1]),
                     "filename": notebook_model["name"],
                     "content": notebook_model["content"],
                 }
