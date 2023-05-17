@@ -99,11 +99,19 @@ class TemplatesLoaderHDFS(TemplatesLoader):
                 notebook_model = contents_manager.get(os.path.join(self.root_dir, path, model["name"]),
                                                       type='notebook')
 
+                data = {
+                    "path": notebook_model["path"],
+                    "name": notebook_model["name"],
+                    "dirname": notebook_model["path"].split(os.path.sep)[:-1],
+                    "filename": notebook_model["name"],
+                    "content": notebook_model["content"],
+                }
+
                 # don't include content unless necessary
-                templates[path].append({"name": notebook_model["name"]})
+                templates[path].append({"name": data["name"]})
 
                 # full data
-                template_by_path[notebook_model["name"]] = notebook_model
+                template_by_path[data["name"]] = data
 
         return templates, template_by_path
 
