@@ -80,24 +80,31 @@ class TemplatesLoader:
 
 
 class TemplatesLoaderHDFS(TemplatesLoader):
+    def __init__(self, template_dirs, root_dir):
+        super().__init__(template_dirs)
+        self.root_dir = root_dir
+
     def get_templates(self):
         templates = defaultdict(list)
         template_by_path = {}
 
-        contents_manager = HDFSContentsManager(root_dir=self.template_dirs[0], checkpoints_class=NoOpCheckpoints)
+        contents_manager = HDFSContentsManager(root_dir=self.root_dir, checkpoints_class=NoOpCheckpoints,
+                                               create_root_dir_on_startup=False)
         for path in self.template_dirs:
             content_list = contents_manager.get(path, type='directory')['content']
             notebooks_model = [model for model in content_list if model['type'] == 'notebook']
 
             # pull contents and push into templates list
             for model in notebooks_model:
-                content = contents_manager.get(model['path'], type='notebook')['content']
+                notebook_model = contents_manager.get(os.path.join(self.root_dir, path, model["name"]),
+                                                      type='notebook')
+                content = notebook_model['content']
 
                 # don't include content unless necessary
-                templates[path].append({"name": content["path"]})
+                templates[path].append({"name": notebook_model["name"]})
 
                 # full data
-                template_by_path[content["name"]] = content
+                template_by_path[notebook_model["name"]] = content
 
         return templates, template_by_path
 
@@ -168,7 +175,8 @@ def load_jupyter_server_extension(nb_server_app):
     if file_system == "local":
         loader = TemplatesLoader(template_dirs)
     elif file_system == 'hdfs':
-        loader = TemplatesLoaderHDFS(template_dirs)
+        root_dir = jupyterlab_templates_config.get("root_dir", "/user/jupyter/notebooks")
+        loader = TemplatesLoaderHDFS(template_dirs, root_dir)
     else:
         raise ValueError("file_system must be either 'local' or 'hdfs'")
     nb_server_app.log.info(
