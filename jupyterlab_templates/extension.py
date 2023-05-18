@@ -104,7 +104,7 @@ class TemplatesLoaderHDFS(TemplatesLoader):
                     "name": notebook_model["name"],
                     "dirname": os.path.sep.join(notebook_model["path"].split(os.path.sep)[:-1]),
                     "filename": notebook_model["name"],
-                    "content": notebook_model["content"],
+                    "content": json.dumps(notebook_model["content"]),
                 }
 
                 # don't include content unless necessary
