@@ -63,7 +63,7 @@ class TemplatesLoader:
                 else:
                     raise ValueError("hdfs extra dependency is required to use hdfs paths. "
                                      "Please install using `pip install jupyterlab_templates[hdfs]`")
-            elif not url.scheme:
+            elif url.scheme == '':
                 # in order to produce correct filenames, abspath should point to the parent directory of path
                 abspath = os.path.abspath(os.path.join(os.path.realpath(path), os.pardir))
                 files = []
