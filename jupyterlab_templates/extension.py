@@ -40,22 +40,26 @@ class TemplatesLoader:
                 if fs:
                     # HDFS will use the 'default' (fs.defaultFS) from core-site.xml to connect.
                     hdfs_client = fs.HadoopFileSystem(host='default')
-                    for file in hdfs_client.get_file_info(fs.FileSelector(url.path, recursive=True)):
-                        if file.extension == 'ipynb':
-                            with hdfs_client.open_input_file(file.path) as f:
-                                content = f.read()
-                            data = {
-                                "path": file.path,
-                                "name": file.base_name,
-                                "dirname": os.path.sep.join(file.path.split(os.path.sep)[:-1]),
-                                "filename": file.base_name,
-                                "content": content,
-                            }
+                    try:
+                        for file in hdfs_client.get_file_info(fs.FileSelector(url.path, recursive=True)):
+                            if file.extension == 'ipynb':
+                                with hdfs_client.open_input_file(file.path) as f:
+                                    content = f.read()
+                                data = {
+                                    "path": file.path,
+                                    "name": file.base_name,
+                                    "dirname": os.path.sep.join(file.path.split(os.path.sep)[:-1]),
+                                    "filename": file.base_name,
+                                    "content": content,
+                                }
 
-                            # don't include content unless necessary
-                            templates[data["dirname"]].append({"name": data["name"]})
-                            # full data
-                            template_by_path[data["name"]] = data
+                                # don't include content unless necessary
+                                templates[data["dirname"]].append({"name": data["name"]})
+                                # full data
+                                template_by_path[data["name"]] = data
+                    except FileNotFoundError:
+                        # Can't read path, skip
+                        continue
                 else:
                     raise ValueError("hdfs extra dependency is required to use hdfs paths. "
                                      "Please install using `pip install jupyterlab_templates[hdfs]`")
