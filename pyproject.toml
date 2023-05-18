@@ -34,8 +34,7 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
 ]
 dependencies = [
-    "jupyterlab>=3.5",
-    "jupyter-hdfscm@git+https://github.com/Automattic/hdfscm@add/shared-dir"
+    "jupyterlab>=3.5"
 ]
 
 [project.optional-dependencies]
@@ -50,6 +49,7 @@ test = [
     "pytest",
     "pytest-cov",
 ]
+hdfs = ["pyarrow>=12.0.0,<13.0.0"]
 
 [project.urls]
 Repository = "https://github.com/finos/jupyterlab_templates"

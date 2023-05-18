@@ -11,15 +11,9 @@ from jupyterlab_templates.extension import load_jupyter_server_extension
 
 
 class TestExtension:
-    def get_mock_config(self, file_system):
+    def test_load_jupyter_server_extension(self):
         m = MagicMock()
+
         m.web_app.settings = {}
         m.web_app.settings["base_url"] = "/test"
-        m.config = {'file_system': file_system}
-        return m
-
-    def test_load_jupyter_server_extension(self):
-        load_jupyter_server_extension(self.get_mock_config('local'))
-
-    def test_load_jupyter_server_extension_hdfs(self):
-        load_jupyter_server_extension(self.get_mock_config('hdfs'))
+        load_jupyter_server_extension(m)

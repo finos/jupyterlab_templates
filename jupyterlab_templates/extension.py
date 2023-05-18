@@ -16,9 +16,14 @@ import tornado.web
 
 from io import open
 
-from hdfscm import HDFSContentsManager, NoOpCheckpoints
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
+from urllib.parse import urlparse
+
+try:
+    from pyarrow.fs import fs
+except ImportError:
+    fs = None
 
 
 class TemplatesLoader:
@@ -26,92 +31,77 @@ class TemplatesLoader:
         self.template_dirs = template_dirs
 
     def get_templates(self):
-        templates = {}
-        template_by_path = {}
-
-        for path in self.template_dirs:
-            # in order to produce correct filenames, abspath should point to the parent directory of path
-            abspath = os.path.abspath(os.path.join(os.path.realpath(path), os.pardir))
-            files = []
-            # get all files in subdirectories
-            for dirname, _, filenames in os.walk(path, followlinks=True):
-                if dirname == path:
-                    # Skip top level
-                    continue
-
-                for filename in fnmatch.filter(filenames, "*.ipynb"):
-                    if ".ipynb_checkpoints" not in dirname:
-                        files.append(
-                            (
-                                os.path.join(dirname, filename),
-                                dirname.replace(path, ""),
-                                filename,
-                            )
-                        )
-            # pull contents and push into templates list
-            for f, dirname, filename in files:
-                # skips over faild attempts to read content
-                try:
-                    with open(os.path.join(abspath, f), "r", encoding="utf8") as fp:
-                        content = fp.read()
-                except (FileNotFoundError, PermissionError):
-                    # Can't read file, skip
-                    continue
-
-                data = {
-                    "path": f,
-                    "name": os.path.join(dirname, filename),
-                    "dirname": dirname,
-                    "filename": filename,
-                    "content": content,
-                }
-
-                # remove leading slash for select
-                if dirname.strip(os.path.sep) not in templates:
-                    templates[dirname.strip(os.path.sep)] = []
-
-                # don't include content unless necessary
-                templates[dirname.strip(os.path.sep)].append({"name": data["name"]})
-
-                # full data
-                template_by_path[data["name"]] = data
-
-        return templates, template_by_path
-
-
-class TemplatesLoaderHDFS(TemplatesLoader):
-    def __init__(self, template_dirs, root_dir):
-        super().__init__(template_dirs)
-        self.root_dir = root_dir
-
-    def get_templates(self):
         templates = defaultdict(list)
         template_by_path = {}
 
-        contents_manager = HDFSContentsManager(root_dir=self.root_dir, checkpoints_class=NoOpCheckpoints,
-                                               create_root_dir_on_startup=False)
         for path in self.template_dirs:
-            content_list = contents_manager.get(path, type='directory')['content']
-            notebooks_model = [model for model in content_list if model['type'] == 'notebook']
+            url = urlparse(path)
+            if url.scheme == "hdfs":
+                if fs:
+                    # HDFS will use the 'default' (fs.defaultFS) from core-site.xml to connect.
+                    hdfs_client = fs.HadoopFileSystem(host='default')
+                    for file in hdfs_client.get_file_info(fs.FileSelector(url.path, recursive=True)):
+                        if file.extension == 'ipynb':
+                            with hdfs_client.open_input_file(file.path) as f:
+                                content = f.read()
+                            data = {
+                                "path": file.path,
+                                "name": file.base_name,
+                                "dirname": os.path.sep.join(file.path.split(os.path.sep)[:-1]),
+                                "filename": file.base_name,
+                                "content": content,
+                            }
 
-            # pull contents and push into templates list
-            for model in notebooks_model:
-                notebook_model = contents_manager.get(os.path.join(self.root_dir, path, model["name"]),
-                                                      type='notebook')
+                            # don't include content unless necessary
+                            templates[data["dirname"]].append({"name": data["name"]})
+                            # full data
+                            template_by_path[data["name"]] = data
+                else:
+                    raise ValueError("hdfs extra dependency is required to use hdfs paths. "
+                                     "Please install using `pip install jupyterlab_templates[hdfs]`")
+            elif not url.scheme:
+                # in order to produce correct filenames, abspath should point to the parent directory of path
+                abspath = os.path.abspath(os.path.join(os.path.realpath(path), os.pardir))
+                files = []
+                # get all files in subdirectories
+                for dirname, _, filenames in os.walk(path, followlinks=True):
+                    if dirname == path:
+                        # Skip top level
+                        continue
 
-                data = {
-                    "path": notebook_model["path"],
-                    "name": notebook_model["name"],
-                    "dirname": os.path.sep.join(notebook_model["path"].split(os.path.sep)[:-1]),
-                    "filename": notebook_model["name"],
-                    "content": json.dumps(notebook_model["content"]),
-                }
+                    for filename in fnmatch.filter(filenames, "*.ipynb"):
+                        if ".ipynb_checkpoints" not in dirname:
+                            files.append(
+                                (
+                                    os.path.join(dirname, filename),
+                                    dirname.replace(path, ""),
+                                    filename,
+                                )
+                            )
+                # pull contents and push into templates list
+                for f, dirname, filename in files:
+                    # skips over faild attempts to read content
+                    try:
+                        with open(os.path.join(abspath, f), "r", encoding="utf8") as fp:
+                            content = fp.read()
+                    except (FileNotFoundError, PermissionError):
+                        # Can't read file, skip
+                        continue
 
-                # don't include content unless necessary
-                templates[path].append({"name": data["name"]})
+                    data = {
+                        "path": f,
+                        "name": os.path.join(dirname, filename),
+                        "dirname": dirname,
+                        "filename": filename,
+                        "content": content,
+                    }
 
-                # full data
-                template_by_path[data["name"]] = data
+                    # don't include content unless necessary
+                    templates[dirname.strip(os.path.sep)].append({"name": data["name"]})
+                    # full data
+                    template_by_path[data["name"]] = data
+                else:
+                    raise ValueError("Scheme '{}' for template path '{}' not supported".format(url.scheme, path))
 
         return templates, template_by_path
 
@@ -177,15 +167,7 @@ def load_jupyter_server_extension(nb_server_app):
         )
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
-    file_system = jupyterlab_templates_config.get("file_system", "local")
-    nb_server_app.log.info("File system: %s" % file_system)
-    if file_system == "local":
-        loader = TemplatesLoader(template_dirs)
-    elif file_system == 'hdfs':
-        root_dir = jupyterlab_templates_config.get("root_dir", "/user/jupyter/notebooks")
-        loader = TemplatesLoaderHDFS(template_dirs, root_dir)
-    else:
-        raise ValueError("file_system must be either 'local' or 'hdfs'")
+    loader = TemplatesLoader(template_dirs)
     nb_server_app.log.info(
         "Available templates:\n\t%s"
         % "\n\t".join(t for t in loader.get_templates()[1].keys())

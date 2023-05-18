@@ -44,6 +44,20 @@ c.JupyterLabTemplates.include_default = True
 c.JupyterLabTemplates.include_core_paths = True
 ```
 
+## HDFS path
+
+HDFS paths are supported by setting the hdfs:// prefix in the template_dirs list and can be used with local paths. 
+The 
+For example:
+
+```python3
+c.JupyterLabTemplates.template_dirs = ['hdfs://path/to/template/directory', '/local/path']
+```
+
+> Note: The `fs.defaultFS` from `core-site.xml` will be used to define the connection to HDFS.
+
+```python3
+
 ## Templates for libraries
 The extension will search *subdirectories* of each parent directory specified in `template_dirs` for templates.
 **Note!** Templates in the parent directories will be ignored. You must put the templates in *subdirectories*, in order to keep everything organized.  
@@ -55,7 +69,6 @@ If `include_default = True` the `notebook_templates` directory under the [jupyte
 - `template_dirs`: a list of absolute directory paths. All `.ipynb` files in any *subdirectories* of these paths will be listed as templates
 - `include_default`: include the default Sample template (default True)
 - `include_core_paths`: include jupyter core paths (see: jupyter --paths) (default True)
-- `file_system`: use the file system for storing templates `local` or `hdfs` (default `local`)
 
 
 ## Development
