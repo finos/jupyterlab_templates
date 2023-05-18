@@ -105,7 +105,7 @@ class TemplatesLoader:
                     # full data
                     template_by_path[data["name"]] = data
                 else:
-                    raise ValueError("Scheme '{}' for template path '{}' not supported".format(url.scheme, path))
+                    raise ValueError(f"Scheme '{url.scheme}' for template path '{path}' not supported")
 
         return templates, template_by_path
 
