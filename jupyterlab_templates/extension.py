@@ -31,7 +31,7 @@ class TemplatesLoader:
         for uri in self.template_dirs:
             try:
                 client, path = fs.FileSystem.from_uri(uri)
-            except OSError as e:
+            except Exception as e:
                 self.log.error("Failed to load template directory %s. \n%s", uri, e)
                 continue
 
