@@ -5,7 +5,6 @@
 # This file is part of the jupyterlab_templates library, distributed under the terms of
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
-import fnmatch
 import json
 import os
 import os.path
@@ -14,98 +13,48 @@ from collections import defaultdict
 import jupyter_core.paths
 import tornado.web
 
-from io import open
-
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
-from urllib.parse import urlparse
 
-try:
-    from pyarrow.fs import fs
-except ImportError:
-    fs = None
+from pyarrow.fs import fs
 
 
 class TemplatesLoader:
-    def __init__(self, template_dirs):
+    def __init__(self, template_dirs, log):
         self.template_dirs = template_dirs
+        self.log = log
 
     def get_templates(self):
         templates = defaultdict(list)
         template_by_path = {}
 
-        for path in self.template_dirs:
-            url = urlparse(path)
-            if url.scheme == "hdfs":
-                if fs:
-                    # HDFS will use the 'default' (fs.defaultFS) from core-site.xml to connect.
-                    hdfs_client = fs.HadoopFileSystem(host='default')
-                    try:
-                        for file in hdfs_client.get_file_info(fs.FileSelector(url.path, recursive=True)):
-                            if file.extension == 'ipynb':
-                                with hdfs_client.open_input_file(file.path) as f:
-                                    content = f.read()
-                                data = {
-                                    "path": file.path,
-                                    "name": file.base_name,
-                                    "dirname": os.path.sep.join(file.path.split(os.path.sep)[:-1]),
-                                    "filename": file.base_name,
-                                    "content": content,
-                                }
+        for uri in self.template_dirs:
+            try:
+                client, path = fs.FileSystem.from_uri(uri)
+            except OSError as e:
+                self.log.error("Failed to load template directory %s. \n%s", uri, e)
+                continue
 
-                                # don't include content unless necessary
-                                templates[data["dirname"]].append({"name": data["name"]})
-                                # full data
-                                template_by_path[data["name"]] = data
-                    except FileNotFoundError:
-                        # Can't read path, skip
-                        continue
-                else:
-                    raise ValueError("hdfs extra dependency is required to use hdfs paths. "
-                                     "Please install using `pip install jupyterlab_templates[hdfs]`")
-            elif url.scheme == '':
-                # in order to produce correct filenames, abspath should point to the parent directory of path
-                abspath = os.path.abspath(os.path.join(os.path.realpath(path), os.pardir))
-                files = []
-                # get all files in subdirectories
-                for dirname, _, filenames in os.walk(path, followlinks=True):
-                    if dirname == path:
-                        # Skip top level
-                        continue
+            try:
+                for file in client.get_file_info(fs.FileSelector(path, recursive=True)):
+                    if file.extension == 'ipynb':
+                        with client.open_input_file(file.path) as f:
+                            content = f.read()
+                        data = {
+                            "path": file.path,
+                            "name": file.base_name,
+                            "dirname": os.path.sep.join(file.path.split(os.path.sep)[:-1]),
+                            "filename": file.base_name,
+                            "content": content,
+                        }
 
-                    for filename in fnmatch.filter(filenames, "*.ipynb"):
-                        if ".ipynb_checkpoints" not in dirname:
-                            files.append(
-                                (
-                                    os.path.join(dirname, filename),
-                                    dirname.replace(path, ""),
-                                    filename,
-                                )
-                            )
-                # pull contents and push into templates list
-                for f, dirname, filename in files:
-                    # skips over faild attempts to read content
-                    try:
-                        with open(os.path.join(abspath, f), "r", encoding="utf8") as fp:
-                            content = fp.read()
-                    except (FileNotFoundError, PermissionError):
-                        # Can't read file, skip
-                        continue
-
-                    data = {
-                        "path": f,
-                        "name": os.path.join(dirname, filename),
-                        "dirname": dirname,
-                        "filename": filename,
-                        "content": content,
-                    }
-
-                    # don't include content unless necessary
-                    templates[dirname.strip(os.path.sep)].append({"name": data["name"]})
-                    # full data
-                    template_by_path[data["name"]] = data
-                else:
-                    raise ValueError(f"Scheme '{url.scheme}' for template path '{path}' not supported")
+                        # don't include content unless necessary
+                        templates[data["dirname"]].append({"name": data["name"]})
+                        # full data
+                        template_by_path[data["name"]] = data
+            except FileNotFoundError as e:
+                self.log.warning("Failed to load template directory %s. \n, %s", uri, e)
+                continue
 
         return templates, template_by_path
 
@@ -171,7 +120,7 @@ def load_jupyter_server_extension(nb_server_app):
         )
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
-    loader = TemplatesLoader(template_dirs)
+    loader = TemplatesLoader(template_dirs, nb_server_app.log)
     nb_server_app.log.info(
         "Available templates:\n\t%s"
         % "\n\t".join(t for t in loader.get_templates()[1].keys())
