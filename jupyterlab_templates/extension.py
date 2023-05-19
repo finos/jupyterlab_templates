@@ -53,7 +53,7 @@ class TemplatesLoader:
                         # full data
                         template_by_path[data["name"]] = data
             except FileNotFoundError as e:
-                self.log.warning("Failed to load template directory %s. \n, %s", uri, e)
+                self.log.warning("Failed to load template directory %s. \n%s", uri, e)
                 continue
 
         return templates, template_by_path
