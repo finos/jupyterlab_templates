@@ -37,7 +37,7 @@ class TemplatesLoader:
 
             try:
                 for file in client.get_file_info(fs.FileSelector(path, recursive=True)):
-                    if file.extension == 'ipynb':
+                    if file.extension == "ipynb":
                         with client.open_input_file(file.path) as f:
                             content = f.read().decode("utf-8")
                         data = {
