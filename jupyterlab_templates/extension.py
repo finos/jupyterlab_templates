@@ -83,6 +83,11 @@ class TemplateNamesHandler(IPythonHandler):
         self.finish(json.dumps(self.loader.get_templates()[0]))
 
 
+def get_bool_config(config, key, default_value=True):
+    value = config.get(key, default_value)
+    return strtobool(value) if isinstance(value, str) else value
+
+
 def load_jupyter_server_extension(nb_server_app):
     """
     Called when the extension is loaded.
@@ -98,9 +103,7 @@ def load_jupyter_server_extension(nb_server_app):
     if isinstance(template_dirs, str):
         template_dirs = template_dirs.split(",")
 
-    include_default = jupyterlab_templates_config.get("include_default", True)
-    include_default = strtobool(include_default) if isinstance(include_default, str) else include_default
-    if include_default:
+    if get_bool_config(jupyterlab_templates_config, "include_default"):
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
 
     base_url = web_app.settings["base_url"]
@@ -111,9 +114,7 @@ def load_jupyter_server_extension(nb_server_app):
         % url_path_join(base_url, "templates")
     )
 
-    include_core_paths = jupyterlab_templates_config.get("include_core_paths", True)
-    include_core_paths = strtobool(include_core_paths) if isinstance(include_core_paths, str) else include_core_paths
-    if include_core_paths:
+    if get_bool_config(jupyterlab_templates_config, "include_core_paths"):
         template_dirs.extend([os.path.join(x, "notebook_templates") for x in jupyter_core.paths.jupyter_path()])
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
