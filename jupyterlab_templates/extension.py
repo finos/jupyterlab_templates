@@ -39,13 +39,13 @@ class TemplatesLoader:
 
             try:
                 for file in client.get_file_info(fs.FileSelector(path, recursive=True)):
-                    if file.extension == 'ipynb':
+                    if file.extension == "ipynb":
                         with client.open_input_file(file.path) as f:
                             content = f.read().decode("utf-8")
                         data = {
                             "path": file.path,
                             "name": file.base_name,
-                            "dirname": os.path.sep.join(file.path.split(os.path.sep)[:-1]),
+                            "dirname": os.path.dirname(file.path),
                             "filename": file.base_name,
                             "content": content,
                         }
