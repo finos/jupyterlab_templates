@@ -43,7 +43,7 @@ class TemplatesLoader:
                         data = {
                             "path": file.path,
                             "name": file.base_name,
-                            "dirname": os.path.sep.join(file.path.split(os.path.sep)[:-1]),
+                            "dirname": os.path.dirname(file.path),
                             "filename": file.base_name,
                             "content": content,
                         }
