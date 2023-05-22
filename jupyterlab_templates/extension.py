@@ -16,6 +16,8 @@ import tornado.web
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join
 
+from distutils.util import strtobool
+
 from pyarrow import fs
 
 
@@ -97,7 +99,7 @@ def load_jupyter_server_extension(nb_server_app):
         template_dirs = template_dirs.split(",")
 
     include_default = jupyterlab_templates_config.get("include_default", True)
-    include_default = include_default.lower() == 'true' if isinstance(include_default, str) else include_default
+    include_default = strtobool(include_default) if isinstance(include_default, str) else include_default
     if include_default:
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
 
@@ -110,14 +112,9 @@ def load_jupyter_server_extension(nb_server_app):
     )
 
     include_core_paths = jupyterlab_templates_config.get("include_core_paths", True)
-    include_core_paths = include_core_paths.lower() == 'true' if isinstance(include_core_paths, str) else include_core_paths
+    include_core_paths = strtobool(include_core_paths) if isinstance(include_core_paths, str) else include_core_paths
     if include_core_paths:
-        template_dirs.extend(
-            [
-                os.path.join(x, "notebook_templates")
-                for x in jupyter_core.paths.jupyter_path()
-            ]
-        )
+        template_dirs.extend([os.path.join(x, "notebook_templates") for x in jupyter_core.paths.jupyter_path()])
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
     loader = TemplatesLoader(template_dirs, nb_server_app.log)
