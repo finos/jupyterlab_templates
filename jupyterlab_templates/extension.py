@@ -13,8 +13,8 @@ import jupyter_core.paths
 import tornado.web
 
 from io import open
-from notebook.base.handlers import IPythonHandler
-from notebook.utils import url_path_join
+from jupyter_server.base.handlers import JupyterHandler
+from jupyter_server.utils import url_path_join
 
 
 class TemplatesLoader:
@@ -75,7 +75,7 @@ class TemplatesLoader:
         return templates, template_by_path
 
 
-class TemplatesHandler(IPythonHandler):
+class TemplatesHandler(JupyterHandler):
     def initialize(self, loader):
         self.loader = loader
 
@@ -88,7 +88,7 @@ class TemplatesHandler(IPythonHandler):
             self.set_status(404)
 
 
-class TemplateNamesHandler(IPythonHandler):
+class TemplateNamesHandler(JupyterHandler):
     def initialize(self, loader):
         self.loader = loader
 
