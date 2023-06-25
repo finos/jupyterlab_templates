@@ -61,6 +61,13 @@ jobs:
       run: |
         make build
 
+    - name: Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: wheel-${{ matrix.os }}-${{ github.sha }}
+        path: dist/*.whl
+      if: ${{ always() }}
+
     - name: Lint
       run: |
         make lint

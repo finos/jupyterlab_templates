@@ -34,7 +34,8 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
 ]
 dependencies = [
-    "jupyterlab>=3.5"
+    "jupyterlab>=3.5",
+    "notebook>=6",
 ]
 
 [project.optional-dependencies]

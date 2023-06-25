@@ -103,22 +103,29 @@ function activate(app, menu, browser, launcher) {
                   const {path} = browser.defaultBrowser.model;
 
                   return new Promise((resolve) => {
+                    const ext = data.filename.split(".").pop().toLowerCase();
+                    const isNotebook = ext === "ipynb";
                     app.commands
                       .execute("docmanager:new-untitled", {
+                        ext,
                         path,
-                        type: "notebook",
+                        type: isNotebook ? "notebook" : "file",
                       })
                       .then((model) => {
                         app.commands
                           .execute("docmanager:open", {
-                            factory: "Notebook",
+                            factory: isNotebook ? "Notebook" : null,
                             path: model.path,
                           })
                           .then((widget) => {
                             // eslint-disable-next-line no-param-reassign
                             widget.isUntitled = true;
                             widget.context.ready.then(() => {
-                              widget.model.fromString(data.content);
+                              if (isNotebook) {
+                                widget.model.fromString(data.content);
+                              } else {
+                                widget.content.editor._editor.setValue(data.content);
+                              }
                               resolve(widget);
                             });
                           });
