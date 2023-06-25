@@ -5,7 +5,6 @@
 # This file is part of the jupyterlab_templates library, distributed under the terms of
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
-import fnmatch
 import json
 import os
 import os.path
@@ -13,13 +12,15 @@ import jupyter_core.paths
 import tornado.web
 
 from io import open
+from fnmatch import fnmatch
 from jupyter_server.base.handlers import JupyterHandler
 from jupyter_server.utils import url_path_join
 
 
 class TemplatesLoader:
-    def __init__(self, template_dirs):
+    def __init__(self, template_dirs, allowed_extensions=None):
         self.template_dirs = template_dirs
+        self.allowed_extensions = allowed_extensions or ["*.ipynb"]
 
     def get_templates(self):
         templates = {}
@@ -35,7 +36,12 @@ class TemplatesLoader:
                     # Skip top level
                     continue
 
-                for filename in fnmatch.filter(filenames, "*.ipynb"):
+                _files = [
+                    x
+                    for x in filenames
+                    if any(fnmatch(x, y) for y in self.allowed_extensions)
+                ]
+                for filename in _files:
                     if ".ipynb_checkpoints" not in dirname:
                         files.append(
                             (
@@ -109,6 +115,10 @@ def load_jupyter_server_extension(nb_server_app):
         "template_dirs", []
     )
 
+    allowed_extensions = nb_server_app.config.get("JupyterLabTemplates", {}).get(
+        "allowed_extensions", ["*.ipynb"]
+    )
+
     if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_default", True):
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
 
@@ -131,7 +141,7 @@ def load_jupyter_server_extension(nb_server_app):
         )
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
-    loader = TemplatesLoader(template_dirs)
+    loader = TemplatesLoader(template_dirs, allowed_extensions=allowed_extensions)
     nb_server_app.log.info(
         "Available templates:\n\t%s"
         % "\n\t".join(t for t in loader.get_templates()[1].keys())
