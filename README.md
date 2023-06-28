@@ -39,6 +39,7 @@ jupyter server extension enable --py jupyterlab_templates
 install the server extension, and add the following to `jupyter_notebook_config.py`
 
 ```python3
+c.JupyterLabTemplates.allowed_extensions = ["*.ipynb"]
 c.JupyterLabTemplates.template_dirs = ['list', 'of', 'template', 'directories']
 c.JupyterLabTemplates.include_default = True
 c.JupyterLabTemplates.include_core_paths = True
@@ -52,7 +53,8 @@ If `include_default = True` the `notebook_templates` directory under the [jupyte
 
 
 ### Flags
-- `template_dirs`: a list of absolute directory paths. All `.ipynb` files in any *subdirectories* of these paths will be listed as templates
+- `allowed_extensions`: a list of extensions to allow templates for. (optional, default `["*.ipynb"]`)
+- `template_dirs`: a list of absolute directory paths. All files matching `allowed_extensions` in any *subdirectories* of these paths will be listed as templates
 - `include_default`: include the default Sample template (default True)
 - `include_core_paths`: include jupyter core paths (see: jupyter --paths) (default True)
 
