@@ -1,2 +1,2 @@
-jupyterlab_templates==0.4.0
+jupyterlab_templates==0.4.1
 jupyterlab>=3.5
