@@ -18,6 +18,7 @@ from jupyter_server.utils import url_path_join
 
 TEMPLATES_IGNORE_FILE = ".jupyterlab_templates_ignore"
 
+
 class TemplatesLoader:
     def __init__(self, template_dirs, allowed_extensions=None):
         self.template_dirs = template_dirs
@@ -36,7 +37,7 @@ class TemplatesLoader:
                 if dirname == path:
                     # Skip top level
                     continue
-                
+
                 if TEMPLATES_IGNORE_FILE in filenames:
                     # skip this very directory (subdirectories will still be considered)
                     continue
