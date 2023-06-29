@@ -1,3 +1,101 @@
 [build-system]
-# Minimum requirements for the build system to execute.
-requires = ["setuptools", "wheel", "jupyter-packaging", "jupyterlab>=3"]
+requires = [
+    "hatchling>=1.3.1",
+    "jupyterlab>=3.5,<4",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "jupyterlab_templates"
+description = "notebook templates for jupyterlab"
+version = "0.4.0"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.7"
+authors = [
+    { name = "the jupyterlab_templates authors" },
+]
+keywords = [
+    "Jupyter",
+    "JupyterLab",
+    "Templates",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+    "jupyterlab>=3.5",
+]
+
+[project.optional-dependencies]
+develop = [
+    "black>=23",
+    "check-manifest",
+    "ruff",
+    "pytest",
+    "pytest-cov",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+]
+
+[project.urls]
+Repository = "https://github.com/finos/jupyterlab_templates"
+Homepage = "https://github.com/finos/jupyterlab_templates"
+
+[tool.check-manifest]
+ignore = [
+	"jupyterlab_templates/labextension/**",
+	"js/**"
+]
+
+[tool.hatch.build]
+artifacts = [
+    "jupyterlab_templates/labextension"
+]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"jupyterlab_templates/labextension" = "share/jupyter/labextensions/jupyterlab_templates"
+"jupyterlab_templates/extension/install.json" = "share/jupyter/labextensions/jupyterlab_templates/install.json"
+"jupyterlab_templates/extension/jupyterlab_templates.json" = "etc/jupyter/jupyter_server_config.d/jupyterlab_templates.json"
+"jupyterlab_templates/extension/notebook_templates" = "share/jupyter/notebook"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    ".github",
+    "binder",
+    "docs",
+]
+
+[tool.hatch.build.hooks.jupyter-builder]
+build-function = "hatch_jupyter_builder.npm_builder"
+ensured-targets = [
+    "jupyterlab_templates/labextension/package.json",
+]
+skip-if-exists = [
+    "jupyterlab_templates/labextension/package.json",
+]
+dependencies = [
+    "hatch-jupyter-builder>=0.5.0",
+]
+
+[tool.hatch.build.hooks.jupyter-builder.build-kwargs]
+path = "js"
+build_cmd = "build"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]

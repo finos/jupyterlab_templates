@@ -6,17 +6,19 @@
  * the Apache License 2.0.  The full license can be found in the LICENSE file.
  *
  */
+const esModules = ["@finos", "@jupyter", "@jupyterlab", "@jupyter-widgets", "lib0", "y-protocols", "internmap", "delaunator", "robust-predicates", "lodash-es"].join("|");
 
- module.exports = {
-  transform: {
-    "^.+\\.jsx?$": "babel-jest",
-    ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css",
-  },
-  testEnvironment: "jsdom",
+module.exports = {
+  moduleDirectories: ["node_modules", "src", "tests"],
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "<rootDir>/tests/styleMock.js",
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/fileMock.js",
   },
-  moduleDirectories: ["node_modules", "src", "tests"],
-  transformIgnorePatterns: ["/node_modules/(?!(@jupyterlab|@finos*|lib0|y-protocols))"],
+  reporters: [ "default", "jest-junit" ],
+  testEnvironment: "jsdom",
+  transform: {
+    "^.+\\.jsx?$": "babel-jest",
+    ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css",
+  },
+  transformIgnorePatterns: [`/node_modules/(?!(${esModules}))`],
 };
