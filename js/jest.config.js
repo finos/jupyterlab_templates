@@ -6,7 +6,7 @@
  * the Apache License 2.0.  The full license can be found in the LICENSE file.
  *
  */
-const esModules = ["@finos", "@jupyter", "@jupyterlab", "@jupyter-widgets", "lib0", "y-protocols", "internmap", "delaunator", "robust-predicates", "lodash-es"].join("|");
+const esModules = ["@finos", "@jupyter", "@jupyterlab", "@jupyter-widgets", "lib0", "y-protocols", "internmap", "delaunator", "robust-predicates", "lodash-es", "nanoid"].join("|");
 
 module.exports = {
   moduleDirectories: ["node_modules", "src", "tests"],
@@ -15,6 +15,7 @@ module.exports = {
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/fileMock.js",
   },
   reporters: [ "default", "jest-junit" ],
+  setupFiles: ["<rootDir>/tests/setup.js"],
   testEnvironment: "jsdom",
   transform: {
     "^.+\\.jsx?$": "babel-jest",
