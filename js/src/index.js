@@ -100,7 +100,7 @@ function activate(app, menu, browser, launcher) {
                   template: result.value,
                 }).then((res2) => {
                   const data = res2.json();
-                  const {path} = browser.defaultBrowser.model;
+                  const {path} = browser.tracker.currentWidget.model;
 
                   return new Promise((resolve) => {
                     const ext = data.filename.split(".").pop().toLowerCase();
