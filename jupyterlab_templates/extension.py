@@ -42,11 +42,7 @@ class TemplatesLoader:
                     # skip this very directory (subdirectories will still be considered)
                     continue
 
-                _files = [
-                    x
-                    for x in filenames
-                    if any(fnmatch(x, y) for y in self.allowed_extensions)
-                ]
+                _files = [x for x in filenames if any(fnmatch(x, y) for y in self.allowed_extensions)]
                 for filename in _files:
                     if ".ipynb_checkpoints" not in dirname:
                         files.append(
@@ -117,13 +113,9 @@ def load_jupyter_server_extension(nb_server_app):
         nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
     """
     web_app = nb_server_app.web_app
-    template_dirs = nb_server_app.config.get("JupyterLabTemplates", {}).get(
-        "template_dirs", []
-    )
+    template_dirs = nb_server_app.config.get("JupyterLabTemplates", {}).get("template_dirs", [])
 
-    allowed_extensions = nb_server_app.config.get("JupyterLabTemplates", {}).get(
-        "allowed_extensions", ["*.ipynb"]
-    )
+    allowed_extensions = nb_server_app.config.get("JupyterLabTemplates", {}).get("allowed_extensions", ["*.ipynb"])
 
     if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_default", True):
         template_dirs.insert(0, os.path.join(os.path.dirname(__file__), "templates"))
@@ -131,27 +123,14 @@ def load_jupyter_server_extension(nb_server_app):
     base_url = web_app.settings["base_url"]
 
     host_pattern = ".*$"
-    nb_server_app.log.info(
-        "Installing jupyterlab_templates handler on path %s"
-        % url_path_join(base_url, "templates")
-    )
+    nb_server_app.log.info("Installing jupyterlab_templates handler on path %s" % url_path_join(base_url, "templates"))
 
-    if nb_server_app.config.get("JupyterLabTemplates", {}).get(
-        "include_core_paths", True
-    ):
-        template_dirs.extend(
-            [
-                os.path.join(x, "notebook_templates")
-                for x in jupyter_core.paths.jupyter_path()
-            ]
-        )
+    if nb_server_app.config.get("JupyterLabTemplates", {}).get("include_core_paths", True):
+        template_dirs.extend([os.path.join(x, "notebook_templates") for x in jupyter_core.paths.jupyter_path()])
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
     loader = TemplatesLoader(template_dirs, allowed_extensions=allowed_extensions)
-    nb_server_app.log.info(
-        "Available templates:\n\t%s"
-        % "\n\t".join(t for t in loader.get_templates()[1].keys())
-    )
+    nb_server_app.log.info("Available templates:\n\t%s" % "\n\t".join(t for t in loader.get_templates()[1].keys()))
 
     web_app.add_handlers(
         host_pattern,
