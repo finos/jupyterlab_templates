@@ -29,7 +29,6 @@ tests: testpy testjs ## run the tests
 ###########
 lintpy:  ## Black/flake8 python
 	python -m ruff jupyterlab_templates setup.py
-	python -m black --check jupyterlab_templates setup.py
 
 lintjs:  ## ESlint javascript
 	cd js; yarn lint
@@ -37,8 +36,7 @@ lintjs:  ## ESlint javascript
 lint: lintpy lintjs  ## run linter
 
 fixpy:  ## Black python
-	python -m ruff jupyterlab_templates setup.py --fix
-	python -m black jupyterlab_templates/ setup.py
+	python -m ruff format jupyterlab_templates setup.py
 
 fixjs:  ## ESlint Autofix JS
 	cd js; yarn fix
