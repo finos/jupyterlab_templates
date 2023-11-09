@@ -1,5 +1,5 @@
 {
-  "name": "@finos/jupyterlab_templates",
+  "name": "jupyterlab_templates",
   "version": "0.5.0",
   "description": "Notebook templates",
   "author": "the jupyterlab_templates authors",
