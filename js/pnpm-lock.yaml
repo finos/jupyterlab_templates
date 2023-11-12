@@ -32,6 +32,12 @@ importers:
       '@lumino/disposable':
         specifier: ^2.1.5
         version: 2.1.5
+      '@tree-finder/base':
+        specifier: ^0.1.0
+        version: 0.1.0
+      requests-helper:
+        specifier: ^0.1.5
+        version: 0.1.5
     devDependencies:
       '@babel/cli':
         specifier: ^7.28.6
@@ -1299,6 +1305,9 @@ packages:
   '@tootallnate/once@2.0.0':
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
+
+  '@tree-finder/base@0.1.0':
+    resolution: {integrity: sha512-AyLgHvvGn3ikZmSKGamcRhhL0i2uzv5sEqxLDTv13H4A+dZ/PSTimyjQ/q1Iymso7bbnVqQW15jq4lnQIGxgUQ==}
 
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
@@ -4024,6 +4033,13 @@ packages:
     resolution: {integrity: sha512-NZQZdC5wOE/H3UT28fVGL+ikOZcEzfMGk/c3iN9UGxzWHMa1op7274oyiUVrAG4B2EuFhus8SvkaYnhvW92p9Q==}
     hasBin: true
 
+  regular-table@0.5.9:
+    resolution: {integrity: sha512-Ck5HYNS7lzsxsDWDBYzrCpwM1wsp5fMY42Ks730Otwq2U+XAlARJMg2tRexy+V8bLy9wiq+SH8EMC/yKqccLCA==}
+    engines: {node: '>=16'}
+
+  requests-helper@0.1.5:
+    resolution: {integrity: sha512-PqCXIvGI6bndTqRyrSA6G5FVWXjfXLCyTVgPeExs+3Ilq31gWV1ChNIr+jO8VP9tsNaUH8PeH1BiyhVhp4NYbQ==}
+
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -4084,6 +4100,9 @@ packages:
 
   rw@1.3.3:
     resolution: {integrity: sha512-PdhdWy89SiZogBLaw42zdeqtRJ//zFd2PgQavcICDUgJT5oW10QCRKbJ6bg4r0/UY2M6BWd5tkxuGFRvCkgfHQ==}
+
+  rxjs@7.8.2:
+    resolution: {integrity: sha512-dhKf903U/PQZY6boNNtAGdWbG85WAbjT/1xYoZIC7FAY0yWapOBQVsVrDl58W86//e1VpMNBtRV4MaXfdMySFA==}
 
   safe-array-concat@1.1.3:
     resolution: {integrity: sha512-AURm5f0jYEOydBj7VQlVvDrjeFgthDdEF5H1dP+6mNpoXOMo1quQqJ4wvJDyRZ9+pO3kGWoOdmV08cSv2aJV6Q==}
@@ -6977,6 +6996,11 @@ snapshots:
       '@sinonjs/commons': 3.0.1
 
   '@tootallnate/once@2.0.0': {}
+
+  '@tree-finder/base@0.1.0':
+    dependencies:
+      regular-table: 0.5.9
+      rxjs: 7.8.2
 
   '@tybys/wasm-util@0.10.1':
     dependencies:
@@ -10190,6 +10214,10 @@ snapshots:
     dependencies:
       jsesc: 3.1.0
 
+  regular-table@0.5.9: {}
+
+  requests-helper@0.1.5: {}
+
   require-directory@2.1.1: {}
 
   require-from-string@2.0.2: {}
@@ -10243,6 +10271,10 @@ snapshots:
       queue-microtask: 1.2.3
 
   rw@1.3.3: {}
+
+  rxjs@7.8.2:
+    dependencies:
+      tslib: 2.8.1
 
   safe-array-concat@1.1.3:
     dependencies:
@@ -10621,8 +10653,7 @@ snapshots:
 
   tslib@1.14.1: {}
 
-  tslib@2.8.1:
-    optional: true
+  tslib@2.8.1: {}
 
   type-check@0.4.0:
     dependencies:

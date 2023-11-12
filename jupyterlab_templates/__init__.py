@@ -5,7 +5,7 @@
 # This file is part of the jupyterlab_templates library, distributed under the terms of
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 
-__version__ = "0.1.0"
+from ._version import __version__
 
 
 def _jupyter_server_extension_paths():
@@ -23,7 +23,9 @@ def _load_jupyter_server_extension(nb_server_app, nb6_entrypoint=False):
     Args:
         nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
     """
-    # web_app = nb_server_app.web_app
+    from .extension import load_jupyter_server_extension
+
+    load_jupyter_server_extension(nb_server_app)
 
 
 def _jupyter_nbextension_paths():

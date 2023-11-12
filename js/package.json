@@ -52,7 +52,9 @@
     "@jupyterlab/mainmenu": "^4.5.3",
     "@jupyterlab/notebook": "^4.5.3",
     "@jupyterlab/services": "^7.5.3",
-    "@lumino/disposable": "^2.1.5"
+    "@lumino/disposable": "^2.1.5",
+    "@tree-finder/base": "^0.1.0",
+    "requests-helper": "^0.1.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.6",
