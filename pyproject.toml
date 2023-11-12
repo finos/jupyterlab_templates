@@ -18,7 +18,9 @@ authors = [
 keywords = [
     "Jupyter",
     "JupyterLab",
+    "JupyterLab Extension",
     "Templates",
+    "FINOS",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",

@@ -12,7 +12,9 @@
   "keywords": [
     "jupyter",
     "jupyterlab",
-    "jupyterlab-extension"
+    "jupyterlab-extension",
+    "templates",
+    "finos"
   ],
   "scripts": {
     "build:babel": "babel src/ --source-maps --out-dir lib/",

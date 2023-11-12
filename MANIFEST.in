@@ -1,10 +1,7 @@
 include LICENSE
 include README.md
-include CONTRIBUTING.md
 
-include .bumpversion.cfg
 include pyproject.toml
-include Makefile
 
 graft jupyterlab_templates
 graft jupyterlab_templates/extension
@@ -24,6 +21,12 @@ prune binder
 
 # get rid of docs
 prune docs
+exclude CONTRIBUTING.md
+exclude GOVERNANCE.md
+
+# get rid of dev tools
+exclude .bumpversion.cfg
+exclude Makefile
 
 # get rid of test and lint artifacts
 prune .pytest_cache
