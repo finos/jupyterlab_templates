@@ -12,10 +12,9 @@ import {request} from "requests-helper";
 import {OpenTemplateWidget} from "./widget";
 
 export const execute = (templates, app, browser) => {
-  const gobutton = Dialog.okButton({label: "GO"});
   showDialog({
-    body: new OpenTemplateWidget(templates, gobutton),
-    buttons: [Dialog.cancelButton(), gobutton],
+    body: new OpenTemplateWidget(templates),
+    buttons: [Dialog.cancelButton(), Dialog.okButton({label: "GO"})],
     focusNodeSelector: "input",
     title: "Template",
   }).then((result) => {

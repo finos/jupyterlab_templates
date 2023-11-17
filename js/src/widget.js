@@ -116,9 +116,10 @@ const root = mockContent({
 });
 
 export class OpenTemplateWidget extends Widget {
-  constructor(templates, gobutton) {
+  constructor(templates) {
     const body = document.createElement("div");
     body.classList.add("jp-Template-Browser");
+
     const label = document.createElement("label");
     label.textContent = "Template:";
 
@@ -164,12 +165,24 @@ export class OpenTemplateWidget extends Widget {
 
   onAfterAttach(msg) {
     super.onAfterAttach(msg);
-    console.log("HERE");
+    this.setButtonDisabled();
     this.treeFinder = document.createElement("tree-finder-panel");
     this.treeFinder.classList.add("jp-Template-Browser");
     this.node.appendChild(this.treeFinder);
     this.init();
   }
+
+  getButton = () => this.node.parentNode.querySelectorAll("button")[1];
+
+  setButtonDisabled = () => {
+    const button = this.getButton();
+    button.style.display = "none";
+  };
+
+  setButtonEnabled = () => {
+    const button = this.getButton();
+    button.style.display = "";
+  };
 
   init = async () => {
     await this.treeFinder.init({
