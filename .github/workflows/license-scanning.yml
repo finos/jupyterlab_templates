@@ -1,0 +1,31 @@
+name: License Scanning
+
+on:
+  schedule:
+    - cron: '0 8,18 * * 1-5'
+  push:
+    paths:
+      - '**/package.json'
+      - '**/yarn.lock'
+      - '.github/workflows/license-scanning.yml'
+
+jobs:
+  node-scan:
+    name: ${{ matrix.module-folder }}-node-scan
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['16.x']
+        module-folder: ['js']
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install --production --frozen-lockfile
+        working-directory: ${{ matrix.module-folder }}
+      - run: npm install -g node-license-validator
+        working-directory: ${{ matrix.module-folder }}
+      - run: node-license-validator . --allow-licenses Apache-2.0 MIT BSD-2-Clause BSD BSD-3-Clause Unlicense ISC
+        working-directory: ${{ matrix.module-folder }}
