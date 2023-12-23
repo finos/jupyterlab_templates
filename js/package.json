@@ -54,6 +54,7 @@
     "@jupyterlab/mainmenu": "^4.0.7",
     "@jupyterlab/notebook": "^4.0.7",
     "@lumino/disposable": "^2.1.2",
+    "@tree-finder/base": "^0.1.0",
     "requests-helper": "^0.1.5"
   },
   "devDependencies": {
