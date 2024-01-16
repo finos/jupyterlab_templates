@@ -91,11 +91,9 @@ class TemplatesHandler(JupyterHandler):
     @tornado.web.authenticated
     def get(self):
         temp = self.get_argument("template", "")
-        if not temp:
-            return self.set_status(404)
-        template_data = self.loader.get_templates()[1][temp]
-        response = {"template_data": template_data, "template_label": self.loader.template_label}
-        self.finish(response)
+        if temp:
+            self.finish(self.loader.get_templates()[1][temp])
+        self.set_status(404)
 
 
 class TemplateNamesHandler(JupyterHandler):
