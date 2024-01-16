@@ -43,6 +43,7 @@ c.JupyterLabTemplates.allowed_extensions = ["*.ipynb"]
 c.JupyterLabTemplates.template_dirs = ['list', 'of', 'template', 'directories']
 c.JupyterLabTemplates.include_default = True
 c.JupyterLabTemplates.include_core_paths = True
+c.JupyterLabTemplates.template_label = "Template"
 ```
 
 ## Templates for libraries
@@ -59,6 +60,7 @@ All notebooks in this directory will be ignored (but has no effect on subdirecto
 - `template_dirs`: a list of absolute directory paths. All files matching `allowed_extensions` in any *subdirectories* of these paths will be listed as templates
 - `include_default`: include the default Sample template (default True)
 - `include_core_paths`: include jupyter core paths (see: jupyter --paths) (default True)
+- `template_label`: set label for template UI icon (default "Template")
 
 
 ## Development
