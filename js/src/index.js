@@ -77,7 +77,9 @@ function activate(app, menu, browser, launcher) {
   // grab templates from serverextension
   request("get", `${PageConfig.getBaseUrl()}templates/names`).then((res) => {
     if (res.ok) {
-      templates = res.json();
+      const template_data = res.json();
+      templates = template_data.templates;
+      const templateLabel = template_data.template_label || "Template";
 
       if (Object.keys(templates).length > 0) {
         // Add an application command
@@ -90,7 +92,7 @@ function activate(app, menu, browser, launcher) {
               body: new OpenTemplateWidget(),
               buttons: [Dialog.cancelButton(), Dialog.okButton({label: "GO"})],
               focusNodeSelector: "input",
-              title: "Template",
+              title: templateLabel,
             }).then((result) => {
               if (result.button.label === "Cancel") {
                 return;
@@ -137,7 +139,7 @@ function activate(app, menu, browser, launcher) {
           },
           iconClass: "jp-TemplateIcon",
           isEnabled: () => true,
-          label: "Template",
+          label: templateLabel,
         });
 
         // Add a launcher item if the launcher is available.

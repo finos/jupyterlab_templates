@@ -20,8 +20,9 @@ TEMPLATES_IGNORE_FILE = ".jupyterlab_templates_ignore"
 
 
 class TemplatesLoader:
-    def __init__(self, template_dirs, allowed_extensions=None):
+    def __init__(self, template_dirs, allowed_extensions=None, template_label=None):
         self.template_dirs = template_dirs
+        self.template_label = template_label or "Template"
         self.allowed_extensions = allowed_extensions or ["*.ipynb"]
 
     def get_templates(self):
@@ -90,10 +91,11 @@ class TemplatesHandler(JupyterHandler):
     @tornado.web.authenticated
     def get(self):
         temp = self.get_argument("template", "")
-        if temp:
-            self.finish(self.loader.get_templates()[1][temp])
-        else:
-            self.set_status(404)
+        if not temp:
+            return self.set_status(404)
+        template_data = self.loader.get_templates()[1][temp]
+        response = {"template_data": template_data, "template_label": self.loader.template_label}
+        self.finish(response)
 
 
 class TemplateNamesHandler(JupyterHandler):
@@ -102,7 +104,9 @@ class TemplateNamesHandler(JupyterHandler):
 
     @tornado.web.authenticated
     def get(self):
-        self.finish(json.dumps(self.loader.get_templates()[0]))
+        templates, _ = self.loader.get_templates()
+        response = {"templates": templates, "template_label": self.loader.template_label}
+        self.finish(json.dumps(response))
 
 
 def load_jupyter_server_extension(nb_server_app):
@@ -129,7 +133,10 @@ def load_jupyter_server_extension(nb_server_app):
         template_dirs.extend([os.path.join(x, "notebook_templates") for x in jupyter_core.paths.jupyter_path()])
     nb_server_app.log.info("Search paths:\n\t%s" % "\n\t".join(template_dirs))
 
-    loader = TemplatesLoader(template_dirs, allowed_extensions=allowed_extensions)
+    template_label = nb_server_app.config.get("JupyterLabTemplates", {}).get("template_label", "Template")
+    nb_server_app.log.info("Template label: %s" % template_label)
+
+    loader = TemplatesLoader(template_dirs, allowed_extensions=allowed_extensions, template_label=template_label)
     nb_server_app.log.info("Available templates:\n\t%s" % "\n\t".join(t for t in loader.get_templates()[1].keys()))
 
     web_app.add_handlers(
