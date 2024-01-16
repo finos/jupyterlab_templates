@@ -4,7 +4,7 @@ Thank you for your interest in contributing to `jupyterlab_templates`!
 
 `jupyterlab_templates` is built on open source and hosted by the Fintech Open Source Foundation (FINOS). We invite you to participate in our community by adding and commenting on [issues](https://github.com/finos/jupyterlab_templates/issues) (e.g., bug reports; new feature suggestions) or contributing code enhancements through a pull request.
 
-Note that commits and pull requests to FINOS repositories such as `jupyterlab_templates` may only be accepted from those contributors with a [Contributor License Agreement (CLA)](https://finosfoundation.atlassian.net/wiki/spaces/FINOS/pages/75530375/Contribution+Compliance+Requirements#ContributionComplianceRequirements-ContributorLicenseAgreement) with FINOS. This may take the form of either:
+Note that commits and pull requests to FINOS repositories such as `jupyterlab_templates` may only be accepted from those contributors with a [Contributor License Agreement (CLA)](https://community.finos.org/docs/governance/Software-Projects/contribution-compliance-requirements) with FINOS. This may take the form of either:
 * an active, executed Individual Contributor License Agreement (ICLA) with FINOS, OR
 * coverage under an existing, active Corporate Contribution License Agreement (CCLA) executed with FINOS (most likely by the developer's employer). Please note that some, though not all, CCLAs require individuals/employees to be explicitly named on the CCLA.
 
