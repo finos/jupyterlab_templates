@@ -7224,13 +7224,6 @@ regjsparser@^0.9.1:
   dependencies:
     jsesc "~0.5.0"
 
-requests-helper@^0.1.0, requests-helper@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/requests-helper/-/requests-helper-0.1.5.tgz#9b0ed91384c1f79e3dccdb1f2a735f0e7e051b18"
-  integrity sha512-PqCXIvGI6bndTqRyrSA6G5FVWXjfXLCyTVgPeExs+3Ilq31gWV1ChNIr+jO8VP9tsNaUH8PeH1BiyhVhp4NYbQ==
-  dependencies:
-    requests-helper "^0.1.0"
-
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
