@@ -1,0 +1,41 @@
+name: License Scanning
+
+on:
+  push:
+    paths:
+      - 'js/package.json'
+      - 'js/yarn.lock'
+      - '.github/workflows/license-scanning.yml'
+      - 'pyproject.toml'
+
+env:
+  ALLOW_LICENSES: "MIT;Apache License 2.0"
+
+jobs:
+  license-scan:
+    name: license-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Build node using yarn
+        run: yarn install --production --frozen-lockfile
+        working-directory: js
+      - name: Install node-license-validator
+        run: npm install -g node-license-validator
+        working-directory: js
+      - name: Run node-license-validator
+        run: node-license-validator . --allow-licenses Apache-2.0 MIT BSD-2-Clause BSD BSD-3-Clause Unlicense ISC
+        working-directory: js
+      - name: Use Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install pip-licenses
+        run: pip3 install pip-licenses
+      - name: Run pip-licenses
+        run: pip-licenses --allow-only="${{ env.ALLOW_LICENSES }}" # --ignore-packages="${{ env.IGNORE_PACKAGES }}"
+        working-directory: python
