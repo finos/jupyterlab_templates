@@ -38,4 +38,3 @@ jobs:
         run: pip3 install pip-licenses
       - name: Run pip-licenses
         run: pip-licenses --allow-only="${{ env.ALLOW_LICENSES }}" # --ignore-packages="${{ env.IGNORE_PACKAGES }}"
-        working-directory: python
