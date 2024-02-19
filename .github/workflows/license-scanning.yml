@@ -31,7 +31,7 @@ jobs:
         run: node-license-validator . --allow-licenses Apache-2.0 MIT BSD-2-Clause BSD BSD-3-Clause Unlicense ISC
         working-directory: js
       - name: Use Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
       - name: Install pip-licenses
