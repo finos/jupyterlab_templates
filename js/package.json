@@ -48,11 +48,11 @@
   "dependencies": {
     "@jupyterlab/application": "^4.0.7",
     "@jupyterlab/apputils": "^4.1.7",
-    "@jupyterlab/coreutils": "^6.0.7",
     "@jupyterlab/filebrowser": "^4.0.7",
     "@jupyterlab/launcher": "^4.0.7",
     "@jupyterlab/mainmenu": "^4.0.7",
     "@jupyterlab/notebook": "^4.0.7",
+    "@jupyterlab/services": "^7.1.5",
     "@lumino/disposable": "^2.1.2"
   },
   "devDependencies": {

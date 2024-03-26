@@ -8,13 +8,13 @@
  */
 import {Dialog, showDialog} from "@jupyterlab/apputils";
 
-import {PageConfig} from "@jupyterlab/coreutils";
-
 import {IFileBrowserFactory} from "@jupyterlab/filebrowser";
 
 import {ILauncher} from "@jupyterlab/launcher";
 
 import {IMainMenu} from "@jupyterlab/mainmenu";
+
+import {ServerConnection} from "@jupyterlab/services";
 
 import {Widget} from "@lumino/widgets";
 
@@ -73,7 +73,8 @@ export class OpenTemplateWidget extends Widget {
 
 async function activate(app, menu, browser, launcher) {
   // grab templates from serverextension
-  const res = await fetch(`${PageConfig.getBaseUrl()}templates/names`);
+  const settings = ServerConnection.makeSettings();
+  const res = await ServerConnection.makeRequest(`${settings.baseUrl}templates/names`, {}, settings);
   if (res.ok) {
     const template_data = await res.json();
     templates = template_data.templates;
@@ -96,7 +97,7 @@ async function activate(app, menu, browser, launcher) {
               return;
             }
             if (result.value) {
-              const res2 = await fetch(`${PageConfig.getBaseUrl()}templates/get?${new URLSearchParams({template: result.value})}`);
+              const res2 = await ServerConnection.makeRequest(`${settings.baseUrl}templates/get?${new URLSearchParams({template: result.value})}`, {}, settings);
               const data = await res2.json();
               const {path} = browser.tracker.currentWidget.model;
 
