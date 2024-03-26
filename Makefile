@@ -15,33 +15,33 @@ install:  ## install to site-packages
 ###########
 # Testing #
 ###########
-testpy: ## Clean and Make unit tests
+testpy: ## run python unit tests
 	python -m pytest -v jupyterlab_templates/tests --junitxml=junit.xml --cov=jupyterlab_templates --cov-report=xml:.coverage.xml --cov-branch --cov-fail-under=20 --cov-report term-missing
 
-testjs: ## Clean and Make js tests
+testjs: ## run javascript unit tests
 	cd js; yarn test
 
 test: tests
-tests: testpy testjs ## run the tests
+tests: testpy testjs ## run all tests
 
 ###########
 # Linting #
 ###########
-lintpy:  ## Black/flake8 python
-	python -m ruff jupyterlab_templates setup.py
+lintpy:  ## lint python with ruff
+	python -m ruff check jupyterlab_templates setup.py
 
-lintjs:  ## ESlint javascript
+lintjs:  ## lint javascript with eslint
 	cd js; yarn lint
 
-lint: lintpy lintjs  ## run linter
+lint: lintpy lintjs  ## run all linters
 
-fixpy:  ## Black python
+fixpy:  ## format python with ruff
 	python -m ruff format jupyterlab_templates setup.py
 
-fixjs:  ## ESlint Autofix JS
+fixjs:  ## format javascript with eslint
 	cd js; yarn fix
 
-fix: fixpy fixjs  ## run black/tslint fix
+fix: fixpy fixjs  ## run all autofixers
 format: fix
 
 #################
