@@ -54,7 +54,7 @@ class TemplatesLoader:
                             )
                         )
             # pull contents and push into templates list
-            for f, dirname, filename in files:
+            for f, dirname, filename in sorted(files):
                 # skips over faild attempts to read content
                 try:
                     with open(os.path.join(abspath, f), "r", encoding="utf8") as fp:
