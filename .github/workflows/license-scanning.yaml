@@ -17,12 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v5
+      - uses: actions-ext/node/setup@main
         with:
-          node-version: 16.x
-      - name: Build node using yarn
-        run: yarn install --production --frozen-lockfile
+          version: 22.x
+      - name: Build node using pnpm
+        run: pnpm install --production --frozen-lockfile
         working-directory: js
       - name: Install node-license-validator
         run: npm install -g node-license-validator
@@ -30,10 +29,10 @@ jobs:
       - name: Run node-license-validator
         run: node-license-validator . --allow-licenses Apache-2.0 MIT BSD-2-Clause BSD BSD-3-Clause Unlicense ISC
         working-directory: js
-      - name: Use Python 3.10
+      - name: Use Python 3.11
         uses: actions/setup-python@v6
         with:
-          python-version: "3.10"
+          python-version: "3.11"
       - name: Install pip-licenses
         run: pip3 install pip-licenses
       - name: Run pip-licenses
