@@ -73,8 +73,8 @@ importers:
         specifier: ^29.0.1
         version: 29.0.1(eslint@8.57.1)(jest@30.2.0(@types/node@24.5.2))(typescript@5.9.2)
       eslint-plugin-json:
-        specifier: ^3.1.0
-        version: 3.1.0
+        specifier: ^4.0.1
+        version: 4.0.1
       eslint-plugin-prettier:
         specifier: ^5.4.0
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
@@ -2240,9 +2240,9 @@ packages:
       jest:
         optional: true
 
-  eslint-plugin-json@3.1.0:
-    resolution: {integrity: sha512-MrlG2ynFEHe7wDGwbUuFPsaT2b1uhuEFhJ+W1f1u+1C2EkXmTYJp4B1aAdQQ8M+CC3t//N/oRKiIVw14L2HR1g==}
-    engines: {node: '>=12.0'}
+  eslint-plugin-json@4.0.1:
+    resolution: {integrity: sha512-3An5ISV5dq/kHfXdNyY5TUe2ONC3yXFSkLX2gu+W8xAhKhfvrRvkSAeKXCxZqZ0KJLX15ojBuLPyj+UikQMkOA==}
+    engines: {node: '>=18.0'}
 
   eslint-plugin-jsx-a11y@6.10.2:
     resolution: {integrity: sha512-scB3nz4WmG75pV8+3eRUQOHZlNSUhFNq37xnpgRkCCELU3XMvXAxLk1eqWWyE22Ki4Q01Fnsw9BA3cJHDPgn2Q==}
@@ -7567,7 +7567,7 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-json@3.1.0:
+  eslint-plugin-json@4.0.1:
     dependencies:
       lodash: 4.17.21
       vscode-json-languageservice: 4.2.1
