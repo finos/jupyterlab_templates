@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier
+_commit: a74894d
+_src_path: https://github.com/python-project-templates/base.git
+add_docs: false
+add_extension: jupyter
+add_wiki: false
+email: t.paine154@gmail.com
+github: finos
+project_description: notebook templates for jupyterlab
+project_name: jupyterlab templates
+python_version_primary: '3.11'
+team: the jupyterlab_templates authors

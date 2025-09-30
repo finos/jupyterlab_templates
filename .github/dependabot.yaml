@@ -16,7 +16,7 @@ updates:
       - "part: dependencies"
 
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/js"
     schedule:
       interval: "monthly"
     labels:

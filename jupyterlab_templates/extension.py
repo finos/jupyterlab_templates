@@ -8,11 +8,11 @@
 import json
 import os
 import os.path
+from fnmatch import fnmatch
+from io import open
+
 import jupyter_core.paths
 import tornado.web
-
-from io import open
-from fnmatch import fnmatch
 from jupyter_server.base.handlers import JupyterHandler
 from jupyter_server.utils import url_path_join
 

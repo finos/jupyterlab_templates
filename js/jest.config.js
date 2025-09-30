@@ -36,5 +36,5 @@ module.exports = {
     "^.+\\.jsx?$": "babel-jest",
     ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css",
   },
-  transformIgnorePatterns: [`/node_modules/(?!(${esModules}))`],
+  transformIgnorePatterns: [`/node_modules/.pnpm/(?!(${esModules}))`],
 };

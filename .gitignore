@@ -4,11 +4,15 @@ __pycache__/
 *$py.class
 
 # C extensions
+*.a
 *.so
+*.obj
+*.dll
+*.exp
+*.lib
 
 # Distribution / packaging
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -20,13 +24,15 @@ lib64/
 parts/
 sdist/
 var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -37,17 +43,17 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
-python_junit.xml
-junit.xml
 nosetests.xml
 coverage.xml
-*,cover
+junit.xml
+*.cover
+*.py,cover
 .hypothesis/
-.pytest_cache
-.ruff_cache
+.pytest_cache/
 
 # Translations
 *.mo
@@ -56,103 +62,98 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
+db.sqlite3
+db.sqlite3-journal
 
-# Flask instance folder
+# Flask stuff:
 instance/
+.webassets-cache
 
 # Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
-docs/_build/
-docs/source
-
 # PyBuilder
 target/
 
-# IPython Notebook
-.ipynb_checkpoints
-.autoversion
+# IPython
+profile_default/
+ipython_config.py
 
 # pyenv
 .python-version
 
-# celery beat schedule file
+# pipenv
+Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
 celerybeat-schedule
+celerybeat.pid
 
-# dotenv
+# SageMath parsed files
+*.sage.py
+
+# Environments
 .env
-
-# virtualenv
+.venv
+env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 
 # Spyder project settings
 .spyderproject
+.spyproject
 
 # Rope project settings
 .ropeproject
 
-# =========================
-# Operating System Files
-# =========================
+# mkdocs documentation
+/site
 
-# OSX
-# =========================
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
 
-.DS_Store
-.AppleDouble
-.LSOverride
+# Pyre type checker
+.pyre/
 
-# Thumbnails
-._*
+# Documentation
+/site
+index.md
+docs/_build/
+docs/src/_build/
+docs/api
+docs/index.md
+docs/html
+docs/jupyter_execute
+index.md
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+# JS
+js/coverage
+js/dist
+js/lib
+js/node_modules
+js/test-results
+js/playwright-report
+js/*.tgz
+jupyterlab_templates/extension
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# Windows
-# =========================
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-
-# NPM
-# ----
-**/node_modules/
-
-# Coverage data
-# -------------
-**/coverage/
-
-# Notebook and lab extensions
-jupyterlab_templates/labextension/*.tgz
+# Jupyter
+.ipynb_checkpoints
+.autoversion
+Untitled*.ipynb
+!jupyterlab_templates/extension/jupyterlab_templates.json
+!jupyterlab_templates/extension/install.json
+jupyterlab_templates/nbextension
 jupyterlab_templates/labextension
+
+# Mac
+.DS_Store
+
+# Rust
+target
