@@ -45,24 +45,10 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^4.4.10",
-<<<<<<< before updating
-    "@jupyterlab/apputils": "^4.5.5",
-    "@jupyterlab/filebrowser": "^4.1.5",
-    "@jupyterlab/launcher": "^4.1.5",
-    "@jupyterlab/mainmenu": "^4.4.10",
-    "@jupyterlab/notebook": "^4.4.2",
-    "@jupyterlab/services": "^7.4.4",
-    "@lumino/disposable": "^2.1.4"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.27.2",
-    "@babel/core": "^7.28.0",
-    "@babel/eslint-parser": "^7.28.5",
-    "@babel/preset-env": "^7.27.2",
-    "@jupyterlab/builder": "^4.4.10",
-    "babel-jest": "^30.0.2",
-=======
     "@jupyterlab/apputils": "^4.5.10",
+    "@jupyterlab/filebrowser": "^4.4.10",
+    "@jupyterlab/launcher": "^4.4.10",
+    "@jupyterlab/mainmenu": "^4.4.10",
     "@jupyterlab/notebook": "^4.4.10",
     "@jupyterlab/services": "^7.4.10",
     "@lumino/disposable": "^2.1.4"
@@ -74,7 +60,6 @@
     "@babel/preset-env": "^7.28.5",
     "@jupyterlab/builder": "^4.4.10",
     "babel-jest": "^30.2.0",
->>>>>>> after updating
     "cpy-cli": "^6.0.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
