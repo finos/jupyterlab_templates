@@ -8,9 +8,8 @@ authors = [{name = "the jupyterlab_templates authors", email = "t.paine154@gmail
 description = "notebook templates for jupyterlab"
 readme = "README.md"
 license = { text = "Apache-2.0" }
-<<<<<<< before updating
 version = "0.5.3"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 keywords = [
     "Jupyter",
     "JupyterLab",
@@ -18,11 +17,6 @@ keywords = [
     "Templates",
     "FINOS",
 ]
-=======
-version = "0.1.0"
-requires-python = ">=3.10"
-keywords = []
->>>>>>> after updating
 
 classifiers = [
     "Development Status :: 3 - Alpha",
