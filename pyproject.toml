@@ -145,8 +145,8 @@ exclude = [
 ]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"jupyterlab_templates/labextension" = "share/jupyter/labextensions/jupyterlab_templates"
-"jupyterlab_templates/extension/install.json" = "share/jupyter/labextensions/jupyterlab_templates/install.json"
+"jupyterlab_templates/labextension" = "share/jupyter/labextensions/jupyterlab-templates"
+"jupyterlab_templates/extension/install.json" = "share/jupyter/labextensions/jupyterlab-templates/install.json"
 "jupyterlab_templates/extension/jupyterlab_templates.json" = "etc/jupyter/jupyter_server_config.d/jupyterlab_templates.json"
 
 [tool.hatch.build.hooks.hatch-js]
