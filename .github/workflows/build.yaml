@@ -63,7 +63,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
 
     - name: Upload test results (Python)
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: test-results-${{ matrix.os }}-${{ matrix.python-version }}-${{ matrix.node-version }}
         path: '**/junit.xml'
@@ -84,7 +84,7 @@ jobs:
       run: make dist
       if: matrix.os == 'ubuntu-latest'
 
-    - uses: actions/upload-artifact@v5
+    - uses: actions/upload-artifact@v6
       with:
         name: dist-${{matrix.os}}
         path: dist
