@@ -49,7 +49,7 @@
     "@jupyterlab/filebrowser": "^4.5.0",
     "@jupyterlab/launcher": "^4.4.10",
     "@jupyterlab/mainmenu": "^4.5.0",
-    "@jupyterlab/notebook": "^4.4.10",
+    "@jupyterlab/notebook": "^4.5.1",
     "@jupyterlab/services": "^7.4.10",
     "@lumino/disposable": "^2.1.4"
   },
