@@ -51,7 +51,7 @@
     "@jupyterlab/mainmenu": "^4.5.0",
     "@jupyterlab/notebook": "^4.5.1",
     "@jupyterlab/services": "^7.4.10",
-    "@lumino/disposable": "^2.1.4"
+    "@lumino/disposable": "^2.1.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",
