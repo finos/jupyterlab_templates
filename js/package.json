@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
+    "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
     "@jupyterlab/builder": "^4.5.1",
