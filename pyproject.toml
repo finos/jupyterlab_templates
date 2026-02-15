@@ -1,10 +1,16 @@
 [build-system]
-requires = ["hatchling", "hatch-js", "jupyterlab>=4,<5"]
+requires = [
+    "hatchling",
+    "hatch-js",
+    "jupyterlab>=4,<5",
+]
 build-backend="hatchling.build"
 
 [project]
 name = "jupyterlab-templates"
-authors = [{name = "the jupyterlab_templates authors", email = "t.paine154@gmail.com"}]
+authors = [
+    {name = "the jupyterlab_templates authors", email = "t.paine154@gmail.com"},
+]
 description = "notebook templates for jupyterlab"
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -52,6 +58,8 @@ develop = [
     "pytest-cov",
     "ruff>=0.9,<0.15",
     "twine",
+    "ty",
+    "uv",
     "wheel",
 ]
 
@@ -130,7 +138,10 @@ artifacts = [
 src = "/"
 
 [tool.hatch.build.targets.sdist]
-packages = ["jupyterlab_templates", "js"]
+packages = [
+    "jupyterlab_templates",
+    "js",
+]
 exclude = [
     "/binder",
     "/js/dist",
@@ -138,7 +149,9 @@ exclude = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["jupyterlab_templates"]
+packages = [
+    "jupyterlab_templates",
+]
 exclude = [
     "/binder",
     "/js",
@@ -159,20 +172,36 @@ targets = [
 ]
 
 [tool.pytest.ini_options]
-addopts = ["-vvv", "--junitxml=junit.xml"]
+addopts = [
+    "-vvv",
+    "--junitxml=junit.xml",
+]
 testpaths = "jupyterlab_templates/tests"
 
 [tool.ruff]
 line-length = 150
 
 [tool.ruff.lint]
-extend-select = ["I"]
+extend-select = [
+    "I",
+]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
 default-section = "third-party"
-known-first-party = ["jupyterlab_templates"]
-section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+known-first-party = [
+    "jupyterlab_templates",
+]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401", "F403"]
+"__init__.py" = [
+    "F401",
+    "F403",
+]
