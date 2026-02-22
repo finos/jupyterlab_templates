@@ -4,7 +4,7 @@ requires = [
     "hatch-js",
     "jupyterlab>=4,<5",
 ]
-build-backend="hatchling.build"
+build-backend = "hatchling.build"
 
 [project]
 name = "jupyterlab-templates"
@@ -47,16 +47,16 @@ dependencies = [
 develop = [
     "build",
     "bump-my-version",
-    "check-manifest",
-    "codespell>=2.4,<2.5",
+    "check-dist",
+    "codespell",
     "hatch-js",
     "hatchling",
-    "mdformat>=0.7.22,<1.1",
+    "mdformat",
     "mdformat-tables>=1",
     "jupyterlab>=4,<5",
     "pytest",
     "pytest-cov",
-    "ruff>=0.9,<0.15",
+    "ruff",
     "twine",
     "ty",
     "uv",
@@ -95,30 +95,12 @@ filename = ":binder/requirements.txt"
 search = "jupyterlab_templates=={current_version}"
 replace = "jupyterlab_templates=={new_version}"
 
-[tool.check-manifest]
-ignore = [
-    ".copier-answers.yaml",
-    "js/pnpm-lock.yaml",
-    "AUTHORS",
-    "CONTRIBUTING.md",
-    "GOVERNANCE.md",
-    "Makefile",
-    "NOTICE",
-    ".vscode/*",
-    "binder/**/*",
-    "docs/**/*",
-    "js/dist/**/*",
-    "js/lib/*",
-    "jupyterlab_templates/extension/**",
-    "jupyterlab_templates/labextension/**",
-    "jupyterlab_templates/nbextension/**",
-]
-
 [tool.coverage.run]
 branch = true
 omit = [
     "jupyterlab_templates/tests/integration/",
 ]
+
 [tool.coverage.report]
 exclude_also = [
     "raise NotImplementedError",
@@ -143,9 +125,9 @@ packages = [
     "js",
 ]
 exclude = [
-    "/binder",
-    "/js/dist",
-    "/js/node_modules",
+    "binder",
+    "js/dist",
+    "js/node_modules",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -153,14 +135,15 @@ packages = [
     "jupyterlab_templates",
 ]
 exclude = [
-    "/binder",
-    "/js",
+    "binder",
+    "js",
 ]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "jupyterlab_templates/labextension" = "share/jupyter/labextensions/jupyterlab-templates"
 "jupyterlab_templates/extension/install.json" = "share/jupyter/labextensions/jupyterlab-templates/install.json"
 "jupyterlab_templates/extension/jupyterlab_templates.json" = "etc/jupyter/jupyter_server_config.d/jupyterlab_templates.json"
+"jupyterlab_templates/templates/notebook_templates" = "share/jupyter/notebook"
 
 [tool.hatch.build.hooks.hatch-js]
 path = "js"

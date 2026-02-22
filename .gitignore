@@ -141,14 +141,12 @@ js/node_modules
 js/test-results
 js/playwright-report
 js/*.tgz
-jupyterlab_templates/extension
 
 # Jupyter
 .ipynb_checkpoints
 .autoversion
 Untitled*.ipynb
-!jupyterlab_templates/extension/jupyterlab_templates.json
-!jupyterlab_templates/extension/install.json
+jupyterlab_templates/extension
 jupyterlab_templates/nbextension
 jupyterlab_templates/labextension
 
@@ -157,3 +155,7 @@ jupyterlab_templates/labextension
 
 # Rust
 target
+
+# Hydra
+outputs/
+multirun/

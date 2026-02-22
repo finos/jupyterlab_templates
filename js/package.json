@@ -33,9 +33,10 @@
   },
   "scripts": {
     "build:babel": "babel src/ --source-maps --out-dir lib/",
+    "build:extension": "mkdirp ../jupyterlab_templates/extension/ && cpy --flat 'src/extension/*' '../jupyterlab_templates/extension/'",
     "build:nbextension": "mkdirp ../jupyterlab_templates/nbextension/static/ && cpy --flat 'src/notebook.js' '../jupyterlab_templates/nbextension/static/'",
     "build:labextension": "rimraf ../jupyterlab_templates/labextension && jupyter labextension build .",
-    "build": "pnpm clean && pnpm build:babel && pnpm build:labextension && pnpm build:nbextension",
+    "build": "pnpm clean && pnpm build:babel && pnpm build:extension && pnpm build:labextension && pnpm build:nbextension",
     "clean": "rimraf lib",
     "fix": "pnpm lint --fix",
     "lint": "eslint -c .eslintrc.js --ext .js src/ tests/",
