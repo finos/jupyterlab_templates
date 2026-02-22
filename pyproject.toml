@@ -90,38 +90,17 @@ filename = "js/package.json"
 search = '"version": "{current_version}"'
 replace = '"version": "{new_version}"'
 
-<<<<<<< before updating
 [[tool.bumpversion.files]]
 filename = ":binder/requirements.txt"
 search = "jupyterlab_templates=={current_version}"
 replace = "jupyterlab_templates=={new_version}"
 
-[tool.check-manifest]
-ignore = [
-    ".copier-answers.yaml",
-    "js/pnpm-lock.yaml",
-    "AUTHORS",
-    "CONTRIBUTING.md",
-    "GOVERNANCE.md",
-    "Makefile",
-    "NOTICE",
-    ".vscode/*",
-    "binder/**/*",
-    "docs/**/*",
-    "js/dist/**/*",
-    "js/lib/*",
-    "jupyterlab_templates/extension/**",
-    "jupyterlab_templates/labextension/**",
-    "jupyterlab_templates/nbextension/**",
-]
-
-=======
->>>>>>> after updating
 [tool.coverage.run]
 branch = true
 omit = [
     "jupyterlab_templates/tests/integration/",
 ]
+
 [tool.coverage.report]
 exclude_also = [
     "raise NotImplementedError",
@@ -146,14 +125,9 @@ packages = [
     "js",
 ]
 exclude = [
-<<<<<<< before updating
-    "/binder",
-    "/js/dist",
-    "/js/node_modules",
-=======
+    "binder",
     "js/dist",
     "js/node_modules",
->>>>>>> after updating
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -161,12 +135,8 @@ packages = [
     "jupyterlab_templates",
 ]
 exclude = [
-<<<<<<< before updating
-    "/binder",
-    "/js",
-=======
-    "js"
->>>>>>> after updating
+    "binder",
+    "js",
 ]
 
 [tool.hatch.build.targets.wheel.shared-data]
