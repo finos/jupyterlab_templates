@@ -73,12 +73,15 @@ format: fix
 ################
 # Other Checks #
 ################
-.PHONY: check-manifest checks check
+.PHONY: check-dist check-types checks check
 
-check-manifest:  ## check python sdist manifest with check-manifest
-	check-manifest -v
+check-dist:  ## check python sdist and wheel with check-dist
+	check-dist -v
 
-checks: check-manifest
+check-types:  ## check python types with ty
+	ty check --python $$(which python)
+
+checks: check-dist
 
 # alias
 check: checks

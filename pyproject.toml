@@ -4,7 +4,7 @@ requires = [
     "hatch-js",
     "jupyterlab>=4,<5",
 ]
-build-backend="hatchling.build"
+build-backend = "hatchling.build"
 
 [project]
 name = "jupyterlab-templates"
@@ -47,16 +47,16 @@ dependencies = [
 develop = [
     "build",
     "bump-my-version",
-    "check-manifest",
-    "codespell>=2.4,<2.5",
+    "check-dist",
+    "codespell",
     "hatch-js",
     "hatchling",
-    "mdformat>=0.7.22,<1.1",
+    "mdformat",
     "mdformat-tables>=1",
     "jupyterlab>=4,<5",
     "pytest",
     "pytest-cov",
-    "ruff>=0.9,<0.15",
+    "ruff",
     "twine",
     "ty",
     "uv",
@@ -90,6 +90,7 @@ filename = "js/package.json"
 search = '"version": "{current_version}"'
 replace = '"version": "{new_version}"'
 
+<<<<<<< before updating
 [[tool.bumpversion.files]]
 filename = ":binder/requirements.txt"
 search = "jupyterlab_templates=={current_version}"
@@ -114,6 +115,8 @@ ignore = [
     "jupyterlab_templates/nbextension/**",
 ]
 
+=======
+>>>>>>> after updating
 [tool.coverage.run]
 branch = true
 omit = [
@@ -143,9 +146,14 @@ packages = [
     "js",
 ]
 exclude = [
+<<<<<<< before updating
     "/binder",
     "/js/dist",
     "/js/node_modules",
+=======
+    "js/dist",
+    "js/node_modules",
+>>>>>>> after updating
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -153,8 +161,12 @@ packages = [
     "jupyterlab_templates",
 ]
 exclude = [
+<<<<<<< before updating
     "/binder",
     "/js",
+=======
+    "js"
+>>>>>>> after updating
 ]
 
 [tool.hatch.build.targets.wheel.shared-data]
