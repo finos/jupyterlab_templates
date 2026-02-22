@@ -143,6 +143,7 @@ exclude = [
 "jupyterlab_templates/labextension" = "share/jupyter/labextensions/jupyterlab-templates"
 "jupyterlab_templates/extension/install.json" = "share/jupyter/labextensions/jupyterlab-templates/install.json"
 "jupyterlab_templates/extension/jupyterlab_templates.json" = "etc/jupyter/jupyter_server_config.d/jupyterlab_templates.json"
+"jupyterlab_templates/templates/notebook_templates" = "share/jupyter/notebook"
 
 [tool.hatch.build.hooks.hatch-js]
 path = "js"
