@@ -11,6 +11,9 @@ __pycache__/
 *.exp
 *.lib
 
+# Rust
+target
+
 # Distribution / packaging
 .Python
 build/
@@ -55,25 +58,11 @@ junit.xml
 .hypothesis/
 .pytest_cache/
 
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
+# Django
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# PyBuilder
-target/
 
 # IPython
 profile_default/
@@ -85,15 +74,12 @@ ipython_config.py
 # pipenv
 Pipfile.lock
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
-
-# Celery stuff
+# Celery
 celerybeat-schedule
 celerybeat.pid
 
-# SageMath parsed files
-*.sage.py
+# Airspeed Velocity
+.asv
 
 # Environments
 .env
