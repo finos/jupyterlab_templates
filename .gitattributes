@@ -7,7 +7,6 @@ Makefile linguist-documentation
 *.html text=auto eol=lf
 *.js text=auto eol=lf
 *.json text=auto eol=lf
-*.less text=auto eol=lf
 *.md text=auto eol=lf
 *.py text=auto eol=lf
 *.toml text=auto eol=lf
