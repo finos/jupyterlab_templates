@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier
-_commit: 71014c6
+_commit: b5fb449
 _src_path: https://github.com/python-project-templates/base.git
 add_docs: false
 add_extension: jupyter
