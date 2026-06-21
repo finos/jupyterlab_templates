@@ -147,8 +147,8 @@ emsdk
 .DS_Store
 
 # Hydra
-outputs/
-multirun/
+/outputs/
+/multirun/
 
 # AI
 ROADMAP.md
