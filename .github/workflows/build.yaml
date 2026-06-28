@@ -34,7 +34,7 @@ jobs:
         node-version: [22.x]
 
     steps:
-    - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - uses: actions-ext/python/setup@main
       with:
@@ -70,7 +70,7 @@ jobs:
       if: ${{ always() }}
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@c950f6fb443cb5af20a377fd0dfaa78838901040 # v2
+      uses: EnricoMi/publish-unit-test-result-action@d0a4676d0e0b938bc201470d88276b7c74c712b3 # v2.24.0
       with:
         files: '**/junit.xml'
       if: matrix.os == 'ubuntu-latest'
