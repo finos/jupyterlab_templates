@@ -50,7 +50,7 @@
     "@jupyterlab/filebrowser": "^4.5.7",
     "@jupyterlab/launcher": "^4.6.0",
     "@jupyterlab/mainmenu": "^4.5.7",
-    "@jupyterlab/notebook": "^4.5.7",
+    "@jupyterlab/notebook": "^4.6.0",
     "@jupyterlab/services": "^7.5.7",
     "@lumino/disposable": "^2.1.5",
     "@tree-finder/base": "^1.0.4",
