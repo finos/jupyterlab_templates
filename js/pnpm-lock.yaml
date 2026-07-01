@@ -43,8 +43,8 @@ importers:
         version: 0.1.5
     devDependencies:
       '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.6)
+        specifier: ^7.29.7
+        version: 7.29.7(@babel/core@7.29.6)
       '@babel/core':
         specifier: ^7.29.6
         version: 7.29.6
@@ -120,8 +120,8 @@ packages:
   '@asamuzakjp/css-color@3.2.0':
     resolution: {integrity: sha512-K1A6z8tS3XsmCMM86xoWdn7Fkdn9m6RSVtocUrJYIwZnFVkng/PvkEoWtOWmP+Scc6saYWHWZYbndEEXxl24jw==}
 
-  '@babel/cli@7.28.6':
-    resolution: {integrity: sha512-6EUNcuBbNkj08Oj4gAZ+BUU8yLCgKzgVX4gaTh09Ya2C8ICM4P+G30g4m3akRxSYAp3A/gnWchrNst7px4/nUQ==}
+  '@babel/cli@7.29.7':
+    resolution: {integrity: sha512-/75HwRbAYPqXv/Ax1h7Fg3IZfXgdU98jnA8H93/m/QBaPV3Hp5ICoLqzGYye1yHBCgpmXvtqgSUN8oOKX5tojQ==}
     engines: {node: '>=6.9.0'}
     hasBin: true
     peerDependencies:
@@ -5014,7 +5014,7 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.4
       lru-cache: 10.4.3
 
-  '@babel/cli@7.28.6(@babel/core@7.29.6)':
+  '@babel/cli@7.29.7(@babel/core@7.29.6)':
     dependencies:
       '@babel/core': 7.29.6
       '@jridgewell/trace-mapping': 0.3.31

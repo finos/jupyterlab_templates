@@ -57,7 +57,7 @@
     "requests-helper": "^0.1.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
+    "@babel/cli": "^7.29.7",
     "@babel/core": "^7.29.6",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/preset-env": "^7.29.5",
