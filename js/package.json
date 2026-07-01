@@ -78,7 +78,7 @@
     "jest-junit": "^17.0.0",
     "jest-transform-css": "^6.0.3",
     "mkdirp": "^3.0.1",
-    "prettier": "^3.8.3",
+    "prettier": "^3.8.4",
     "rimraf": "^6.1.3"
   }
 }
