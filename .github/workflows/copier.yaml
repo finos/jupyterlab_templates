@@ -12,6 +12,6 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions-ext/copier-update@main
+    - uses: actions-ext/copier-update@378500315a83b5985e175139a55f1fa5ea6dde09
       with:
         token: ${{ secrets.WORKFLOW_TOKEN }}
