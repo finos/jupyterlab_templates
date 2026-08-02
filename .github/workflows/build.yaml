@@ -34,71 +34,76 @@ jobs:
         node-version: [22.x]
 
     steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with:
-        persist-credentials: false
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
 
-    - uses: actions-ext/python/setup@6e1b91a408ea89f49bc8aff8724f83826f7b5446
-      with:
-        version: ${{ matrix.python-version }}
+      - name: Setup Python
+        uses: actions-ext/python/setup@6e1b91a408ea89f49bc8aff8724f83826f7b5446
+        with:
+          version: ${{ matrix.python-version }}
 
-    - uses: actions-ext/node/setup@0ea5bdcd24d2488b28e16bf611b446a2f8e1e12f
-      with:
-        version: ${{ matrix.node-version }}
+      - name: Setup Node.js
+        uses: actions-ext/node/setup@0ea5bdcd24d2488b28e16bf611b446a2f8e1e12f
+        with:
+          version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: make develop
+      - name: Install dependencies
+        run: make develop
 
-    - name: Lint
-      run: make lint
-      if: matrix.os == 'ubuntu-latest'
+      - name: Lint
+        run: make lint
+        if: matrix.os == 'ubuntu-latest'
 
-    - name: Checks
-      run: make checks
-      if: matrix.os == 'ubuntu-latest'
+      - name: Checks
+        run: make checks
+        if: matrix.os == 'ubuntu-latest'
 
-    - name: Build
-      run: make build
+      - name: Build
+        run: make build
 
-    - name: Test
-      run: make coverage
-      if: matrix.os == 'ubuntu-latest'
+      - name: Test
+        run: make coverage
+        if: matrix.os == 'ubuntu-latest'
 
-    - name: Upload test results (Python)
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-      with:
-        name: test-results-${{ matrix.os }}-${{ matrix.python-version }}-${{ matrix.node-version }}
-        path: '**/junit.xml'
-      if: ${{ always() }}
+      - name: Upload test results (Python)
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: test-results-${{ matrix.os }}-${{ matrix.python-version }}-${{ matrix.node-version }}
+          path: '**/junit.xml'
+        if: ${{ always() }}
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@d0a4676d0e0b938bc201470d88276b7c74c712b3 # v2.24.0
-      with:
-        files: '**/junit.xml'
-      if: matrix.os == 'ubuntu-latest'
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@d0a4676d0e0b938bc201470d88276b7c74c712b3  # v2.24.0
+        with:
+          files: '**/junit.xml'
+        if: matrix.os == 'ubuntu-latest'
 
-    - name: Upload coverage
-      uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f  # v7.0.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
-    - name: Make dist
-      run: make dist
-      if: matrix.os == 'ubuntu-latest'
+      - name: Build distributions
+        run: make dist
+        if: matrix.os == 'ubuntu-latest'
 
-    - uses: actions-ext/python/test-wheel@6e1b91a408ea89f49bc8aff8724f83826f7b5446
-      with:
-        module: jupyterlab_templates
-      if: matrix.os == 'ubuntu-latest'
+      - name: Test wheel
+        uses: actions-ext/python/test-wheel@6e1b91a408ea89f49bc8aff8724f83826f7b5446
+        with:
+          module: jupyterlab_templates
+        if: matrix.os == 'ubuntu-latest'
 
-    - uses: actions-ext/python/test-sdist@6e1b91a408ea89f49bc8aff8724f83826f7b5446
-      with:
-        module: jupyterlab_templates
-      if: matrix.os == 'ubuntu-latest'
+      - name: Test source distribution
+        uses: actions-ext/python/test-sdist@6e1b91a408ea89f49bc8aff8724f83826f7b5446
+        with:
+          module: jupyterlab_templates
+        if: matrix.os == 'ubuntu-latest'
 
-    - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-      with:
-        name: dist-${{matrix.os}}
-        path: dist
-      if: matrix.os == 'ubuntu-latest'
-
+      - name: Upload distributions
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: dist-${{matrix.os}}
+          path: dist
+        if: matrix.os == 'ubuntu-latest'
