@@ -39,7 +39,7 @@ jobs:
           version: "3.11"
 
       - name: Setup Node.js
-        uses: actions-ext/node/setup@0ea5bdcd24d2488b28e16bf611b446a2f8e1e12f
+        uses: actions-ext/node/setup@b0536d87c5e92c924bc8667f566f620758280825
         with:
           version: 22.x
 
