@@ -79,7 +79,7 @@ jobs:
         run: make dist
 
       - name: Test wheel
-        uses: actions-ext/python/test-wheel@6e1b91a408ea89f49bc8aff8724f83826f7b5446
+        uses: actions-ext/python/test-wheel@a3f3953ef26a519ab7b6a56b94d06fa1b31ab3f3
         with:
           module: jupyterlab_templates
 
