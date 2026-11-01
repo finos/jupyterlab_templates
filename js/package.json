@@ -51,7 +51,7 @@
     "@jupyterlab/launcher": "^4.6.0",
     "@jupyterlab/mainmenu": "^4.5.7",
     "@jupyterlab/notebook": "^4.5.7",
-    "@jupyterlab/services": "^7.5.7",
+    "@jupyterlab/services": "^7.6.4",
     "@lumino/disposable": "^2.1.5",
     "@tree-finder/base": "^1.0.4",
     "requests-helper": "^0.1.5"
