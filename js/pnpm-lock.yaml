@@ -85,8 +85,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       eslint-plugin-prettier:
-        specifier: ^5.5.5
-        version: 5.5.5(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1(supports-color@8.1.1)))(eslint@8.57.1(supports-color@8.1.1))(prettier@3.8.4)
+        specifier: ^5.5.7
+        version: 5.5.7(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1(supports-color@8.1.1)))(eslint@8.57.1(supports-color@8.1.1))(prettier@3.8.4)
       isomorphic-fetch:
         specifier: ^3.0.0
         version: 3.0.0
@@ -848,6 +848,9 @@ packages:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
 
+  '@dual-bundle/import-meta-resolve@4.2.1':
+    resolution: {integrity: sha512-id+7YRUgoUX6CgV0DtuhirQWodeeA7Lf4i2x71JS/vtA5pRb/hIGWlw+G6MeXvsM+MXrz0VAydTGElX1rAfgPg==}
+
   '@emnapi/core@1.10.0':
     resolution: {integrity: sha512-yq6OkJ4p82CAfPl0u9mQebQHKPJkY7WrIuk205cTYnYe+k2Z8YBh11FrbRG/H6ihirqcacOgl2BIO8oyMQLeXw==}
 
@@ -1329,6 +1332,10 @@ packages:
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
+  '@pkgr/core@0.3.6':
+    resolution: {integrity: sha512-SEeaJLb3qBNF/OaXnaR1NmmBbFYk1zC0ZH/52fATcRPLFg/p791YrcyFFy44Bo9sLaGuSuLp5Q6axbb/O+v/RA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
 
   '@rjsf/core@5.24.13':
     resolution: {integrity: sha512-ONTr14s7LFIjx2VRFLuOpagL76sM/HPy6/OhdBfq6UukINmTIs6+aFN0GgcR0aXQHFDXQ7f/fel0o/SO05Htdg==}
@@ -2697,8 +2704,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-prettier@5.5.5:
-    resolution: {integrity: sha512-hscXkbqUZ2sPithAuLm5MXL+Wph+U7wHngPBv9OMWwlP8iaflyxpjTYZkmdgB4/vPIhemRlBEoLrH7UC1n7aUw==}
+  eslint-plugin-prettier@5.5.7:
+    resolution: {integrity: sha512-WjHyn3GrFd+ZR0rzsLiM4zJZ35PZMOE0SUIxzGmnWNG0126yNfJKJzObmmkYDwHJfGlkz3PSlzyG9ez/LJntwg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       '@types/eslint': '>=8.0.0'
@@ -4477,6 +4484,10 @@ packages:
     resolution: {integrity: sha512-Bh7QjT8/SuKUIfObSXNHNSK6WHo6J1tHCqJsuaFDP7gP0fkzSfTxI8y85JrppZ0h8l0maIgc2tfuZQ6/t3GtnQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
+  synckit@0.12.3:
+    resolution: {integrity: sha512-U+/AXT6LWsxnj2vz9HeUuPWBNgdWxjyIEjEPdbJARC9txmgPzo2VEdqnFo4hHaNyMPtycyVJrSaQYeQv/PoyyA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+
   tabbable@5.3.3:
     resolution: {integrity: sha512-QD9qKY3StfbZqWOPLp0++pOrAVb/HbUi5xCc8cUo4XjP19808oaMiDzn0leBY5mCespIBM0CIZePzZjgzR83kA==}
 
@@ -5968,6 +5979,8 @@ snapshots:
 
   '@discoveryjs/json-ext@0.5.7': {}
 
+  '@dual-bundle/import-meta-resolve@4.2.1': {}
+
   '@emnapi/core@1.10.0':
     dependencies:
       '@emnapi/wasi-threads': 1.2.1
@@ -7301,6 +7314,8 @@ snapshots:
     optional: true
 
   '@pkgr/core@0.2.9': {}
+
+  '@pkgr/core@0.3.6': {}
 
   '@rjsf/core@5.24.13(@rjsf/utils@5.24.13(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -8853,12 +8868,12 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-prettier@5.5.5(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1(supports-color@8.1.1)))(eslint@8.57.1(supports-color@8.1.1))(prettier@3.8.4):
+  eslint-plugin-prettier@5.5.7(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@8.57.1(supports-color@8.1.1)))(eslint@8.57.1(supports-color@8.1.1))(prettier@3.8.4):
     dependencies:
       eslint: 8.57.1(supports-color@8.1.1)
       prettier: 3.8.4
       prettier-linter-helpers: 1.0.1
-      synckit: 0.11.12
+      synckit: 0.12.3
     optionalDependencies:
       '@types/eslint': 9.6.1
       eslint-config-prettier: 10.1.8(eslint@8.57.1(supports-color@8.1.1))
@@ -10953,6 +10968,11 @@ snapshots:
   synckit@0.11.12:
     dependencies:
       '@pkgr/core': 0.2.9
+
+  synckit@0.12.3:
+    dependencies:
+      '@dual-bundle/import-meta-resolve': 4.2.1
+      '@pkgr/core': 0.3.6
 
   tabbable@5.3.3: {}
 
